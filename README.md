@@ -29,11 +29,11 @@ Zecure is a **modular AI cybersecurity framework** built to detect and neutraliz
 
 ## ✨ Key Features
 
-- 🧠 **Agentic AI**: Modular agents (`PhisherHawk`, `TransactionSage`, `LeakSniper`) for task-specific security
-- 🌐 **Full-Spectrum Defense**: CLI, browser extension, real-time server monitoring
-- 🔄 **Autonomous Retraining**: Self-learning models adapt continuously
-- 🧪 **Simulation Lab**: Test Zecure in a sandbox before going live
-- 📊 **Sleek UI**: Control panel with a 3D threat globe and agent insights
+- 🧠 **Agentic AI**: Modular agents (`PhisherHawk`, `TransactionSage`, `LeakSniper`) for task-specific security  
+- 🌐 **Full-Spectrum Defense**: CLI, browser extension, real-time server monitoring  
+- 🔄 **Autonomous Retraining**: Self-learning models adapt continuously  
+- 🧪 **Simulation Lab**: Test Zecure in a sandbox before going live  
+- 📊 **Sleek UI**: Control panel with a 3D threat globe and agent insights  
 
 ---
 
@@ -49,26 +49,40 @@ ZECURE/
 ├── zecure-lab/       # Simulation playground
 ├── zecure-api/       # REST/gRPC APIs
 └── zecure-data/      # Training datasets & logs
+```
 
----
-
-## 🚀 Getting Started
-
+🚀 Getting Started
 ```bash
 # Clone Zecure
 git clone https://github.com/yourorg/zecure.git
 cd zecure
 
-# Launch the stack
+# Launch the full stack with Docker
 docker-compose up --build
 
 # Use the CLI
 zecure scan url https://suspicious-site.com
 zecure agent status
+```
+🧑‍💻 How to Contribute
 
-👥 Contributors
+We welcome contributions! Here’s how you can get started:
+	1.	🍴 Fork the repo
+	2.	🛠️ Create a new branch: git checkout -b feature-name
+	3.	📦 Make your changes and commit: git commit -m "Add new feature"
+	4.	📤 Push to your branch: git push origin feature-name
+	5.	🔁 Submit a Pull Request
 
-Thanks to everyone helping secure the digital world:
-<a href="https://github.com/yourorg/zecure/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=yourorg/zecure" />
-</a>
+Please read our Contribution Guide before starting.
+
+🧩 Tech Stack
+	•	Python, Node.js, Docker, gRPC, React
+	•	HuggingFace Transformers, BERT, GNNs, LLMs
+	•	Globe.gl, Tailwind CSS, Express, MongoDB
+
+🛡️ License
+This project is licensed. 
+
+```bash
+<p align="center"><i>Secure your future, one packet at a time.</i></p>
+```
