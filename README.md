@@ -38,15 +38,17 @@ Zecure is a **modular AI cybersecurity framework** built to detect and neutraliz
 ---
 
 ## 🗺️ Zecure Blueprint
+
+```bash
 ZECURE/
-├── zecure-core/     # AI Models (LLMs, BERT, GNNs)
-├── zecure-agents/   # Modular agents (PhisherHawk, etc.)
-├── zecure-cli/      # Terminal-based threat scanner
-├── zecure-ext/      # Chrome extension
-├── zecure-ui/       # React + Globe.gl Dashboard
-├── zecure-lab/      # Simulation playground
-├── zecure-api/      # REST/gRPC APIs
-└── zecure-data/     # Training datasets & logs
+├── zecure-core/      # AI Models (LLMs, BERT, GNNs)
+├── zecure-agents/    # Modular agents (PhisherHawk, etc.)
+├── zecure-cli/       # Terminal-based threat scanner
+├── zecure-ext/       # Chrome extension
+├── zecure-ui/        # React + Globe.gl Dashboard
+├── zecure-lab/       # Simulation playground
+├── zecure-api/       # REST/gRPC APIs
+└── zecure-data/      # Training datasets & logs
 
 ---
 
@@ -63,3 +65,10 @@ docker-compose up --build
 # Use the CLI
 zecure scan url https://suspicious-site.com
 zecure agent status
+
+👥 Contributors
+
+Thanks to everyone helping secure the digital world:
+<a href="https://github.com/yourorg/zecure/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=yourorg/zecure" />
+</a>
