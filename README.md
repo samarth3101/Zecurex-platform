@@ -83,6 +83,6 @@ Please read our Contribution Guide before starting.
 🛡️ License
 This project is licensed. 
 
-```bash
+
 <p align="center"><i>Secure your future, one packet at a time.</i></p>
-```
+
