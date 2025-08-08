@@ -1,0 +1,35 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
+.venv/
+
+# macOS system files
+.DS_Store
+
+# Logs and temp files
+*.log
+*.tmp
+*.temp
+
+# Data files (we keep raw & processed data local only)
+data/raw/
+data/processed/
+data/training_datasets/
+logs/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Hugging Face cache
+~/.cache/huggingface/
+
+# Model weights & large artifacts
+*.pt
+*.bin
+*.ckpt
