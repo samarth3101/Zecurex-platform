@@ -13,30 +13,44 @@ export default function LoaderScreen({ onLoadingComplete }: LoaderScreenProps) {
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
 
   const loadingSteps = [
-    { progress: 15, text: 'Initializing systems...' },
-    { progress: 30, text: 'Loading neural networks...' },
-    { progress: 50, text: 'Establishing protocols...' },
-    { progress: 70, text: 'Optimizing algorithms...' },
-    { progress: 85, text: 'Finalizing setup...' },
-    { progress: 100, text: 'Welcome to Zecure ONE' }
+    { progress: 15, text: 'Initializing modules...' },
+    { progress: 40, text: 'Setting up environment...' },
+    { progress: 70, text: 'Final touches...' },
+    { progress: 100, text: 'Welcome to Zecure ONE!' }
   ];
 
+  // Lock all scroll while loader present
   useEffect(() => {
-    let currentStep = 0;
+    const html = document.documentElement;
+    const originalHtmlOverflow = html.style.overflow;
+    const originalBodyOverflow = document.body.style.overflow;
+
+    html.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      html.style.overflow = originalHtmlOverflow;
+      document.body.style.overflow = originalBodyOverflow;
+    };
+  }, []);
+
+  useEffect(() => {
+    let i = 0;
     const interval = setInterval(() => {
-      if (currentStep < loadingSteps.length) {
-        const step = loadingSteps[currentStep];
-        setProgress(step.progress);
-        setLoadingText(step.text);
-        currentStep++;
+      if (i < loadingSteps.length) {
+        setProgress(loadingSteps[i].progress);
+        setLoadingText(loadingSteps[i].text);
+        i++;
       } else {
         clearInterval(interval);
         setTimeout(() => {
           setIsAnimatingOut(true);
-          onLoadingComplete();
-        }, 800);
+          setTimeout(() => {
+            if (onLoadingComplete) onLoadingComplete();
+          }, 750); // allow animation to finish
+        }, 480);
       }
-    }, 600);
+    }, 690);
 
     return () => clearInterval(interval);
   }, [onLoadingComplete]);
@@ -44,19 +58,19 @@ export default function LoaderScreen({ onLoadingComplete }: LoaderScreenProps) {
   return (
     <div className={`${styles.loaderScreen} ${isAnimatingOut ? styles.slideUp : ''}`}>
       <div className={styles.loaderContent}>
-        <div className={styles.logo}>
-          <h1 className={styles.logoText}>
-            <span className={styles.zecure}>Zecure</span>
-            <span className={styles.one}>ONE</span>
-          </h1>
-        </div>
-        
-        <div className={styles.progressContainer}>
+        <h1 className={styles.logoText}>
+          <span className={styles.zecure}>Zecure</span>
+          <span className={styles.one}>ONE</span>
+        </h1>
+        <div className={styles.progressWrapper}>
           <div className={styles.progressBar}>
-            <div className={styles.progressFill} style={{ width: `${progress}%` }}></div>
+            <div
+              className={styles.progressFill}
+              style={{ width: `${progress}%` }}
+            />
           </div>
+          <span className={styles.progressPercent}>{progress}%</span>
           <p className={styles.loadingText}>{loadingText}</p>
-          <div className={styles.progressPercent}>{progress}%</div>
         </div>
       </div>
     </div>

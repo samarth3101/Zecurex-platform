@@ -1,277 +1,115 @@
 @import '../../styles/variables';
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Comfortaa:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700;800&family=Comfortaa:wght@700&display=swap');
+
+$calm-white: rgba(255,255,255,0.85);
+$calm-white-soft: rgba(255,255,255,0.62);
 
 .loaderScreen {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh; // Full viewport height
-  background: #000000;
-  z-index: 9999;
-  overflow: hidden;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  z-index: 999999;
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  // PROPER UPWARD SLIDE ANIMATION - Window going up
   transform: translateY(0);
-  transition: transform 2.2s cubic-bezier(0.19, 1, 0.22, 1);
-  
-  // WHITE SMOKY SHADOW AT BOTTOM - Makes animation visible
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    background: linear-gradient(
-      to top,
-      rgba(255, 255, 255, 0.2) 0%,
-      rgba(255, 255, 255, 0.12) 40%,
-      rgba(255, 255, 255, 0.05) 70%,
-      transparent 100%
-    );
-    pointer-events: none;
-    z-index: 10000;
-    filter: blur(2px);
-    transition: all 2.2s cubic-bezier(0.19, 1, 0.22, 1);
-  }
-  
-  // SLIDE UP ANIMATION - Entire screen goes up like window blind
+  transition: transform 1.18s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: transform;
+  overflow: hidden; // absolutely no scroll!
+  touch-action: none;
+
   &.slideUp {
-    transform: translateY(-100vh); // Slides completely out of view upward
-    
-    &::after {
-      opacity: 0;
-      transform: translateY(30px);
-    }
+    transform: translateY(-100vh);
   }
 }
 
-// MAIN CONTENT
 .loaderContent {
+  width: 95%;
+  max-width: 410px;
+  margin: 0 auto;
   text-align: center;
-  max-width: 500px;
+  padding: 0 1rem;
+}
+
+.logoText {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.34rem;
+  margin-bottom: 2.3rem;
+  animation: fadeIn .92s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+.zecure {
+  font-family: 'Inter', sans-serif;
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: $calm-white;
+}
+
+.one {
+  font-family: 'Comfortaa', cursive;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: $calm-white;
+}
+
+.progressWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.66rem;
+  animation: fadeIn 1s 0.13s cubic-bezier(.4,0,.2,1) forwards;
+}
+
+.progressBar {
   width: 100%;
-  padding: 2rem;
-  opacity: 1;
-  transform: translateY(0);
-  position: relative;
-  z-index: 10001;
-}
+  height: 5px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0 auto;
 
-.logo {
-  margin-bottom: 4rem;
-  
-  .logoText {
-    margin: 0;
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: 0.5rem;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 1.5s ease-out 0.3s forwards;
-    
-    .zecure {
-      font-family: 'Inter', sans-serif;
-      font-size: 3rem;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: 4px;
-      text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
-    }
-    
-    .one {
-      font-family: 'Comfortaa', cursive;
-      font-size: 3rem;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: 2px;
-      text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
-    }
+  .progressFill {
+    height: 100%;
+    background: linear-gradient(90deg, $calm-white 0%, $calm-white-soft 70%);
+    border-radius: 4px 0 0 4px;
+    box-shadow: 0 0 7px $calm-white-soft;
+    transition: width 0.6s cubic-bezier(.4,0,.2,1);
   }
 }
 
-// ENHANCED PROGRESS SECTION
-.progressContainer {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 1.2s ease-out 0.8s forwards;
-  
-  .progressBar {
-    width: 100%;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 2px;
-    overflow: hidden;
-    margin-bottom: 2rem;
-    position: relative;
-    box-shadow: 0 2px 15px rgba(255, 255, 255, 0.1);
-    
-    .progressFill {
-      height: 100%;
-      background: linear-gradient(90deg, 
-        #ffffff 0%, 
-        #f0f0f0 50%, 
-        #ffffff 100%);
-      border-radius: 2px;
-      transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      position: relative;
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
-      
-      &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 30px;
-        height: 100%;
-        background: linear-gradient(90deg, 
-          transparent, 
-          rgba(255,255,255,0.8), 
-          rgba(255,255,255,1));
-        border-radius: 0 2px 2px 0;
-        animation: progressGlow 2s ease-in-out infinite;
-      }
-    }
-  }
-  
-  .loadingText {
-    color: rgba(255, 255, 255, 0.95);
-    font-size: 1.2rem;
-    margin: 0 0 1rem 0;
-    font-weight: 400;
-    letter-spacing: 1px;
-    min-height: 1.5rem;
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
-  }
-  
-  .progressPercent {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
-    font-weight: 300;
-    letter-spacing: 2px;
-    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
-  }
+.progressPercent {
+  color: $calm-white;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  opacity: 0.82;
 }
 
-// SMOOTH ANIMATIONS
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.loadingText {
+  color: $calm-white-soft;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: .6px;
+  min-height: 1.2em;
+  margin-bottom: .5rem;
 }
 
-@keyframes progressGlow {
-  0%, 100% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-// MOBILE RESPONSIVE
-@media (max-width: 768px) {
-  .loaderScreen {
-    &::after {
-      height: 80px;
-      bottom: -8px;
-    }
-  }
-  
-  .loaderContent {
-    padding: 1.5rem;
-  }
-  
-  .logo {
-    margin-bottom: 3rem;
-    
-    .logoText {
-      .zecure {
-        font-size: 2.2rem;
-        letter-spacing: 2px;
-      }
-      
-      .one {
-        font-size: 2.2rem;
-        letter-spacing: 1px;
-      }
-    }
-  }
-  
-  .progressContainer {
-    .loadingText {
-      font-size: 1rem;
-    }
-    
-    .progressPercent {
-      font-size: 0.8rem;
-    }
-  }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px);}
+  to { opacity: 1; transform: translateY(0);}
 }
 
 @media (max-width: 480px) {
-  .loaderScreen {
-    &::after {
-      height: 60px;
-      bottom: -5px;
-    }
+  .logoText .zecure, .logoText .one {
+    font-size: 1.6rem;
   }
-  
-  .loaderContent {
-    padding: 1rem;
-  }
-  
-  .logo {
-    margin-bottom: 2.5rem;
-    
-    .logoText {
-      flex-direction: column;
-      gap: 0.2rem;
-      
-      .zecure {
-        font-size: 2rem;
-        letter-spacing: 1px;
-      }
-      
-      .one {
-        font-size: 2rem;
-        letter-spacing: 0.5px;
-      }
-    }
-  }
-  
-  .progressContainer {
-    .progressBar {
-      height: 3px;
-      margin-bottom: 1.5rem;
-    }
-    
-    .loadingText {
-      font-size: 0.9rem;
-    }
-  }
-}
-
-// HARDWARE ACCELERATION FOR ULTRA-SMOOTH UPWARD ANIMATION
-.loaderScreen {
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
-  will-change: transform;
-  // Force hardware acceleration
-  transform: translateZ(0);
-}
-
-.loaderContent {
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
+  .loaderContent { max-width: 97vw; }
+  .progressBar { height: 3px; }
+  .progressPercent { font-size: .82rem; }
+  .loadingText { font-size: .94rem; }
 }
