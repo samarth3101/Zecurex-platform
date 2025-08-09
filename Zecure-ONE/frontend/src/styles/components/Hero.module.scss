@@ -21,7 +21,6 @@
       radial-gradient(circle at 25% 25%, rgba(255,255,255,0.02) 0%, transparent 50%),
       radial-gradient(circle at 75% 75%, rgba(255,255,255,0.01) 0%, transparent 50%);
     pointer-events: none;
-    animation: backgroundShift 20s ease-in-out infinite;
   }
 }
 
@@ -31,7 +30,7 @@
   justify-content: space-between;
   max-width: 1400px;
   width: 100%;
-  gap: 8rem;
+  gap: 4rem; // Adjustable gap for positioning control
   z-index: 1;
 }
 
@@ -94,10 +93,20 @@
 
   .accent {
     font-weight: 600;
-    background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
+    // Blue-Green + Light Blue Gradient
+    background: linear-gradient(135deg, 
+      #00d4ff 0%,     // Light Blue
+      #00b4d8 20%,    // Medium Blue
+      #0077be 40%,    // Blue
+      #006ba6 60%,    // Darker Blue
+      #00a896 80%,    // Teal/Blue-Green
+      #02c39a 100%    // Green-Blue
+    );
+    background-size: 200% 200%;
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: blueGreenText 3s ease-in-out infinite;
   }
 }
 
@@ -114,6 +123,47 @@
   display: flex;
   gap: 1.5rem;
   margin-bottom: 4rem;
+}
+
+// Blue-Green Aurora Button Ring
+.auroraButton {
+  position: relative;
+  background: transparent !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  border: 2px solid transparent !important;
+  
+  // Blue-Green aurora ring border
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    padding: 2px;
+    background: linear-gradient(45deg, 
+      #00d4ff 0%,     // Light Blue
+      #00b4d8 15%,    // Medium Blue
+      #0077be 30%,    // Blue
+      #006ba6 45%,    // Darker Blue
+      #00a896 60%,    // Teal/Blue-Green
+      #02c39a 75%,    // Green-Blue
+      #00d4ff 100%    // Back to Light Blue
+    );
+    background-size: 300% 300%;
+    border-radius: inherit;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    animation: blueGreenRing 3s linear infinite;
+    z-index: -1;
+  }
+  
+  // NO HOVER EFFECTS
+  &:hover {
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    transform: none !important;
+    box-shadow: none !important;
+  }
 }
 
 .stats {
@@ -143,13 +193,30 @@
   letter-spacing: 1px;
 }
 
-/* RIGHT PANEL - Lottie Animation */
+/* RIGHT PANEL - Adjustable Position Control */
 .rightPanel {
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; // Change this to control position
   max-width: 500px;
+  transform: translateX(-3rem); // Fine-tune horizontal position
+}
+
+// Position Control Classes (add these to your component if needed)
+.rightPanel.positionLeft {
+  justify-content: flex-start;
+  transform: translateX(-2rem);
+}
+
+.rightPanel.positionCenter {
+  justify-content: center;
+  transform: translateX(-1rem);
+}
+
+.rightPanel.positionRight {
+  justify-content: flex-end;
+  transform: translateX(0);
 }
 
 .visualContainer {
@@ -183,37 +250,6 @@
   }
 }
 
-/* Animation Placeholder (while loading) */
-.animationPlaceholder {
-  width: 100%;
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  backdrop-filter: blur(5px);
-
-  .placeholderContent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.9rem;
-  }
-
-  .placeholderSpinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid rgba(255, 255, 255, 0.1);
-    border-top: 3px solid rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-}
-
 /* Status Indicators */
 .statusIndicators {
   position: absolute;
@@ -240,7 +276,6 @@
   position: relative;
   overflow: hidden;
 
-  // Background pulse effect
   &::before {
     content: '';
     position: absolute;
@@ -269,21 +304,14 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #00ff88;
+  background: #02c39a; // Updated to match blue-green theme
   animation: dotBlink 2.5s ease-in-out infinite;
-  box-shadow: 0 0 8px #00ff88;
+  box-shadow: 0 0 8px #02c39a;
   position: relative;
   z-index: 1;
 }
 
-/* ENHANCED ANIMATIONS */
-@keyframes backgroundShift {
-  0%, 100% { transform: translateX(0) translateY(0); }
-  25% { transform: translateX(5px) translateY(-2px); }
-  50% { transform: translateX(-2px) translateY(5px); }
-  75% { transform: translateX(2px) translateY(2px); }
-}
-
+/* ANIMATIONS */
 @keyframes shimmer {
   0% { left: -100%; }
   100% { left: 100%; }
@@ -298,9 +326,27 @@
   }
 }
 
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+// Blue-Green Text Animation
+@keyframes blueGreenText {
+  0%, 100% { 
+    background-position: 0% 50%; 
+  }
+  50% { 
+    background-position: 100% 50%; 
+  }
+}
+
+// Blue-Green Ring Animation
+@keyframes blueGreenRing {
+  0% { 
+    background-position: 0% 50%; 
+  }
+  50% { 
+    background-position: 100% 50%; 
+  }
+  100% { 
+    background-position: 200% 50%; 
+  }
 }
 
 @keyframes slideInRight {
@@ -324,29 +370,33 @@
   0%, 100% { 
     opacity: 1; 
     transform: scale(1);
-    box-shadow: 0 0 8px #00ff88;
+    box-shadow: 0 0 8px #02c39a;
   }
   50% { 
     opacity: 0.6; 
     transform: scale(1.2);
-    box-shadow: 0 0 12px #00ff88;
+    box-shadow: 0 0 12px #02c39a;
   }
 }
 
 /* RESPONSIVE DESIGN */
 @media (max-width: 1200px) {
   .container {
-    gap: 6rem;
+    gap: 3rem;
   }
   
   .animationContainer {
     height: 350px;
   }
+
+  .rightPanel {
+    transform: translateX(-2rem);
+  }
 }
 
 @media (max-width: 1024px) {
   .container {
-    gap: 4rem;
+    gap: 2rem;
   }
   
   .mainHeading {
@@ -356,17 +406,21 @@
   .animationContainer {
     height: 320px;
   }
+
+  .rightPanel {
+    transform: translateX(-1rem);
+  }
 }
 
 @media (max-width: 768px) {
   .hero {
     padding: 2rem 1rem;
-    min-height: auto;
+    min-height: 90vh;
   }
 
   .container {
     flex-direction: column;
-    gap: 3rem;
+    gap: 2.5rem;
     text-align: center;
   }
   
@@ -374,30 +428,48 @@
     max-width: none;
     width: 100%;
   }
+
+  .rightPanel {
+    justify-content: center;
+    transform: translateX(0); // Reset transform on mobile
+  }
   
   .mainHeading {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+  }
+
+  .description {
+    font-size: 1.1rem;
+    max-width: 100%;
   }
   
   .stats {
     justify-content: center;
     gap: 2rem;
+    flex-wrap: wrap;
   }
   
   .buttons {
     flex-direction: column;
     gap: 1rem;
     align-items: center;
+    width: 100%;
     
     :global(.button) {
       width: 100%;
-      max-width: 280px;
+      max-width: 300px;
+    }
+
+    .auroraButton {
+      width: 100% !important;
+      max-width: 300px !important;
     }
   }
 
   .animationContainer {
-    height: 280px;
-    max-width: 300px;
+    height: 250px;
+    max-width: 280px;
     margin: 0 auto;
   }
 
@@ -405,33 +477,41 @@
     position: static;
     flex-direction: row;
     justify-content: center;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     gap: 0.8rem;
+    flex-wrap: wrap;
   }
 
   .indicator {
     font-size: 0.75rem;
     padding: 0.4rem 0.8rem;
+    white-space: nowrap;
   }
 }
 
 @media (max-width: 480px) {
   .hero {
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 0.8rem;
+    min-height: 85vh;
+  }
+
+  .container {
+    gap: 2rem;
   }
 
   .mainHeading {
-    font-size: 2.2rem;
-    letter-spacing: -1px;
+    font-size: 2rem;
+    letter-spacing: -0.5px;
   }
-  
+
   .description {
     font-size: 1rem;
+    line-height: 1.6;
   }
 
   .animationContainer {
-    height: 220px;
-    max-width: 250px;
+    height: 200px;
+    max-width: 240px;
   }
 
   .stats {
@@ -439,11 +519,11 @@
   }
 
   .statNumber {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .statLabel {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
 
   .statusIndicators {
@@ -451,7 +531,7 @@
   }
 
   .indicator {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     padding: 0.3rem 0.6rem;
   }
 
@@ -459,30 +539,122 @@
     width: 6px;
     height: 6px;
   }
+
+  .buttons {
+    :global(.button) {
+      padding: 0.8rem 1.5rem;
+      font-size: 0.9rem;
+    }
+  }
 }
 
 @media (max-width: 360px) {
+  .hero {
+    padding: 1rem 0.5rem;
+  }
+
   .animationContainer {
     height: 180px;
     max-width: 200px;
   }
 
   .mainHeading {
-    font-size: 1.9rem;
+    font-size: 1.8rem;
+  }
+
+  .description {
+    font-size: 0.95rem;
+  }
+
+  .stats {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .stat {
+    text-align: center;
   }
 }
 
-/* Accessibility - Reduced motion support */
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   .lottieAnimation {
     animation-play-state: paused;
   }
   
   .floatAnimation,
-  .backgroundShift,
   .shimmer,
   .indicatorPulse,
-  .dotBlink {
+  .dotBlink,
+  .blueGreenText,
+  .blueGreenRing {
     animation: none;
+  }
+}
+
+
+.mainHeading {
+  font-size: 4.2rem;
+  font-weight: 300;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  letter-spacing: -2px;
+
+  .accent {
+    font-weight: 600;
+    // Blue-Green + Light Blue Gradient
+    background: linear-gradient(135deg, 
+      #00d4ff 0%,     // Light Blue
+      #00b4d8 20%,    // Medium Blue
+      #0077be 40%,    // Blue
+      #006ba6 60%,    // Darker Blue
+      #00a896 80%,    // Teal/Blue-Green
+      #02c39a 100%    // Green-Blue
+    );
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: blueGreenText 3s ease-in-out infinite;
+  }
+}
+
+.description {
+  font-size: 1.15rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.7;
+  margin-bottom: 3rem;
+  max-width: 520px;
+
+  // Same accent styling for Zecure ONE in description
+  .accent {
+    font-weight: 600;
+    // Same Blue-Green + Light Blue Gradient
+    background: linear-gradient(135deg, 
+      #00d4ff 0%,     // Light Blue
+      #00b4d8 20%,    // Medium Blue
+      #0077be 40%,    // Blue
+      #006ba6 60%,    // Darker Blue
+      #00a896 80%,    // Teal/Blue-Green
+      #02c39a 100%    // Green-Blue
+    );
+    background-size: 200% 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: blueGreenText 3s ease-in-out infinite;
+  }
+}
+
+// Blue-Green Text Animation (shared by both)
+@keyframes blueGreenText {
+  0%, 100% { 
+    background-position: 0% 50%; 
+  }
+  50% { 
+    background-position: 100% 50%; 
   }
 }
