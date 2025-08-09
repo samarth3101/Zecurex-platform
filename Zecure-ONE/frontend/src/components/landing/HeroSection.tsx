@@ -15,17 +15,22 @@ export default function HeroSection() {
 
   return (
     <section className={styles.hero}>
-      <div className={styles.backgroundMesh} />
       <div className={styles.content}>
-        <h1 className={styles.logo}>ZECURE ONE</h1>
-        <p className={styles.tagline}>
-          The AI Agent That Watches Over You
-        </p>
-        <Button size="lg" onClick={() => {
-          document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' });
-        }}>
-          Explore Demo
-        </Button>
+        <div className={`${styles.logoContainer} animate-fade-in-up`}>
+          <h1 className={styles.logo}>ZECURE ONE</h1>
+        </div>
+        <div className={`${styles.taglineContainer} animate-fade-in-up-delay`}>
+          <p className={styles.tagline}>
+            The AI Agent That Watches Over You
+          </p>
+        </div>
+        <div className={`${styles.buttonContainer} animate-fade-in-up-delay-2`}>
+          <Button size="lg" onClick={() => {
+            document.getElementById('demo')?.scrollIntoView({ behavior: 'smooth' });
+          }}>
+            Explore Demo
+          </Button>
+        </div>
       </div>
     </section>
   );

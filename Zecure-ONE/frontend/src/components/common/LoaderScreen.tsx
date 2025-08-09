@@ -10,6 +10,7 @@ interface LoaderScreenProps {
 export default function LoaderScreen({ onLoadingComplete }: LoaderScreenProps) {
   const [progress, setProgress] = useState(0);
   const [loadingText, setLoadingText] = useState('Initializing Zecure ONE...');
+  const [isAnimatingOut, setIsAnimatingOut] = useState(false);
 
   useEffect(() => {
     const loadingSteps = [
@@ -28,8 +29,13 @@ export default function LoaderScreen({ onLoadingComplete }: LoaderScreenProps) {
         currentStep++;
       } else {
         clearInterval(interval);
+        // Start curtain animation after a brief pause
         setTimeout(() => {
-          onLoadingComplete();
+          setIsAnimatingOut(true);
+          // Call onLoadingComplete after curtain animation completes
+          setTimeout(() => {
+            onLoadingComplete();
+          }, 1500); // 1.5s for curtain animation
         }, 800);
       }
     }, 600);
@@ -38,7 +44,7 @@ export default function LoaderScreen({ onLoadingComplete }: LoaderScreenProps) {
   }, [onLoadingComplete]);
 
   return (
-    <div className={styles.loaderScreen}>
+    <div className={`${styles.loaderScreen} ${isAnimatingOut ? styles.curtainUp : ''}`}>
       <div className={styles.loaderContent}>
         <div className={styles.logo}>
           <div className={styles.logoIcon}>

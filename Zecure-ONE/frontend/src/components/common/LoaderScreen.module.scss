@@ -12,11 +12,18 @@
   justify-content: center;
   z-index: 9999;
   opacity: 1;
-  transition: opacity 0.5s ease-out;
+  transform: translateY(0);
+  transition: transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
-  &.fadeOut {
-    opacity: 0;
-    pointer-events: none;
+  // Curtain up animation
+  &.curtainUp {
+    transform: translateY(-100%);
+    
+    .loaderContent {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease-out;
+    }
   }
 }
 
@@ -25,6 +32,9 @@
   max-width: 400px;
   width: 100%;
   padding: 2rem;
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s ease-out;
 }
 
 .logo {
@@ -106,5 +116,25 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+// Mobile responsive
+@media (max-width: 768px) {
+  .loaderContent {
+    padding: 1rem;
+    
+    .logo {
+      margin-bottom: 2rem;
+      
+      .logoIcon {
+        width: 60px;
+        height: 60px;
+      }
+      
+      .logoText {
+        font-size: 1.5rem;
+      }
+    }
   }
 }
