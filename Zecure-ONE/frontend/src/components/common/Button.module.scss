@@ -1,0 +1,79 @@
+@import '../../styles/variables';
+
+.button {
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $transition-smooth;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.primary {
+  background: linear-gradient(135deg, $neon-blue, $neon-cyan);
+  color: $bg-primary;
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+  }
+}
+
+.secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid $neon-blue;
+  
+  &:hover:not(:disabled) {
+    background: rgba(0, 212, 255, 0.1);
+  }
+}
+
+.ghost {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  
+  &:hover:not(:disabled) {
+    color: $neon-blue;
+  }
+}
+
+.sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.md {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+.lg {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

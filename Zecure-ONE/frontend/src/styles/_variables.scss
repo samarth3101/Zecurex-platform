@@ -1,0 +1,26 @@
+// Dark Theme Colors
+$bg-primary: #0f172a;
+$bg-secondary: #1e293b;
+$bg-tertiary: #334155;
+
+// Neon Accent Colors
+$neon-blue: #00d4ff;
+$neon-cyan: #00ffff;
+$neon-purple: #8b5cf6;
+
+// Glass Effect
+$glass-bg: rgba(15, 23, 42, 0.8);
+$glass-border: rgba(255, 255, 255, 0.1);
+$glass-shadow: rgba(0, 0, 0, 0.3);
+
+// Typography
+$font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+$font-mono: 'JetBrains Mono', monospace;
+
+// Spacing
+$section-padding: 5rem 0;
+$container-max-width: 1200px;
+
+// Animation
+$transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);

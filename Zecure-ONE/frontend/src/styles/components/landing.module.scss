@@ -1,0 +1,407 @@
+@import '../variables';
+@import '../mixins';
+
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, $bg-primary 0%, $bg-secondary 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+    animation: pulse 4s ease-in-out infinite alternate;
+  }
+
+  .content {
+    text-align: center;
+    z-index: 1;
+    max-width: 800px;
+    padding: 0 2rem;
+
+    .logo {
+      font-size: 4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, $neon-blue, $neon-cyan);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    .tagline {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+  }
+
+  .backgroundMesh {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    background-image: 
+      linear-gradient(rgba(0, 212, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 212, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: meshMove 20s linear infinite;
+  }
+}
+
+.section {
+  padding: $section-padding;
+  max-width: $container-max-width;
+  margin: 0 auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+
+  .sectionTitle {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    background: linear-gradient(135deg, $neon-blue, white);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.glassCard {
+  background: $glass-bg;
+  backdrop-filter: blur(10px);
+  border: 1px solid $glass-border;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 8px 32px $glass-shadow;
+  transition: $transition-smooth;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 212, 255, 0.2);
+  }
+}
+
+.aboutGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+
+  .featureCard {
+    @extend .glassCard;
+    text-align: center;
+
+    .icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: $neon-blue;
+    }
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .description {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+    }
+  }
+}
+
+.workflowContainer {
+  .flowDiagram {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 3rem 0;
+    flex-wrap: wrap;
+    gap: 2rem;
+
+    .flowStep {
+      @extend .glassCard;
+      flex: 1;
+      min-width: 200px;
+      text-align: center;
+      position: relative;
+
+      .stepNumber {
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        width: 30px;
+        height: 30px;
+        background: linear-gradient(135deg, $neon-blue, $neon-cyan);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 0.9rem;
+        color: $bg-primary;
+      }
+
+      .stepTitle {
+        font-weight: 600;
+        color: white;
+        margin-bottom: 0.5rem;
+      }
+
+      .stepDescription {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+      }
+
+      &::after {
+        content: '→';
+        position: absolute;
+        right: -30px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2rem;
+        color: $neon-blue;
+      }
+
+      &:last-child::after {
+        display: none;
+      }
+    }
+  }
+}
+
+.demoContainer {
+  .mockDashboard {
+    @extend .glassCard;
+    margin-top: 3rem;
+    background: rgba(15, 23, 42, 0.9);
+
+    .dashboardHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid $glass-border;
+
+      .headerTitle {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: white;
+      }
+
+      .statusIndicator {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #10b981;
+
+        .pulse {
+          width: 8px;
+          height: 8px;
+          background: #10b981;
+          border-radius: 50%;
+          animation: pulse 2s infinite;
+        }
+      }
+    }
+
+    .dashboardGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+
+      .metric {
+        background: rgba(30, 41, 59, 0.5);
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        border: 1px solid $glass-border;
+
+        .metricLabel {
+          color: rgba(255, 255, 255, 0.7);
+          font-size: 0.9rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .metricValue {
+          font-size: 2rem;
+          font-weight: 700;
+          color: $neon-blue;
+          margin-bottom: 0.5rem;
+        }
+
+        .metricChange {
+          font-size: 0.8rem;
+          color: #10b981;
+        }
+      }
+    }
+  }
+}
+
+.modulesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+
+  .moduleCard {
+    @extend .glassCard;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    &:hover::before {
+      left: 100%;
+    }
+
+    .moduleIcon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: $neon-blue;
+    }
+
+    .moduleTitle {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .moduleDescription {
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.6;
+    }
+  }
+}
+
+.joinSection {
+  text-align: center;
+  padding: 6rem 0;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(139, 92, 246, 0.1));
+
+  .joinTitle {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, $neon-blue, white);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .joinSubtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.footer {
+  background: $bg-primary;
+  border-top: 1px solid $glass-border;
+  padding: 3rem 0 1rem;
+
+  .footerContent {
+    max-width: $container-max-width;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+
+    .footerLinks {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+
+      a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: $transition-smooth;
+
+        &:hover {
+          color: $neon-blue;
+        }
+      }
+    }
+
+    .copyright {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.9rem;
+    }
+  }
+}
+
+// Animations
+@keyframes glow {
+  0% { text-shadow: 0 0 20px rgba(0, 212, 255, 0.5); }
+  100% { text-shadow: 0 0 30px rgba(0, 212, 255, 0.8), 0 0 40px rgba(0, 212, 255, 0.3); }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.8; }
+  100% { opacity: 1; }
+}
+
+@keyframes meshMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .hero {
+    .content {
+      .logo {
+        font-size: 2.5rem;
+      }
+
+      .tagline {
+        font-size: 1.25rem;
+      }
+    }
+  }
+
+  .section {
+    .sectionTitle {
+      font-size: 2rem;
+    }
+  }
+
+  .workflowContainer {
+    .flowDiagram {
+      flex-direction: column;
+      
+      .flowStep::after {
+        display: none;
+      }
+    }
+  }
+}
