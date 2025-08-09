@@ -13,18 +13,11 @@ import Footer from '@/components/landing/Footer';
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
-  const [contentReady, setContentReady] = useState(false);
 
   const handleLoadingComplete = () => {
     setIsLoading(false);
-    // Start content reveal after curtain begins
-    setTimeout(() => {
-      setShowContent(true);
-      // Content is fully ready after reveal animation
-      setTimeout(() => {
-        setContentReady(true);
-      }, 1000);
-    }, 500);
+    // Show content immediately when curtain starts lifting
+    setShowContent(true);
   };
 
   return (
@@ -35,21 +28,16 @@ export default function Home() {
         className={`min-h-screen bg-black ${
           showContent 
             ? 'opacity-100 translate-y-0' 
-            : 'opacity-0 translate-y-12'
-        } transition-all duration-1000 ease-out`}
-        style={{
-          transitionDelay: showContent ? '0.2s' : '0s'
-        }}
+            : 'opacity-0 translate-y-8'
+        } transition-all duration-700 ease-out`}
       >
-        <div className={`${contentReady ? 'animate-fade-in-sequence' : ''}`}>
-          <HeroSection />
-          <AboutSection />
-          <HowItWorksSection />
-          <DemoSection />
-          <ModulesSection />
-          <JoinSection />
-          <Footer />
-        </div>
+        <HeroSection isVisible={showContent} />
+        <AboutSection />
+        <HowItWorksSection />
+        <DemoSection />
+        <ModulesSection />
+        <JoinSection />
+        <Footer />
       </main>
     </>
   );

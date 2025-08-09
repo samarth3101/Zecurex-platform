@@ -1,6 +1,40 @@
 @import '../variables';
 @import '../mixins';
 
+// Faster hero animations
+.hero {
+  .content {
+    .logoContainer,
+    .taglineContainer,
+    .buttonContainer {
+      opacity: 0;
+      transform: translateY(30px) scale(0.96);
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    
+    .logoContainer.animateIn {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transition-delay: 0.1s; // Faster start
+    }
+    
+    .taglineContainer.animateInDelay1 {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transition-delay: 0.3s; // Faster sequence
+    }
+    
+    .buttonContainer.animateInDelay2 {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transition-delay: 0.5s; // Quick reveal
+    }
+  }
+}
+
+// Rest of your existing styles...
+
+
 .hero {
   min-height: 100vh;
   background: $bg-primary;
@@ -347,65 +381,5 @@
         display: none;
       }
     }
-  }
-}
-
-
-// Enhanced hero animations
-.hero {
-  .content {
-    .logoContainer,
-    .taglineContainer,
-    .buttonContainer {
-      opacity: 0;
-      transform: translateY(40px) scale(0.95);
-      transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    
-    .logoContainer.animateIn {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      transition-delay: 0.2s;
-    }
-    
-    .taglineContainer.animateInDelay1 {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      transition-delay: 0.6s;
-    }
-    
-    .buttonContainer.animateInDelay2 {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      transition-delay: 1s;
-    }
-  }
-}
-
-// Staggered section animations
-.animate-fade-in-sequence {
-  .section {
-    opacity: 0;
-    transform: translateY(30px);
-    animation: smoothFadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    
-    &:nth-child(1) { animation-delay: 0.1s; }
-    &:nth-child(2) { animation-delay: 0.2s; }
-    &:nth-child(3) { animation-delay: 0.3s; }
-    &:nth-child(4) { animation-delay: 0.4s; }
-    &:nth-child(5) { animation-delay: 0.5s; }
-    &:nth-child(6) { animation-delay: 0.6s; }
-    &:nth-child(7) { animation-delay: 0.7s; }
-  }
-}
-
-@keyframes smoothFadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
   }
 }

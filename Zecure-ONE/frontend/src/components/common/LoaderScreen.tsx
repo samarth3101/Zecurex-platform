@@ -35,12 +35,11 @@ export default function LoaderScreen({ onLoadingComplete }: LoaderScreenProps) {
         clearInterval(interval);
         setTimeout(() => {
           setIsAnimatingOut(true);
-          setTimeout(() => {
-            onLoadingComplete();
-          }, 2000); // 2s for smooth curtain animation
-        }, 1000);
+          // Start hero reveal immediately when curtain starts
+          onLoadingComplete();
+        }, 500); // Reduced wait time
       }
-    }, 800);
+    }, 700); // Faster steps
 
     return () => clearInterval(interval);
   }, [onLoadingComplete]);
