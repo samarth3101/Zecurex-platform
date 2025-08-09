@@ -97,22 +97,9 @@ a {
 
 
 //  new style
-// Add to your existing globals.scss
-
-// Smooth page reveal
-.page-reveal {
-  animation: pageReveal 1.2s ease-out forwards;
-}
-
-@keyframes pageReveal {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+// Apple-level smooth transitions
+* {
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 // Enhanced scroll behavior
@@ -121,8 +108,24 @@ html {
   overflow-x: hidden;
 }
 
-// Prevent flash of unstyled content
-body {
-  opacity: 1;
-  transition: opacity 0.3s ease-in-out;
+// Smooth focus transitions
+*:focus {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  transition: outline-offset 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+// Performance optimizations
+.curtain-animation {
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+// Hardware acceleration for smooth animations
+.morphing-shape,
+.progress-fill,
+.curtain-overlay {
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }

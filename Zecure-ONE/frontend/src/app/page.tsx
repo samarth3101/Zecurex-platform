@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LoaderScreen from '@/components/common/LoaderScreen';
 import HeroSection from '@/components/landing/HeroSection';
 import AboutSection from '@/components/landing/AboutSection';
@@ -13,13 +13,18 @@ import Footer from '@/components/landing/Footer';
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
+  const [contentReady, setContentReady] = useState(false);
 
   const handleLoadingComplete = () => {
     setIsLoading(false);
-    // Slight delay to let curtain animation complete
+    // Start content reveal after curtain begins
     setTimeout(() => {
       setShowContent(true);
-    }, 100);
+      // Content is fully ready after reveal animation
+      setTimeout(() => {
+        setContentReady(true);
+      }, 1000);
+    }, 500);
   };
 
   return (
@@ -27,17 +32,24 @@ export default function Home() {
       {isLoading && <LoaderScreen onLoadingComplete={handleLoadingComplete} />}
       
       <main 
-        className={`min-h-screen bg-black transition-all duration-1000 ease-out ${
-          showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}
+        className={`min-h-screen bg-black ${
+          showContent 
+            ? 'opacity-100 translate-y-0' 
+            : 'opacity-0 translate-y-12'
+        } transition-all duration-1000 ease-out`}
+        style={{
+          transitionDelay: showContent ? '0.2s' : '0s'
+        }}
       >
-        <HeroSection />
-        <AboutSection />
-        <HowItWorksSection />
-        <DemoSection />
-        <ModulesSection />
-        <JoinSection />
-        <Footer />
+        <div className={`${contentReady ? 'animate-fade-in-sequence' : ''}`}>
+          <HeroSection />
+          <AboutSection />
+          <HowItWorksSection />
+          <DemoSection />
+          <ModulesSection />
+          <JoinSection />
+          <Footer />
+        </div>
       </main>
     </>
   );
