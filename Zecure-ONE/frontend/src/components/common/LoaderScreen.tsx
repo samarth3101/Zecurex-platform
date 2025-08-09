@@ -10,28 +10,20 @@ interface LoaderScreenProps {
 export default function LoaderScreen({ onLoadingComplete }: LoaderScreenProps) {
   const [progress, setProgress] = useState(0);
   const [loadingText, setLoadingText] = useState('Initializing Zecure ONE...');
-  const [currentShape, setCurrentShape] = useState(0);
+  const [shapeStates, setShapeStates] = useState([0, 1, 2]); // [square=0, triangle=1, circle=2]
   const [isAnimatingOut, setIsAnimatingOut] = useState(false);
-  const [particleIntensity, setParticleIntensity] = useState(0);
 
-  const shapes = [
-    'liquidSquare', 
-    'flowingCircle', 
-    'morphingTriangle', 
-    'crystalDiamond', 
-    'energyHexagon',
-    'plasmaStar',
-    'quantumSphere'
-  ];
-
+  // More immersive sequencing - smoother wave-like transitions
   const loadingSteps = [
-    { progress: 15, text: 'Initializing Quantum Core...', shape: 0, particles: 20 },
-    { progress: 30, text: 'Loading Neural Networks...', shape: 1, particles: 40 },
-    { progress: 45, text: 'Establishing Secure Protocols...', shape: 2, particles: 60 },
-    { progress: 60, text: 'Calibrating AI Systems...', shape: 3, particles: 80 },
-    { progress: 75, text: 'Optimizing Threat Detection...', shape: 4, particles: 100 },
-    { progress: 90, text: 'Synchronizing Security Matrix...', shape: 5, particles: 120 },
-    { progress: 100, text: 'Welcome to the Future', shape: 6, particles: 150 }
+    { progress: 12, text: 'Initializing quantum core...', states: [0, 1, 2] }, // square, triangle, circle
+    { progress: 24, text: 'Loading neural pathways...', states: [2, 0, 1] }, // circle, square, triangle
+    { progress: 36, text: 'Establishing secure protocols...', states: [1, 2, 0] }, // triangle, circle, square
+    { progress: 48, text: 'Calibrating AI matrices...', states: [0, 1, 2] }, // square, triangle, circle
+    { progress: 60, text: 'Synchronizing data streams...', states: [2, 0, 1] }, // circle, square, triangle
+    { progress: 72, text: 'Optimizing security layers...', states: [1, 2, 0] }, // triangle, circle, square
+    { progress: 84, text: 'Finalizing system integration...', states: [0, 2, 1] }, // square, circle, triangle
+    { progress: 96, text: 'Activating Zecure ONE...', states: [1, 0, 2] }, // triangle, square, circle
+    { progress: 100, text: 'System ready', states: [2, 1, 0] } // circle, triangle, square
   ];
 
   useEffect(() => {
@@ -41,20 +33,24 @@ export default function LoaderScreen({ onLoadingComplete }: LoaderScreenProps) {
         const step = loadingSteps[currentStep];
         setProgress(step.progress);
         setLoadingText(step.text);
-        setCurrentShape(step.shape);
-        setParticleIntensity(step.particles);
+        setShapeStates(step.states);
         currentStep++;
       } else {
         clearInterval(interval);
         setTimeout(() => {
           setIsAnimatingOut(true);
           onLoadingComplete();
-        }, 800);
+        }, 1000);
       }
-    }, 650);
+    }, 650); // Slightly faster for more fluid experience
 
     return () => clearInterval(interval);
   }, [onLoadingComplete]);
+
+  const getShapeClass = (position: number, shapeType: number) => {
+    const shapes = ['square', 'triangle', 'circle'];
+    return `${styles.position}${position} ${styles[shapes[shapeType]]}`;
+  };
 
   return (
     <div className={`${styles.loaderScreen} ${isAnimatingOut ? styles.curtainUp : ''}`}>
@@ -62,46 +58,39 @@ export default function LoaderScreen({ onLoadingComplete }: LoaderScreenProps) {
         <div className={styles.loaderContent}>
           <div className={styles.logo}>
             <div className={styles.logoIcon}>
-              {/* Particle System */}
-              <div className={styles.particleContainer}>
-                {Array.from({ length: Math.floor(particleIntensity / 10) }, (_, i) => (
-                  <div
-                    key={i}
-                    className={styles.particle}
-                    style={{
-                      animationDelay: `${i * 0.1}s`,
-                      animationDuration: `${2 + Math.random() * 2}s`
-                    }}
-                  />
-                ))}
-              </div>
-              
-              {/* Energy Field */}
-              <div className={styles.energyField}>
-                <div className={styles.energyRing}></div>
-                <div className={styles.energyRing}></div>
-                <div className={styles.energyRing}></div>
-              </div>
-              
-              {/* Main Morphing Shape */}
-              <div className={`${styles.morphingShape} ${styles[shapes[currentShape]]}`}>
-                <div className={styles.shapeCore}></div>
-                <div className={styles.shapeLayer1}></div>
-                <div className={styles.shapeLayer2}></div>
-                <div className={styles.shapeLayer3}></div>
-                <div className={styles.liquidOverlay}></div>
-                <div className={styles.glowEffect}></div>
-              </div>
-              
-              {/* Holographic Grid */}
-              <div className={styles.holographicGrid}>
-                <div className={styles.gridLine}></div>
-                <div className={styles.gridLine}></div>
-                <div className={styles.gridLine}></div>
-                <div className={styles.gridLine}></div>
+              <div className={styles.shapesContainer}>
+                {/* Position 0: Enhanced floating and morphing */}
+                <div className={`${styles.shapePosition} ${getShapeClass(0, shapeStates[0])}`}>
+                  <div className={styles.morphingShape}>
+                    <div className={styles.liquidCore}></div>
+                    <div className={styles.liquidFlow}></div>
+                    <div className={styles.glowLayer}></div>
+                  </div>
+                </div>
+                
+                {/* Position 1: Enhanced floating and morphing */}
+                <div className={`${styles.shapePosition} ${getShapeClass(1, shapeStates[1])}`}>
+                  <div className={styles.morphingShape}>
+                    <div className={styles.liquidCore}></div>
+                    <div className={styles.liquidFlow}></div>
+                    <div className={styles.glowLayer}></div>
+                  </div>
+                </div>
+                
+                {/* Position 2: Enhanced floating and morphing */}
+                <div className={`${styles.shapePosition} ${getShapeClass(2, shapeStates[2])}`}>
+                  <div className={styles.morphingShape}>
+                    <div className={styles.liquidCore}></div>
+                    <div className={styles.liquidFlow}></div>
+                    <div className={styles.glowLayer}></div>
+                  </div>
+                </div>
               </div>
             </div>
-            <h1 className={styles.logoText}>ZECURE ONE</h1>
+            <h1 className={styles.logoText}>
+              <span className={styles.zecure}>Zecure</span>
+              <span className={styles.one}>ONE</span>
+            </h1>
           </div>
           
           <div className={styles.progressContainer}>
@@ -113,10 +102,6 @@ export default function LoaderScreen({ onLoadingComplete }: LoaderScreenProps) {
               <div className={styles.progressGlow}></div>
             </div>
             <p className={styles.loadingText}>{loadingText}</p>
-            <div className={styles.systemStatus}>
-              <div className={styles.statusIndicator}></div>
-              <span>System Status: Active</span>
-            </div>
           </div>
         </div>
       </div>
