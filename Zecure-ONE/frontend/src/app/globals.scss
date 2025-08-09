@@ -15,66 +15,12 @@ html {
 body {
   font-family: $font-primary;
   background-color: $bg-primary;
-  color: white;
+  color: $text-primary;
   line-height: 1.6;
   overflow-x: hidden;
   min-height: 100vh;
-  position: relative;
-}
-
-// App background with animated gradient
-.app-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-    linear-gradient(135deg, $bg-primary 0%, $bg-secondary 100%);
-  z-index: -1;
-  animation: backgroundShift 20s ease-in-out infinite alternate;
-}
-
-.app-container {
-  position: relative;
-  z-index: 1;
-  min-height: 100vh;
-}
-
-// Loading spinner styles
-.loading-spinner {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(15, 23, 42, 0.9);
-  backdrop-filter: blur(10px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-
-  .spinner-content {
-    text-align: center;
-
-    .spinner {
-      width: 50px;
-      height: 50px;
-      border: 3px solid rgba(0, 212, 255, 0.3);
-      border-top: 3px solid $neon-blue;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 1rem;
-    }
-
-    p {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 1.1rem;
-    }
-  }
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 // Custom scrollbar
@@ -87,54 +33,43 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, $neon-blue, $neon-cyan);
+  background: $border-light;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, $neon-cyan, $neon-blue);
+  background: $text-muted;
 }
 
 // Selection color
 ::selection {
-  background: rgba(0, 212, 255, 0.3);
-  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  color: $text-primary;
 }
 
-// Smooth page transitions
-.page-transition {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInUp 0.6s ease-out forwards;
+// Focus styles
+*:focus {
+  outline: 2px solid $accent-primary;
+  outline-offset: 2px;
 }
 
-// Animations
-@keyframes backgroundShift {
-  0% {
-    background: 
-      radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-      linear-gradient(135deg, $bg-primary 0%, $bg-secondary 100%);
-  }
-  100% {
-    background: 
-      radial-gradient(circle at 80% 20%, rgba(0, 212, 255, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-      linear-gradient(135deg, $bg-secondary 0%, $bg-primary 100%);
-  }
+// Smooth transitions for all interactive elements
+a, button, input, textarea, select {
+  transition: $transition-smooth;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+// Remove default button styles
+button {
+  background: none;
+  border: none;
+  font: inherit;
+  cursor: pointer;
 }
 
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+// Remove default link styles
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 // Responsive utilities
@@ -142,29 +77,12 @@ body {
   body {
     font-size: 14px;
   }
-  
-  .app-container {
-    overflow-x: hidden;
-  }
-}
-
-// Print styles
-@media print {
-  .app-background,
-  .loading-spinner {
-    display: none !important;
-  }
-  
-  body {
-    background: white !important;
-    color: black !important;
-  }
 }
 
 // High contrast mode support
 @media (prefers-contrast: high) {
-  .app-background {
-    background: $bg-primary !important;
+  body {
+    background: #000000 !important;
   }
 }
 
@@ -174,9 +92,5 @@ body {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-  
-  .app-background {
-    animation: none !important;
   }
 }

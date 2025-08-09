@@ -2,7 +2,7 @@
 
 .button {
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
   transition: $transition-smooth;
@@ -11,40 +11,40 @@
   justify-content: center;
   gap: 0.5rem;
   text-decoration: none;
+  font-family: $font-primary;
   
   &:disabled {
-    opacity: 0.6;
+    opacity: 0.5;
     cursor: not-allowed;
   }
 }
 
 .primary {
-  background: linear-gradient(135deg, $neon-blue, $neon-cyan);
-  color: $bg-primary;
-  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
+  background: $button-primary;
+  color: $button-primary-text;
   
   &:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+    background: $accent-secondary;
   }
 }
 
 .secondary {
   background: transparent;
-  color: white;
-  border: 2px solid $neon-blue;
+  color: $button-secondary-text;
+  border: 1px solid $border-color;
   
   &:hover:not(:disabled) {
-    background: rgba(0, 212, 255, 0.1);
+    background: $bg-secondary;
+    border-color: $border-light;
   }
 }
 
 .ghost {
   background: transparent;
-  color: rgba(255, 255, 255, 0.7);
+  color: $text-secondary;
   
   &:hover:not(:disabled) {
-    color: $neon-blue;
+    color: $text-primary;
   }
 }
 

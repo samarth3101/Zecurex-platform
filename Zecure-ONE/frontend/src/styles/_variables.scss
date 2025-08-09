@@ -1,21 +1,29 @@
-// Dark Theme Colors
-$bg-primary: #0f172a;
-$bg-secondary: #1e293b;
-$bg-tertiary: #334155;
+// Clean Dark Theme Colors - OpenAI Style
+$bg-primary: #000000;
+$bg-secondary: #111111;
+$bg-tertiary: #1a1a1a;
+$bg-elevated: #222222;
 
-// Neon Accent Colors
-$neon-blue: #00d4ff;
-$neon-cyan: #00ffff;
-$neon-purple: #8b5cf6;
+// Text Colors
+$text-primary: #ffffff;
+$text-secondary: #cccccc;
+$text-muted: #888888;
+$text-dimmed: #666666;
 
-// Glass Effect
-$glass-bg: rgba(15, 23, 42, 0.8);
-$glass-border: rgba(255, 255, 255, 0.1);
-$glass-shadow: rgba(0, 0, 0, 0.3);
+// Accent Colors
+$accent-primary: #ffffff;
+$accent-secondary: #cccccc;
+$border-color: #333333;
+$border-light: #444444;
+
+// Button Colors
+$button-primary: #ffffff;
+$button-primary-text: #000000;
+$button-secondary: transparent;
+$button-secondary-text: #ffffff;
 
 // Typography
 $font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-$font-mono: 'JetBrains Mono', monospace;
 
 // Spacing
 $section-padding: 5rem 0;
