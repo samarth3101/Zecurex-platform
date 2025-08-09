@@ -1,0 +1,488 @@
+.hero {
+  min-height: 100vh;
+  background: #000000;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+
+  // Enhanced background pattern
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(255,255,255,0.02) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(255,255,255,0.01) 0%, transparent 50%);
+    pointer-events: none;
+    animation: backgroundShift 20s ease-in-out infinite;
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  width: 100%;
+  gap: 8rem;
+  z-index: 1;
+}
+
+/* LEFT PANEL - Content */
+.leftPanel {
+  flex: 1;
+  max-width: 600px;
+}
+
+.content {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &.slideIn {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+
+  // Subtle shimmer effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+}
+
+.badgeText {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.5px;
+}
+
+.mainHeading {
+  font-size: 4.2rem;
+  font-weight: 300;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 2rem;
+  letter-spacing: -2px;
+
+  .accent {
+    font-weight: 600;
+    background: linear-gradient(135deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+.description {
+  font-size: 1.15rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.7;
+  margin-bottom: 3rem;
+  max-width: 520px;
+}
+
+.buttons {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.stats {
+  display: flex;
+  gap: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.statNumber {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.statLabel {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* RIGHT PANEL - Lottie Animation */
+.rightPanel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 500px;
+}
+
+.visualContainer {
+  opacity: 0;
+  transform: scale(0.8) rotate(2deg);
+  transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  
+  &.fadeIn {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Lottie Animation Container */
+.animationContainer {
+  width: 100%;
+  height: 400px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .lottieAnimation {
+    width: 100%;
+    height: 100%;
+    filter: brightness(1.1) contrast(1.05);
+    animation: floatAnimation 6s ease-in-out infinite;
+  }
+}
+
+/* Animation Placeholder (while loading) */
+.animationPlaceholder {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+
+  .placeholderContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+  }
+
+  .placeholderSpinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top: 3px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+/* Status Indicators */
+.statusIndicators {
+  position: absolute;
+  top: -20px;
+  right: -40px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  z-index: 2;
+}
+
+.indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.9);
+  animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+  position: relative;
+  overflow: hidden;
+
+  // Background pulse effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    animation: indicatorPulse 4s ease-in-out infinite;
+  }
+
+  &.secure {
+    animation-delay: 1s;
+  }
+
+  &.monitoring {
+    animation-delay: 1.3s;
+  }
+
+  &.protected {
+    animation-delay: 1.6s;
+  }
+}
+
+.indicatorDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00ff88;
+  animation: dotBlink 2.5s ease-in-out infinite;
+  box-shadow: 0 0 8px #00ff88;
+  position: relative;
+  z-index: 1;
+}
+
+/* ENHANCED ANIMATIONS */
+@keyframes backgroundShift {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(5px) translateY(-2px); }
+  50% { transform: translateX(-2px) translateY(5px); }
+  75% { transform: translateX(2px) translateY(2px); }
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+@keyframes floatAnimation {
+  0%, 100% { 
+    transform: translateY(0px) scale(1); 
+  }
+  50% { 
+    transform: translateY(-8px) scale(1.01); 
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(25px) translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes indicatorPulse {
+  0% { left: -100%; }
+  50% { left: 0%; }
+  100% { left: 100%; }
+}
+
+@keyframes dotBlink {
+  0%, 100% { 
+    opacity: 1; 
+    transform: scale(1);
+    box-shadow: 0 0 8px #00ff88;
+  }
+  50% { 
+    opacity: 0.6; 
+    transform: scale(1.2);
+    box-shadow: 0 0 12px #00ff88;
+  }
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1200px) {
+  .container {
+    gap: 6rem;
+  }
+  
+  .animationContainer {
+    height: 350px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    gap: 4rem;
+  }
+  
+  .mainHeading {
+    font-size: 3.5rem;
+  }
+
+  .animationContainer {
+    height: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 2rem 1rem;
+    min-height: auto;
+  }
+
+  .container {
+    flex-direction: column;
+    gap: 3rem;
+    text-align: center;
+  }
+  
+  .leftPanel, .rightPanel {
+    max-width: none;
+    width: 100%;
+  }
+  
+  .mainHeading {
+    font-size: 2.8rem;
+  }
+  
+  .stats {
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .buttons {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    
+    :global(.button) {
+      width: 100%;
+      max-width: 280px;
+    }
+  }
+
+  .animationContainer {
+    height: 280px;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .statusIndicators {
+    position: static;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 0.8rem;
+  }
+
+  .indicator {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 1.5rem 1rem;
+  }
+
+  .mainHeading {
+    font-size: 2.2rem;
+    letter-spacing: -1px;
+  }
+  
+  .description {
+    font-size: 1rem;
+  }
+
+  .animationContainer {
+    height: 220px;
+    max-width: 250px;
+  }
+
+  .stats {
+    gap: 1.5rem;
+  }
+
+  .statNumber {
+    font-size: 1.3rem;
+  }
+
+  .statLabel {
+    font-size: 0.75rem;
+  }
+
+  .statusIndicators {
+    gap: 0.5rem;
+  }
+
+  .indicator {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .indicatorDot {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+@media (max-width: 360px) {
+  .animationContainer {
+    height: 180px;
+    max-width: 200px;
+  }
+
+  .mainHeading {
+    font-size: 1.9rem;
+  }
+}
+
+/* Accessibility - Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .lottieAnimation {
+    animation-play-state: paused;
+  }
+  
+  .floatAnimation,
+  .backgroundShift,
+  .shimmer,
+  .indicatorPulse,
+  .dotBlink {
+    animation: none;
+  }
+}

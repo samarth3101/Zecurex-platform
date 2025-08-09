@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, ReactNode } from 'react';
 import styles from './Button.module.scss';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'ghost';
+  variant?: 'primary' | 'secondary' | 'ghost' |  'outline';
   size?: 'sm' | 'md' | 'lg';
   children: ReactNode;
   isLoading?: boolean;
@@ -30,3 +30,5 @@ export default function Button({
     </button>
   );
 }
+
+

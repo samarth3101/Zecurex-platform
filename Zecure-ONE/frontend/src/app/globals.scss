@@ -129,3 +129,53 @@ html {
   will-change: transform, opacity;
   transform: translateZ(0);
 }
+
+
+// globe
+/* BUTTON STYLES */
+:global(.button) {
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  text-decoration: none;
+  font-family: inherit;
+  position: relative;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+:global(.primary) {
+  background: #ffffff;
+  color: #000000;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
+  }
+}
+
+:global(.outline) {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  
+  &:hover {
+    border-color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+  }
+}
+
+:global(.lg) {
+  padding: 1rem 2.5rem;
+  font-size: 0.95rem;
+  min-width: 180px;
+}

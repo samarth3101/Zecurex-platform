@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Lottie from 'lottie-react';
+import loadingAnimation from '@/assets/animations/loaderscreen.json';
 import styles from './LoaderScreen.module.scss';
 
 interface LoaderScreenProps {
@@ -47,7 +49,7 @@ export default function LoaderScreen({ onLoadingComplete }: LoaderScreenProps) {
           setIsAnimatingOut(true);
           setTimeout(() => {
             if (onLoadingComplete) onLoadingComplete();
-          }, 750); // allow animation to finish
+          }, 750);
         }, 480);
       }
     }, 690);
@@ -58,10 +60,25 @@ export default function LoaderScreen({ onLoadingComplete }: LoaderScreenProps) {
   return (
     <div className={`${styles.loaderScreen} ${isAnimatingOut ? styles.slideUp : ''}`}>
       <div className={styles.loaderContent}>
+        
+        {/* Lottie Animation */}
+        <div className={styles.animationContainer}>
+          <Lottie 
+            animationData={loadingAnimation}
+            className={styles.lottieAnimation}
+            loop={true}
+            autoplay={true}
+            style={{ width: '100%', height: '100%' }}
+          />
+        </div>
+
+        {/* Brand Logo */}
         <h1 className={styles.logoText}>
           <span className={styles.zecure}>Zecure</span>
           <span className={styles.one}>ONE</span>
         </h1>
+
+        {/* Progress Section */}
         <div className={styles.progressWrapper}>
           <div className={styles.progressBar}>
             <div
