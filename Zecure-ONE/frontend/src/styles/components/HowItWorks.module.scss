@@ -1,0 +1,361 @@
+/* Refined How It Works Section - Dulled Colors */
+.howItWorksSection {
+    background: #000000;
+    width: 100vw;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 2rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    position: relative;
+
+    /* Refined grid background */
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image:
+            linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+        background-size: 60px 60px;
+        mask: radial-gradient(ellipse 70% 50% at 50% 50%, black 30%, transparent 75%);
+        -webkit-mask: radial-gradient(ellipse 70% 50% at 50% 50%, black 30%, transparent 75%);
+        pointer-events: none;
+        opacity: 0.4;
+    }
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Enhanced Header */
+.header {
+    text-align: center;
+    margin-bottom: 4.5rem;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+}
+
+.badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #1a1a1a, #222222);
+    color: #cccccc;
+    border: 1px solid #333333;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.5rem 1.4rem;
+    margin-bottom: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+}
+
+.titleAccent {
+    /* Dulled Zecure gradient */
+    //   background: linear-gradient(135deg, #66b3cc 0%, #66a388 100%);
+    background: linear-gradient(135deg,
+            #00d4ff 0%, // Light Blue
+            #00b4d8 20%, // Medium Blue
+            #0077be 40%, // Blue
+            #006ba6 60%, // Darker Blue
+            #00a896 80%, // Teal/Blue-Green
+            #02c39a 100% // Green-Blue
+        );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    font-size: 1.15rem;
+    color: #888888;
+    max-width: 650px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Enhanced Steps Grid */
+.stepsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+    width: 100%;
+    max-width: 1100px;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.stepCard {
+    background: linear-gradient(145deg, #0f0f0f 0%, #1a1a1a 100%);
+    border: 2px solid #333333;
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUp 0.8s ease-out forwards;
+    backdrop-filter: blur(8px);
+
+    /* Zecure card with dulled gradient border */
+    &.zecureCard {
+        border: 3px solid;
+        border-image: linear-gradient(135deg, #66b3cc, #66a388) 1;
+    }
+
+    /* Active state */
+    &.active {
+        border-width: 3px;
+        background: linear-gradient(145deg, #111111 0%, #1a1a1a 100%);
+    }
+
+    /* Current step enhancement */
+    &.current {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Dulled periodic glow effect */
+    &.glowing {
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
+    }
+
+    &.glowing.zecureCard {
+        box-shadow: 0 0 30px rgba(102, 179, 204, 0.2);
+    }
+
+    &:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    }
+}
+
+.stepNumber {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2a2a2a, #3a3a3a);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin: 0 auto 1.8rem auto;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.stepIcon {
+    width: 56px;
+    height: 56px;
+    color: #cccccc;
+    margin: 0 auto 1.8rem auto;
+    transition: all 0.4s ease;
+
+    svg {
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+    }
+}
+
+.stepTitle {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 1.2rem;
+    letter-spacing: -0.01em;
+}
+
+.stepDescription {
+    font-size: 1rem;
+    color: #999999;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Flow Connectors */
+.flowConnector {
+    position: absolute;
+    right: -1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: #444444;
+    transition: all 0.4s ease;
+    z-index: 2;
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .stepCard.active & {
+        color: #888888;
+        /* Dulled white */
+        animation: arrowPulse 2s ease-in-out infinite;
+    }
+}
+
+/* Enhanced Performance Stats */
+.statsContainer {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-top: 3rem;
+    padding-top: 3rem;
+    border-top: 1px solid #222222;
+}
+
+.stat {
+    text-align: center;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+    border: 1px solid #2a2a2a;
+    border-radius: 16px;
+    transition: all 0.4s ease;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out 1s forwards;
+
+    &:hover {
+        transform: translateY(-4px);
+        border-color: #66b3cc;
+        /* Dulled blue */
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.statNumber {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.6rem;
+    text-shadow: 0 0 15px rgba(102, 179, 204, 0.15);
+    /* Dulled glow */
+}
+
+.statLabel {
+    font-size: 0.9rem;
+    color: #777777;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 500;
+}
+
+/* Enhanced Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes arrowPulse {
+
+    0%,
+    100% {
+        transform: translateY(-50%) scale(1);
+        opacity: 0.6;
+        /* Dulled opacity */
+    }
+
+    50% {
+        transform: translateY(-50%) scale(1.1);
+        opacity: 0.8;
+        /* Dulled opacity */
+    }
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 1200px) {
+    .stepsGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    .flowConnector {
+        display: none;
+    }
+
+    .statsContainer {
+        gap: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .howItWorksSection {
+        padding: 4rem 1rem;
+    }
+
+    .title {
+        font-size: 2.2rem;
+    }
+
+    .stepsGrid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .statsContainer {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stepCard {
+        padding: 2rem 1.5rem;
+    }
+
+    .stepIcon {
+        width: 48px;
+        height: 48px;
+    }
+
+    .stepTitle {
+        font-size: 1.2rem;
+    }
+
+    .stepDescription {
+        font-size: 0.95rem;
+    }
+}

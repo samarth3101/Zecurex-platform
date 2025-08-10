@@ -1,0 +1,273 @@
+.footer {
+  background: #000000; /* Plain black background */
+  width: 100vw;
+  border-top: 1px solid #222222;
+  padding: 3rem 2rem 2rem 2rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  position: relative;
+  margin-top: auto;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Simplified Footer Content */
+.footerContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 2rem;
+  align-items: start;
+}
+
+/* Brand Section */
+.brandSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.logoIcon {
+  width: 28px;
+  height: 28px;
+  color: #66b3cc;
+  
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.logoText {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+}
+
+.brandName {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.brandSuffix {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #66b3cc;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.brandDescription {
+  font-size: 0.9rem;
+  color: #888888;
+  line-height: 1.5;
+  max-width: 280px;
+  margin: 0;
+}
+
+/* Single Line Links Section */
+.linksSection {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.footerLinks {
+  display: flex;
+  flex-wrap: nowrap; /* Prevent wrapping to keep all links on one line */
+  gap: 1rem; /* Reduced gap for tighter spacing */
+  justify-content: flex-end;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.footerLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #aaaaaa;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  transition: color 0.3s ease; /* Only color transition, no transform */
+  
+  &:hover,
+  &.hovered {
+    color: #ffffff; /* Only color change on hover */
+    background: #111111;    
+    .linkIcon {
+      color: #66b3cc;
+    }
+  }
+}
+
+.linkIcon {
+  width: 14px;
+  height: 14px;
+  color: #666666;
+  transition: color 0.3s ease; /* Only color transition */
+  
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.linkText {
+  transition: color 0.3s ease; /* Only color transition */
+}
+
+/* Simple Divider */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #333333 50%,
+    transparent 100%
+  );
+  margin: 2rem 0 1.5rem 0;
+}
+
+/* Simple Bottom Section */
+.bottomSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.copyright {
+  font-size: 0.8rem;
+  color: #666666;
+  
+  span {
+    color: inherit;
+  }
+}
+
+.copyrightBrand {
+  color: #66b3cc !important;
+  font-weight: 600;
+}
+
+.footerMeta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.buildStatus {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: #777777;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  background: #66a388;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.version {
+  font-size: 0.75rem;
+  color: #555555;
+  font-weight: 500;
+  padding: 0.2rem 0.6rem;
+  background: #111111;
+  border: 1px solid #222222;
+  border-radius: 6px;
+}
+
+/* Simple Animations */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 8px currentColor;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .footerContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .linksSection {
+    justify-content: center;
+  }
+  
+  .footerLinks {
+    justify-content: center;
+  }
+  
+  .bottomSection {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 2.5rem 1rem 1.5rem 1rem;
+  }
+  
+  .footerLinks {
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 0.8rem;
+    justify-content: center;
+  }
+  
+  .footerLink {
+    min-width: auto; /* Remove fixed width for mobile */
+  }
+  
+  .footerMeta {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 2rem 1rem 1rem 1rem;
+  }
+  
+  .brandDescription {
+    text-align: center;
+    max-width: 100%;
+  }
+  
+  .logo {
+    justify-content: center;
+  }
+  
+  .footerLinks {
+    flex-direction: column; /* Stack vertically on very small screens */
+    align-items: center;
+  }
+}

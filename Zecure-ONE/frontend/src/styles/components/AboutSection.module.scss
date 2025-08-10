@@ -154,7 +154,15 @@
   color: #ffffff;
 
   .accent {
-    background: linear-gradient(135deg, #00d4ff 0%, #02c39a 100%);
+    // background: linear-gradient(135deg, #00d4ff 0%, #02c39a 100%);
+        background: linear-gradient(135deg, 
+      #00d4ff 0%,     // Light Blue
+      #00b4d8 20%,    // Medium Blue
+      #0077be 40%,    // Blue
+      #006ba6 60%,    // Darker Blue
+      #00a896 80%,    // Teal/Blue-Green
+      #02c39a 100%    // Green-Blue
+    );
     background-size: 200% 200%;
     background-clip: text;
     -webkit-background-clip: text;

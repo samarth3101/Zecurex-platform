@@ -1,0 +1,137 @@
+/* ===== SMOOTH SCROLL CONFIGURATION ===== */
+
+/* Basic smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced smooth scrolling with better performance */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Custom smooth scroll for specific containers */
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* ===== ENHANCED SCROLL CONFIGURATION ===== */
+
+/* Better scroll performance and smoothness */
+html, body {
+  scroll-behavior: smooth;
+  /* Optimize scrolling performance */
+  -webkit-overflow-scrolling: touch;
+  /* Better font rendering during scroll */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== CUSTOM SCROLLBAR STYLING (OPTIONAL) ===== */
+
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 4px;
+  
+  &:hover {
+    background: #555555;
+  }
+}
+
+/* Firefox scrollbar */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #333333 #000000;
+}
+
+/* ===== SCROLL SNAP (OPTIONAL) ===== */
+
+/* If you want scroll snap functionality */
+.scroll-snap-container {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+.scroll-snap-item {
+  scroll-snap-align: start;
+}
+
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+
+/* Better scroll performance */
+html {
+  /* Enable hardware acceleration for smooth scrolling */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  
+  /* Improve scroll performance */
+  will-change: scroll-position;
+}
+
+/* ===== ACCESSIBILITY ===== */
+
+/* Respect user's preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  * {
+    scroll-behavior: auto;
+  }
+}
+
+/* ===== ANCHOR LINK OFFSET (FOR FIXED HEADERS) ===== */
+
+/* If you have a fixed header, adjust scroll position */
+.scroll-offset {
+  scroll-padding-top: 80px; /* Adjust based on your header height */
+}
+
+/* Alternative method for anchor offset */
+.anchor-offset {
+  &::before {
+    content: '';
+    display: block;
+    height: 80px; /* Adjust based on your header height */
+    margin-top: -80px;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
+
+/* ===== SMOOTH SCROLL FOR MODAL/POPUP CONTAINERS ===== */
+
+.modal-content,
+.popup-content,
+.sidebar-content {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* Enable smooth scroll */
+.smooth-scroll-enabled {
+  scroll-behavior: smooth;
+}
+
+/* Disable smooth scroll */
+.smooth-scroll-disabled {
+  scroll-behavior: auto;
+}
+
+/* Instant scroll (no animation) */
+.instant-scroll {
+  scroll-behavior: auto;
+}

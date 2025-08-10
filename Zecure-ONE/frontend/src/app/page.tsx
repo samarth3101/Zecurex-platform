@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import LoaderScreen from '@/components/common/LoaderScreen';
 import HeroSection from '@/components/landing/HeroSection';
 import AboutSection from '@/components/landing/AboutSection';
-import OurModels from '@/components/landing/OurModels';
+// import OurModels from '@/components/landing/OurModels';
 import HowItWorksSection from '@/components/landing/HowItWorksSection';
 import DemoSection from '@/components/landing/DemoSection';
 import ModulesSection from '@/components/landing/ModulesSection';
@@ -34,7 +34,7 @@ export default function Home() {
       >
         <HeroSection isVisible={showContent} />
         <AboutSection />
-        <OurModels/>
+        {/* <OurModels/> */}
         <HowItWorksSection />
         <DemoSection />
         <ModulesSection />
