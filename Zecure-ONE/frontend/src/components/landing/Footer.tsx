@@ -12,7 +12,7 @@ export default function Footer() {
           <a href="#">Terms of Service</a>
         </div>
         <p className={styles.copyright}>
-          © 2025 Zecure ONE. Built with Next.js and TypeScript.
+          © 2025 Zecure ONE.
         </p>
       </div>
     </footer>

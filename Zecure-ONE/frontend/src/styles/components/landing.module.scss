@@ -1,5 +1,5 @@
-@import '../variables';
-@import '../mixins';
+@use '../variables';
+@use '../mixins';
 
 // Faster hero animations
 .hero {
@@ -37,7 +37,7 @@
 
 .hero {
   min-height: 100vh;
-  background: $bg-primary;
+  background: variables.$bg-primary;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,14 +53,14 @@
     .logo {
       font-size: 4rem;
       font-weight: 800;
-      color: $text-primary;
+      color: variables.$text-primary;
       margin-bottom: 1rem;
       letter-spacing: 2px;
     }
 
     .tagline {
       font-size: 1.5rem;
-      color: $text-secondary;
+      color: variables.$text-secondary;
       margin-bottom: 3rem;
       font-weight: 400;
       line-height: 1.5;
@@ -69,32 +69,32 @@
 }
 
 .section {
-  padding: $section-padding;
-  max-width: $container-max-width;
+  padding: variables.$section-padding;
+  max-width: variables.$container-max-width;
   margin: 0 auto;
   padding-left: 2rem;
   padding-right: 2rem;
-  background: $bg-primary;
+  background: variables.$bg-primary;
 
   .sectionTitle {
     font-size: 3rem;
     font-weight: 700;
     text-align: center;
     margin-bottom: 3rem;
-    color: $text-primary;
+    color: variables.$text-primary;
   }
 }
 
 .card {
-  background: $bg-secondary;
-  border: 1px solid $border-color;
+  background: variables.$bg-secondary;
+  border: 1px solid variables.$border-color;
   border-radius: 12px;
   padding: 2rem;
-  transition: $transition-smooth;
+  transition: variables.$transition-smooth;
 
   &:hover {
-    background: $bg-tertiary;
-    border-color: $border-light;
+    background: variables.$bg-tertiary;
+    border-color: variables.$border-light;
   }
 }
 
@@ -116,12 +116,12 @@
     .title {
       font-size: 1.5rem;
       font-weight: 600;
-      color: $text-primary;
+      color: variables.$text-primary;
       margin-bottom: 1rem;
     }
 
     .description {
-      color: $text-secondary;
+      color: variables.$text-secondary;
       line-height: 1.6;
     }
   }
@@ -149,8 +149,8 @@
         left: -15px;
         width: 30px;
         height: 30px;
-        background: $accent-primary;
-        color: $bg-primary;
+        background: variables.$accent-primary;
+        color: variables.$bg-primary;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -161,12 +161,12 @@
 
       .stepTitle {
         font-weight: 600;
-        color: $text-primary;
+        color: variables.$text-primary;
         margin-bottom: 0.5rem;
       }
 
       .stepDescription {
-        color: $text-secondary;
+        color: variables.$text-secondary;
         font-size: 0.9rem;
       }
 
@@ -177,7 +177,7 @@
         top: 50%;
         transform: translateY(-50%);
         font-size: 2rem;
-        color: $text-muted;
+        color: variables.$text-muted;
       }
 
       &:last-child::after {
@@ -191,7 +191,7 @@
   .mockDashboard {
     @extend .card;
     margin-top: 3rem;
-    background: $bg-secondary;
+    background: variables.$bg-secondary;
 
     .dashboardHeader {
       display: flex;
@@ -199,12 +199,12 @@
       align-items: center;
       margin-bottom: 2rem;
       padding-bottom: 1rem;
-      border-bottom: 1px solid $border-color;
+      border-bottom: 1px solid variables.$border-color;
 
       .headerTitle {
         font-size: 1.5rem;
         font-weight: 600;
-        color: $text-primary;
+        color: variables.$text-primary;
       }
 
       .statusIndicator {
@@ -229,13 +229,13 @@
       gap: 1.5rem;
 
       .metric {
-        background: $bg-tertiary;
+        background: variables.$bg-tertiary;
         padding: 1.5rem;
         border-radius: 8px;
-        border: 1px solid $border-color;
+        border: 1px solid variables.$border-color;
 
         .metricLabel {
-          color: $text-muted;
+          color: variables.$text-muted;
           font-size: 0.9rem;
           margin-bottom: 0.5rem;
         }
@@ -243,7 +243,7 @@
         .metricValue {
           font-size: 2rem;
           font-weight: 700;
-          color: $text-primary;
+          color: variables.$text-primary;
           margin-bottom: 0.5rem;
         }
 
@@ -276,12 +276,12 @@
     .moduleTitle {
       font-size: 1.25rem;
       font-weight: 600;
-      color: $text-primary;
+      color: variables.$text-primary;
       margin-bottom: 1rem;
     }
 
     .moduleDescription {
-      color: $text-secondary;
+      color: variables.$text-secondary;
       line-height: 1.6;
     }
   }
@@ -290,20 +290,20 @@
 .joinSection {
   text-align: center;
   padding: 6rem 0;
-  background: $bg-secondary;
-  border-top: 1px solid $border-color;
-  border-bottom: 1px solid $border-color;
+  background: variables.$bg-secondary;
+  border-top: 1px solid variables.$border-color;
+  border-bottom: 1px solid variables.$border-color;
 
   .joinTitle {
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
-    color: $text-primary;
+    color: variables.$text-primary;
   }
 
   .joinSubtitle {
     font-size: 1.25rem;
-    color: $text-secondary;
+    color: variables.$text-secondary;
     margin-bottom: 3rem;
     max-width: 600px;
     margin-left: auto;
@@ -312,12 +312,12 @@
 }
 
 .footer {
-  background: $bg-primary;
-  border-top: 1px solid $border-color;
+  background: variables.$bg-primary;
+  border-top: 1px solid variables.$border-color;
   padding: 3rem 0 1rem;
 
   .footerContent {
-    max-width: $container-max-width;
+    max-width: variables.$container-max-width;
     margin: 0 auto;
     padding: 0 2rem;
     text-align: center;
@@ -330,18 +330,18 @@
       flex-wrap: wrap;
 
       a {
-        color: $text-muted;
+        color: variables.$text-muted;
         text-decoration: none;
-        transition: $transition-smooth;
+        transition: variables.$transition-smooth;
 
         &:hover {
-          color: $text-primary;
+          color: variables.$text-primary;
         }
       }
     }
 
     .copyright {
-      color: $text-dimmed;
+      color: variables.$text-dimmed;
       font-size: 0.9rem;
     }
   }

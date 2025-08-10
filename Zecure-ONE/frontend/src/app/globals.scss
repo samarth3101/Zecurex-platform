@@ -1,4 +1,4 @@
-@import '../styles/variables';
+@use '../styles/variables';
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 * {
@@ -13,9 +13,9 @@ html {
 }
 
 body {
-  font-family: $font-primary;
-  background-color: $bg-primary;
-  color: $text-primary;
+  font-family: variables.$font-primary;
+  background-color: variables.$bg-primary;
+  color: variables.$text-primary;
   line-height: 1.6;
   overflow-x: hidden;
   min-height: 100vh;
@@ -29,33 +29,33 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: $bg-secondary;
+  background: variables.$bg-secondary;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $border-light;
+  background: variables.$border-light;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: $text-muted;
+  background: variables.$text-muted;
 }
 
 // Selection color
 ::selection {
   background: rgba(255, 255, 255, 0.2);
-  color: $text-primary;
+  color: variables.$text-primary;
 }
 
 // Focus styles
 *:focus {
-  outline: 2px solid $accent-primary;
+  outline: 2px solid variables.$accent-primary;
   outline-offset: 2px;
 }
 
 // Smooth transitions for all interactive elements
 a, button, input, textarea, select {
-  transition: $transition-smooth;
+  transition: variables.$transition-smooth;
 }
 
 // Remove default button styles

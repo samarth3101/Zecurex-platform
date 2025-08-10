@@ -1,17 +1,17 @@
-@import '../../styles/variables';
+@use '../../styles/variables';
 
 .button {
   border: none;
   border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  transition: $transition-smooth;
+  transition: variables.$transition-smooth;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   text-decoration: none;
-  font-family: $font-primary;
+  font-family: variables.$font-primary;
   
   &:disabled {
     opacity: 0.5;
@@ -20,31 +20,31 @@
 }
 
 .primary {
-  background: $button-primary;
-  color: $button-primary-text;
+  background: variables.$button-primary;
+  color: variables.$button-primary-text;
   
   &:hover:not(:disabled) {
-    background: $accent-secondary;
+    background: variables.$accent-secondary;
   }
 }
 
 .secondary {
   background: transparent;
-  color: $button-secondary-text;
-  border: 1px solid $border-color;
+  color: variables.$button-secondary-text;
+  border: 1px solid variables.$border-color;
   
   &:hover:not(:disabled) {
-    background: $bg-secondary;
-    border-color: $border-light;
+    background: variables.$bg-secondary;
+    border-color: variables.$border-light;
   }
 }
 
 .ghost {
   background: transparent;
-  color: $text-secondary;
+  color: variables.$text-secondary;
   
   &:hover:not(:disabled) {
-    color: $text-primary;
+    color: variables.$text-primary;
   }
 }
 

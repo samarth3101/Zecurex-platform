@@ -1,8 +1,8 @@
-@import '../../styles/variables';
+@use '../../styles/variables';
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700;800&family=Comfortaa:wght@700&display=swap');
 
-$calm-white: rgba(255,255,255,0.85);
-$calm-white-soft: rgba(255,255,255,0.62);
+variables.$calm-white: rgba(255,255,255,0.85);
+variables.$calm-white-soft: rgba(255,255,255,0.62);
 
 .loaderScreen {
   position: fixed;
@@ -68,14 +68,14 @@ $calm-white-soft: rgba(255,255,255,0.62);
   font-size: 2.2rem;
   font-weight: 800;
   letter-spacing: 2px;
-  color: $calm-white;
+  color: variables.$calm-white;
 }
 
 .one {
   font-family: 'Comfortaa', cursive;
   font-size: 2.2rem;
   font-weight: 700;
-  color: $calm-white;
+  color: variables.$calm-white;
 }
 
 .progressWrapper {
@@ -99,9 +99,9 @@ $calm-white-soft: rgba(255,255,255,0.62);
 
   .progressFill {
     height: 100%;
-    background: linear-gradient(90deg, $calm-white 0%, $calm-white-soft 70%);
+    background: linear-gradient(90deg, variables.$calm-white 0%, variables.$calm-white-soft 70%);
     border-radius: 4px 0 0 4px;
-    box-shadow: 0 0 8px $calm-white-soft;
+    box-shadow: 0 0 8px variables.$calm-white-soft;
     transition: width 0.6s cubic-bezier(.4,0,.2,1);
     position: relative;
 
@@ -120,7 +120,7 @@ $calm-white-soft: rgba(255,255,255,0.62);
 }
 
 .progressPercent {
-  color: $calm-white;
+  color: variables.$calm-white;
   font-size: 1rem;
   font-weight: 600;
   letter-spacing: 1px;
@@ -129,7 +129,7 @@ $calm-white-soft: rgba(255,255,255,0.62);
 }
 
 .loadingText {
-  color: $calm-white-soft;
+  color: variables.$calm-white-soft;
   font-size: 1rem;
   font-weight: 400;
   letter-spacing: .6px;
