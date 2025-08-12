@@ -10,67 +10,77 @@ interface Module {
   color: string;
 }
 
-// Clean, refined icons
-const FraudIcon = () => (
+// Updated icons for the new modules
+const CloudSecurityIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 0 1 0 9Z"/>
+    <path d="M12 12v6"/>
+    <path d="M16 16l-4-4-4 4"/>
+  </svg>
+);
+
+const FraudPreventionIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
     <path d="M9 12l2 2 4-4"/>
-    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
-    <path d="M3 5c0 1.66 4 3 9 3s9-1.34 9-3"/>
+    <circle cx="12" cy="8" r="3" fill="none"/>
   </svg>
 );
 
-const ThreatIcon = () => (
+const ThreatIntelligenceIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-    <path d="M3 3v18h18"/>
-    <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/>
-    <circle cx="18.7" cy="8" r="1.5" fill="currentColor" opacity="0.3"/>
-  </svg>
-);
-
-const BehavioralIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-    <path d="M12 17h.01"/>
     <circle cx="12" cy="12" r="10"/>
+    <path d="M12 6v6l4 2"/>
+    <path d="M16 8l-4 4-2-2"/>
   </svg>
 );
 
-const ApiIcon = () => (
+const IncidentResponseIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-    <line x1="8" y1="21" x2="16" y2="21"/>
-    <line x1="12" y1="17" x2="12" y2="21"/>
+    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    <circle cx="12" cy="9" r="1"/>
   </svg>
 );
 
-const AuditIcon = () => (
+const PolicyEngineIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
     <polyline points="14,2 14,8 20,8"/>
-    <line x1="16" y1="13" x2="8" y2="13"/>
+    <path d="M16 13H8"/>
+    <path d="M16 17H8"/>
+    <path d="M10 9H8"/>
   </svg>
 );
 
-const AlertIcon = () => (
+const AttackPlaygroundIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+    <circle cx="9" cy="9" r="2"/>
+    <path d="M21 15l-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+    <circle cx="15" cy="9" r="1"/>
   </svg>
 );
 
-const NetworkIcon = () => (
+const DeveloperAPIIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-    <path d="M16 4h2a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/>
-    <path d="M8 4H6a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2"/>
-    <line x1="12" y1="2" x2="12" y2="6"/>
-    <line x1="12" y1="18" x2="12" y2="22"/>
+    <polyline points="16 18 22 12 16 6"/>
+    <polyline points="8 6 2 12 8 18"/>
+    <line x1="12" y1="2" x2="12" y2="22"/>
   </svg>
 );
 
-const EncryptionIcon = () => (
+const AuditDashboardIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-    <circle cx="12" cy="16" r="1"/>
-    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+    <rect x="3" y="3" width="18" height="18" rx="2"/>
+    <path d="M9 9h6v6H9z"/>
+    <path d="M9 3v2"/>
+    <path d="M15 3v2"/>
+    <path d="M9 19v2"/>
+    <path d="M15 19v2"/>
+    <path d="M3 9h2"/>
+    <path d="M3 15h2"/>
+    <path d="M19 9h2"/>
+    <path d="M19 15h2"/>
   </svg>
 );
 
@@ -116,60 +126,60 @@ export default function ModulesSection() {
   const modules: Module[] = [
     // Top Row (4 cards)
     {
-      id: 'fraud-detection',
-      icon: <FraudIcon />,
-      title: 'Fraud Detection',
-      description: 'Advanced ML algorithms to identify fraudulent activities in real-time.',
+      id: 'cloud-security',
+      icon: <CloudSecurityIcon />,
+      title: 'Real-Time Cloud Security',
+      description: 'Continuous monitoring and protection for cloud infrastructure and services.',
       color: '#cc6666'
     },
     {
-      id: 'threat-analysis',
-      icon: <ThreatIcon />,
-      title: 'Threat Analysis',
-      description: 'Comprehensive threat intelligence and analysis tools.',
+      id: 'fraud-prevention',
+      icon: <FraudPreventionIcon />,
+      title: 'AI-Powered Fraud Prevention',
+      description: 'Advanced machine learning algorithms to detect and prevent fraudulent activities.',
       color: '#cc9966'
     },
     {
-      id: 'behavioral-ai',
-      icon: <BehavioralIcon />,
-      title: 'Behavioral AI',
-      description: 'ML models that understand user behavior patterns.',
+      id: 'threat-intelligence',
+      icon: <ThreatIntelligenceIcon />,
+      title: 'Advanced Threat Intelligence',
+      description: 'Comprehensive threat analysis covering phishing and LLM security.',
       color: '#99cc66'
     },
     {
-      id: 'api-gateway',
-      icon: <ApiIcon />,
-      title: 'API Gateway',
-      description: 'Secure API management with threat detection.',
+      id: 'incident-response',
+      icon: <IncidentResponseIcon />,
+      title: 'Automated Incident Response',
+      description: 'Intelligent orchestration and event-driven security response system.',
       color: '#66b3cc'
     },
     // Bottom Row (4 cards)
     {
-      id: 'audit-logs',
-      icon: <AuditIcon />,
-      title: 'Audit Logs',
-      description: 'Comprehensive logging system for compliance.',
+      id: 'policy-engine',
+      icon: <PolicyEngineIcon />,
+      title: 'Security Policy & Compliance Engine',
+      description: 'Automated policy management and compliance monitoring system.',
       color: '#9999cc'
     },
     {
-      id: 'real-time-alerts',
-      icon: <AlertIcon />,
-      title: 'Real-time Alerts',
-      description: 'Instant notifications for immediate response.',
+      id: 'attack-playground',
+      icon: <AttackPlaygroundIcon />,
+      title: 'Attack Simulation & Testing Playground',
+      description: 'Safe environment for security testing and attack simulation scenarios.',
       color: '#66a388'
     },
     {
-      id: 'network-security',
-      icon: <NetworkIcon />,
-      title: 'Network Security',
-      description: 'Advanced network protection and monitoring.',
+      id: 'developer-api',
+      icon: <DeveloperAPIIcon />,
+      title: 'Developer API & Integration Hub',
+      description: 'Comprehensive API suite for seamless security integration and development.',
       color: '#cc99cc'
     },
     {
-      id: 'data-encryption',
-      icon: <EncryptionIcon />,
-      title: 'Data Encryption',
-      description: 'End-to-end encryption for sensitive data.',
+      id: 'audit-dashboard',
+      icon: <AuditDashboardIcon />,
+      title: 'Audit & Analytics Dashboard',
+      description: 'Advanced metrics, logging, and analytical insights for security operations.',
       color: '#99cccc'
     }
   ];
@@ -183,12 +193,12 @@ export default function ModulesSection() {
         
         {/* Header */}
         <header className={`${styles.header} ${isVisible ? styles.visible : ''}`}>
-          <div className={styles.badge}>Platform Modules</div>
+          <div className={styles.badge}>Security Platform</div>
           <h2 className={styles.title}>
-            Security <span className={styles.titleAccent}>Modules</span>
+            Zecure <span className={styles.titleAccent}>Security</span> Platforms
           </h2>
           <p className={styles.subtitle}>
-            Complete security toolkit with 8 AI-powered modules
+            Comprehensive security ecosystem with 8 integrated modules
           </p>
         </header>
 
@@ -235,15 +245,15 @@ export default function ModulesSection() {
         <div className={styles.moduleStats}>
           <div className={styles.stat}>
             <div className={styles.statNumber}>8</div>
-            <div className={styles.statLabel}>Core Modules</div>
+            <div className={styles.statLabel}>Platform Modules</div>
           </div>
           <div className={styles.stat}>
             <div className={styles.statNumber}>99.9%</div>
-            <div className={styles.statLabel}>Uptime</div>
+            <div className={styles.statLabel}>Reliability</div>
           </div>
           <div className={styles.stat}>
             <div className={styles.statNumber}>24/7</div>
-            <div className={styles.statLabel}>Monitoring</div>
+            <div className={styles.statLabel}>Protection</div>
           </div>
         </div>
       </div>

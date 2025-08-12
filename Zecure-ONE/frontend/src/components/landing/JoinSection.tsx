@@ -53,7 +53,7 @@ export default function JoinSection() {
             </h2>
 
             <p className={styles.subtitle}>
-              We're building the future of AI-driven security. Join our elite team of innovators
+              We're building the future of AI-driven security. <br/>  <span className={styles.titleAccent}>Join our elite team of innovators </span>
               <br />and help protect the digital world from emerging cyber threats.
             </p>
           </header>

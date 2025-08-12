@@ -3,12 +3,10 @@
     background: #000000;
     width: 100vw;
     min-height: 80vh;
-    /* Reduced */
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 4rem 2rem;
-    /* Reduced */
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     position: relative;
 
@@ -43,7 +41,6 @@
 .header {
     text-align: center;
     margin-bottom: 3rem;
-    /* Reduced */
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -61,12 +58,9 @@
     border: 1px solid #333333;
     border-radius: 50px;
     font-size: 0.8rem;
-    /* Reduced */
     font-weight: 500;
     padding: 0.4rem 1.2rem;
-    /* Reduced */
     margin-bottom: 1.5rem;
-    /* Reduced */
     text-transform: uppercase;
     letter-spacing: 0.8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -74,24 +68,21 @@
 
 .title {
     font-size: 2.4rem;
-    /* Reduced */
     font-weight: 700;
     color: #ffffff;
     margin-bottom: 1rem;
-    /* Reduced */
     letter-spacing: -0.025em;
     line-height: 1.1;
 }
 
 .titleAccent {
-    //   background: linear-gradient(135deg, #66b3cc 0%, #66a388 100%);
     background: linear-gradient(135deg,
-            #00d4ff 0%, // Light Blue
-            #00b4d8 20%, // Medium Blue
-            #0077be 40%, // Blue
-            #006ba6 60%, // Darker Blue
-            #00a896 80%, // Teal/Blue-Green
-            #02c39a 100% // Green-Blue
+            #00d4ff 0%, 
+            #00b4d8 20%, 
+            #0077be 40%, 
+            #006ba6 60%, 
+            #00a896 80%, 
+            #02c39a 100%
         );
     background-clip: text;
     -webkit-background-clip: text;
@@ -100,10 +91,8 @@
 
 .subtitle {
     font-size: 1rem;
-    /* Reduced */
     color: #888888;
     max-width: 500px;
-    /* Reduced */
     line-height: 1.6;
     margin: 0;
 }
@@ -112,19 +101,13 @@
 .modulesGrid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    /* Fixed 4 columns */
     grid-template-rows: repeat(2, 1fr);
-    /* Fixed 2 rows */
     gap: 1.5rem;
-    /* Reduced gap */
     width: 100%;
     max-width: 1000px;
-    /* Reduced */
     margin-bottom: 3rem;
-    /* Reduced */
     opacity: 0;
     transform: translateY(40px);
-    /* Reduced */
     transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
 
     &.visible {
@@ -137,9 +120,7 @@
     background: linear-gradient(145deg, #0f0f0f 0%, #1a1a1a 100%);
     border: 2px solid #2a2a2a;
     border-radius: 16px;
-    /* Reduced */
     padding: 1.8rem 1.5rem;
-    /* Reduced */
     text-align: center;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -148,27 +129,21 @@
     backdrop-filter: blur(10px);
     opacity: 0;
     transform: translateY(30px) scale(0.95);
-    /* Reduced */
     animation: moduleSlideIn 0.6s ease-out forwards;
-    /* Faster */
 
     &:hover,
     &.hovered {
         transform: translateY(-6px) scale(1.02);
-        /* Reduced */
         border-color: var(--module-color);
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-        /* Reduced */
 
         .cardGlow {
             opacity: 0.25;
-            /* Reduced */
         }
 
         .moduleIcon {
             color: var(--module-color);
             transform: scale(1.08);
-            /* Reduced */
         }
 
         .statusDot {
@@ -181,11 +156,9 @@
         border-color: var(--module-color);
         background: linear-gradient(145deg, #111111 0%, #1f1f1f 100%);
         box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
-        /* Reduced */
 
         .cardGlow {
             opacity: 0.15;
-            /* Reduced */
             animation: glowPulse 3s ease-in-out infinite;
         }
 
@@ -214,12 +187,10 @@
 
 .moduleHeader {
     margin-bottom: 1.5rem;
-    /* Reduced */
 }
 
 .moduleIcon {
     width: 48px;
-    /* Reduced */
     height: 48px;
     color: #cccccc;
     margin: 0 auto;
@@ -229,31 +200,25 @@
         width: 100%;
         height: 100%;
         filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.3));
-        /* Reduced */
     }
 }
 
 .moduleContent {
     margin-bottom: 1.5rem;
-    /* Reduced */
 }
 
 .moduleTitle {
     font-size: 1.2rem;
-    /* Reduced */
     font-weight: 600;
     color: #ffffff;
     margin-bottom: 0.8rem;
-    /* Reduced */
     letter-spacing: -0.01em;
 }
 
 .moduleDescription {
     font-size: 0.9rem;
-    /* Reduced */
     color: #999999;
     line-height: 1.5;
-    /* Reduced */
     margin: 0;
 }
 
@@ -262,14 +227,11 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    /* Reduced */
     margin-top: 1rem;
-    /* Reduced */
 }
 
 .statusDot {
     width: 7px;
-    /* Reduced */
     height: 7px;
     background: #555555;
     border-radius: 50%;
@@ -278,7 +240,6 @@
 
 .statusText {
     font-size: 0.8rem;
-    /* Reduced */
     color: #777777;
     font-weight: 500;
     text-transform: uppercase;
@@ -290,50 +251,38 @@
     display: flex;
     justify-content: center;
     gap: 3rem;
-    /* Reduced */
     margin-top: 2rem;
-    /* Reduced */
     padding-top: 2.5rem;
-    /* Reduced */
     border-top: 1px solid #222222;
 }
 
 .stat {
     text-align: center;
     padding: 1.2rem 1.8rem;
-    /* Reduced */
     background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
     border: 1px solid #2a2a2a;
     border-radius: 12px;
-    /* Reduced */
     transition: all 0.4s ease;
     opacity: 0;
     animation: fadeInUp 0.8s ease-out 1.2s forwards;
-    /* Faster */
 
     &:hover {
         transform: translateY(-3px);
-        /* Reduced */
         border-color: #66b3cc;
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        /* Reduced */
     }
 }
 
 .statNumber {
     font-size: 1.8rem;
-    /* Reduced */
     font-weight: 700;
     color: #ffffff;
     margin-bottom: 0.5rem;
-    /* Reduced */
     text-shadow: 0 0 12px rgba(102, 179, 204, 0.2);
-    /* Reduced */
 }
 
 .statLabel {
     font-size: 0.85rem;
-    /* Reduced */
     color: #777777;
     text-transform: uppercase;
     letter-spacing: 0.8px;
@@ -354,9 +303,7 @@
 }
 
 @keyframes glowPulse {
-
-    0%,
-    100% {
+    0%, 100% {
         opacity: 0.05;
         transform: scale(1);
     }
@@ -368,9 +315,7 @@
 }
 
 @keyframes statusPulse {
-
-    0%,
-    100% {
+    0%, 100% {
         opacity: 0.6;
         transform: scale(1);
     }
