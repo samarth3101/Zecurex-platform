@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from '@/styles/components/Demo.module.scss';
 
 interface MetricData {
@@ -25,6 +26,8 @@ interface ActivityItem {
 }
 
 export default function DemoSection() {
+  const router = useRouter();
+  
   const [metrics, setMetrics] = useState<MetricData>({
     threats: 1247,
     blocked: 98.7,
@@ -47,6 +50,12 @@ export default function DemoSection() {
   ]);
 
   const [isActive, setIsActive] = useState(true);
+  const [showOverlay, setShowOverlay] = useState(true);
+
+  // Handle navigation to dashboard with query parameter
+  const handleGetStarted = () => {
+    router.push('/?view=dashboard'); // Add query parameter to differentiate
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -112,118 +121,137 @@ export default function DemoSection() {
         <div className={styles.demoContainer}>
           <div className={styles.mockDashboard}>
             
-            {/* Compact Dashboard Header */}
-            <div className={styles.dashboardHeader}>
-              <h3 className={styles.headerTitle}>Command Center</h3>
-              <div className={styles.statusIndicator}>
-                <div className={`${styles.pulse} ${isActive ? styles.active : ''}`} />
-                <span>Live</span>
-              </div>
-            </div>
-            
-            {/* Compact Metrics Grid */}
-            <div className={styles.dashboardGrid}>
-              <div className={styles.metric}>
-                <div className={styles.metricIcon} style={{ color: '#cc6666' }}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z"/>
-                  </svg>
+            {/* Dashboard Content with conditional blur */}
+            <div className={`${styles.dashboardContent} ${showOverlay ? styles.blurred : ''}`}>
+              {/* Compact Dashboard Header */}
+              <div className={styles.dashboardHeader}>
+                <h3 className={styles.headerTitle}>Command Center</h3>
+                <div className={styles.statusIndicator}>
+                  <div className={`${styles.pulse} ${isActive ? styles.active : ''}`} />
+                  <span>Live</span>
                 </div>
-                <div className={styles.metricValue}>{metrics.threats.toLocaleString()}</div>
-                <div className={styles.metricLabel}>Threats</div>
               </div>
               
-              <div className={styles.metric}>
-                <div className={styles.metricIcon} style={{ color: '#66a388' }}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/>
-                  </svg>
+              {/* Compact Metrics Grid */}
+              <div className={styles.dashboardGrid}>
+                <div className={styles.metric}>
+                  <div className={styles.metricIcon} style={{ color: '#cc6666' }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z"/>
+                    </svg>
+                  </div>
+                  <div className={styles.metricValue}>{metrics.threats.toLocaleString()}</div>
+                  <div className={styles.metricLabel}>Threats</div>
                 </div>
-                <div className={styles.metricValue}>{metrics.blocked.toFixed(1)}%</div>
-                <div className={styles.metricLabel}>Success</div>
+                
+                <div className={styles.metric}>
+                  <div className={styles.metricIcon} style={{ color: '#66a388' }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/>
+                    </svg>
+                  </div>
+                  <div className={styles.metricValue}>{metrics.blocked.toFixed(1)}%</div>
+                  <div className={styles.metricLabel}>Success</div>
+                </div>
+                
+                <div className={styles.metric}>
+                  <div className={styles.metricIcon} style={{ color: '#66b3cc' }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                  </div>
+                  <div className={styles.metricValue}>{(metrics.scanned / 1000).toFixed(1)}K</div>
+                  <div className={styles.metricLabel}>Scanned</div>
+                </div>
+                
+                <div className={styles.metric}>
+                  <div className={styles.metricIcon} style={{ color: '#cc9966' }}>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+                    </svg>
+                  </div>
+                  <div className={styles.metricValue}>{metrics.alerts}</div>
+                  <div className={styles.metricLabel}>Alerts</div>
+                </div>
               </div>
-              
-              <div className={styles.metric}>
-                <div className={styles.metricIcon} style={{ color: '#66b3cc' }}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+
+              {/* Charts and Activity */}
+              <div className={styles.dashboardCharts}>
+                
+                {/* Compact Chart */}
+                <div className={styles.chartSection}>
+                  <h4 className={styles.sectionTitle}>Activity</h4>
+                  <svg className={styles.chart} viewBox="0 0 300 120">
+                    <defs>
+                      <pattern id="grid" width="30" height="12" patternUnits="userSpaceOnUse">
+                        <path d="M 30 0 L 0 0 0 12" fill="none" stroke="#333" strokeWidth="0.5" opacity="0.2"/>
+                      </pattern>
+                    </defs>
+                    <rect width="300" height="120" fill="url(#grid)" />
+                    
+                    <polyline
+                      fill="none"
+                      stroke="#cc6666"
+                      strokeWidth="2"
+                      points={chartData.map((d, i) => `${i * 60 + 30},${120 - (d.threats * 1.2)}`).join(' ')}
+                      className={styles.chartLine}
+                    />
+                    
+                    <polyline
+                      fill="none"
+                      stroke="#66b3cc"
+                      strokeWidth="2"
+                      points={chartData.map((d, i) => `${i * 60 + 30},${120 - (d.scanned / 20)}`).join(' ')}
+                      className={styles.chartLine}
+                    />
+                    
+                    {chartData.map((d, i) => (
+                      <g key={i}>
+                        <circle cx={i * 60 + 30} cy={120 - (d.threats * 1.2)} r="2.5" fill="#cc6666" />
+                        <circle cx={i * 60 + 30} cy={120 - (d.scanned / 20)} r="2.5" fill="#66b3cc" />
+                      </g>
+                    ))}
                   </svg>
                 </div>
-                <div className={styles.metricValue}>{(metrics.scanned / 1000).toFixed(1)}K</div>
-                <div className={styles.metricLabel}>Scanned</div>
-              </div>
-              
-              <div className={styles.metric}>
-                <div className={styles.metricIcon} style={{ color: '#cc9966' }}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
-                  </svg>
+
+                {/* Compact Activity Feed */}
+                <div className={styles.activitySection}>
+                  <h4 className={styles.sectionTitle}>Recent</h4>
+                  <div className={styles.activityFeed}>
+                    {activities.map((activity) => (
+                      <div key={activity.id} className={styles.activityItem}>
+                        <div 
+                          className={styles.activityIcon}
+                          style={{ color: getSeverityColor(activity.severity) }}
+                        >
+                          {getActivityIcon(activity.type)}
+                        </div>
+                        <div className={styles.activityContent}>
+                          <div className={styles.activityMessage}>{activity.message}</div>
+                          <div className={styles.activityTime}>{activity.timestamp}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className={styles.metricValue}>{metrics.alerts}</div>
-                <div className={styles.metricLabel}>Alerts</div>
               </div>
             </div>
 
-            {/* Compact Charts and Activity */}
-            <div className={styles.dashboardContent}>
-              
-              {/* Compact Chart */}
-              <div className={styles.chartSection}>
-                <h4 className={styles.sectionTitle}>Activity</h4>
-                <svg className={styles.chart} viewBox="0 0 300 120">
-                  <defs>
-                    <pattern id="grid" width="30" height="12" patternUnits="userSpaceOnUse">
-                      <path d="M 30 0 L 0 0 0 12" fill="none" stroke="#333" strokeWidth="0.5" opacity="0.2"/>
-                    </pattern>
-                  </defs>
-                  <rect width="300" height="120" fill="url(#grid)" />
-                  
-                  <polyline
-                    fill="none"
-                    stroke="#cc6666"
-                    strokeWidth="2"
-                    points={chartData.map((d, i) => `${i * 60 + 30},${120 - (d.threats * 1.2)}`).join(' ')}
-                    className={styles.chartLine}
-                  />
-                  
-                  <polyline
-                    fill="none"
-                    stroke="#66b3cc"
-                    strokeWidth="2"
-                    points={chartData.map((d, i) => `${i * 60 + 30},${120 - (d.scanned / 20)}`).join(' ')}
-                    className={styles.chartLine}
-                  />
-                  
-                  {chartData.map((d, i) => (
-                    <g key={i}>
-                      <circle cx={i * 60 + 30} cy={120 - (d.threats * 1.2)} r="2.5" fill="#cc6666" />
-                      <circle cx={i * 60 + 30} cy={120 - (d.scanned / 20)} r="2.5" fill="#66b3cc" />
-                    </g>
-                  ))}
-                </svg>
-              </div>
-
-              {/* Compact Activity Feed */}
-              <div className={styles.activitySection}>
-                <h4 className={styles.sectionTitle}>Recent</h4>
-                <div className={styles.activityFeed}>
-                  {activities.map((activity) => (
-                    <div key={activity.id} className={styles.activityItem}>
-                      <div 
-                        className={styles.activityIcon}
-                        style={{ color: getSeverityColor(activity.severity) }}
-                      >
-                        {getActivityIcon(activity.type)}
-                      </div>
-                      <div className={styles.activityContent}>
-                        <div className={styles.activityMessage}>{activity.message}</div>
-                        <div className={styles.activityTime}>{activity.timestamp}</div>
-                      </div>
-                    </div>
-                  ))}
+            {/* Overlay - NOT BLURRED */}
+            {showOverlay && (
+              <div className={styles.overlay}>
+                <div className={styles.overlayContent}>
+                  <h3>Experience Real-Time Security</h3>
+                  <p>See how Zecure protects your digital assets with advanced threat detection and automated responses.</p>
+                  <button 
+                    className={styles.ctaButton}
+                    onClick={handleGetStarted}
+                  >
+                    Get Started
+                  </button>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
