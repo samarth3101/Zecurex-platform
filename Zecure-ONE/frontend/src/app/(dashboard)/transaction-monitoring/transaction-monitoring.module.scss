@@ -1,0 +1,180 @@
+.transactionPage {
+    padding: 2rem;
+    background: #0a0a0a;
+    min-height: 100vh;
+    color: #e0e0e0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #333;
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #e0e0e0;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    &:hover {
+        background: #333;
+    }
+}
+
+.headerInfo {
+    h1 {
+        margin: 0;
+        color: #66a388;
+        font-size: 1.5rem;
+    }
+
+    p {
+        margin: 0.25rem 0 0 0;
+        color: #888;
+        font-size: 0.9rem;
+    }
+}
+
+.overview {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.volumeCard {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+
+    .volumeValue {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #66a388;
+        margin-bottom: 0.5rem;
+    }
+
+    .volumeLabel {
+        color: #888;
+        margin-bottom: 1rem;
+    }
+
+    .volumeChange {
+        color: #66a388;
+        font-size: 0.9rem;
+    }
+}
+
+.metricsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.metricItem {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+
+    .metricValue {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #66a388;
+        margin-bottom: 0.5rem;
+    }
+
+    .metricLabel {
+        color: #888;
+        font-size: 0.8rem;
+    }
+}
+
+.transactionsList {
+    h3 {
+        color: #e0e0e0;
+        margin-bottom: 1rem;
+    }
+}
+
+.transactionCard {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid;
+
+    &.completed { border-left-color: #66a388; }
+    &.pending { border-left-color: #cc9966; }
+    &.flagged { border-left-color: #cc6666; }
+    &.blocked { border-left-color: #666; }
+}
+
+.transactionMain {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.transactionId {
+    font-family: monospace;
+    color: #66a388;
+    font-weight: bold;
+}
+
+.transactionAmount {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #e0e0e0;
+}
+
+.transactionType {
+    background: #333;
+    color: #e0e0e0;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.transactionDetails {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 0.5rem;
+}
+
+.transactionStatus {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+
+    &.completed { background: #66a388; color: white; }
+    &.pending { background: #cc9966; color: white; }
+    &.flagged { background: #cc6666; color: white; }
+    &.blocked { background: #666; color: white; }
+}

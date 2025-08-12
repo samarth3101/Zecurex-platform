@@ -1,0 +1,251 @@
+.alertsPage {
+    padding: 2rem;
+    background: #0a0a0a;
+    min-height: 100vh;
+    color: #e0e0e0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #333;
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #e0e0e0;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    &:hover {
+        background: #333;
+    }
+}
+
+.headerInfo {
+    flex: 1;
+
+    h1 {
+        margin: 0;
+        color: #cc6666;
+        font-size: 1.5rem;
+    }
+
+    p {
+        margin: 0.25rem 0 0 0;
+        color: #888;
+        font-size: 0.9rem;
+    }
+}
+
+.headerControls {
+    .autoRefreshToggle {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #e0e0e0;
+        cursor: pointer;
+
+        input[type="checkbox"] {
+            accent-color: #cc6666;
+        }
+    }
+}
+
+.alertStats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.statCard {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+
+    .statValue {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #cc6666;
+        margin-bottom: 0.5rem;
+    }
+
+    .statLabel {
+        color: #888;
+        font-size: 0.8rem;
+    }
+}
+
+.alertFilters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.filterBtn {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #e0e0e0;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover, &.active {
+        background: #cc6666;
+        border-color: #cc6666;
+        color: white;
+    }
+}
+
+.alertsList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.alertCard {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1rem;
+    border-left: 4px solid;
+
+    &.critical { border-left-color: #cc6666; }
+    &.high { border-left-color: #cc9966; }
+    &.medium { border-left-color: #99cc66; }
+    &.low { border-left-color: #66b3cc; }
+
+    &.new { 
+        background: #1a1111; 
+        animation: pulse 2s infinite;
+    }
+    &.acknowledged { background: #1a1a11; }
+    &.resolved { 
+        background: #111a11;
+        opacity: 0.7;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { background: #1a1111; }
+    50% { background: #2a1515; }
+}
+
+.alertHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.alertType {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #333;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+
+    .typeIcon {
+        font-size: 1rem;
+    }
+}
+
+.alertSeverity {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: var(--severity-color, #666);
+    color: white;
+}
+
+.alertTime {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.alertContent {
+    margin-bottom: 1rem;
+}
+
+.alertTitle {
+    margin: 0 0 0.5rem 0;
+    color: #e0e0e0;
+    font-size: 1.1rem;
+}
+
+.alertMessage {
+    margin: 0 0 0.5rem 0;
+    color: #ccc;
+    line-height: 1.4;
+}
+
+.alertSource {
+    color: #888;
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+.alertActions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.acknowledgeBtn, .resolveBtn, .detailsBtn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+}
+
+.acknowledgeBtn {
+    background: #cc9966;
+    color: white;
+
+    &:hover {
+        background: #aa7744;
+    }
+}
+
+.resolveBtn {
+    background: #66a388;
+    color: white;
+
+    &:hover {
+        background: #558866;
+    }
+}
+
+.detailsBtn {
+    background: #333;
+    color: #e0e0e0;
+    border: 1px solid #555;
+
+    &:hover {
+        background: #555;
+    }
+}

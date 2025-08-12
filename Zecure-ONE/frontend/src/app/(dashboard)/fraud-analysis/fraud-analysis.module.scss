@@ -1,0 +1,228 @@
+.fraudPage {
+    padding: 2rem;
+    background: #0a0a0a;
+    min-height: 100vh;
+    color: #e0e0e0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #333;
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #e0e0e0;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    &:hover {
+        background: #333;
+    }
+}
+
+.headerInfo {
+    h1 {
+        margin: 0;
+        color: #cc9966;
+        font-size: 1.5rem;
+    }
+
+    p {
+        margin: 0.25rem 0 0 0;
+        color: #888;
+        font-size: 0.9rem;
+    }
+}
+
+.fraudMetrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.metricCard {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+
+    .metricValue {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #cc9966;
+        margin-bottom: 0.5rem;
+    }
+
+    .metricLabel {
+        color: #888;
+        margin-bottom: 0.5rem;
+    }
+
+    .metricTrend {
+        color: #cc9966;
+        font-size: 0.8rem;
+    }
+}
+
+.fraudContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.casesList {
+    h3 {
+        color: #e0e0e0;
+        margin-bottom: 1rem;
+    }
+}
+
+.caseCard {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-left: 4px solid;
+
+    &.critical { border-left-color: #cc6666; }
+    &.high { border-left-color: #cc9966; }
+    &.medium { border-left-color: #99cc66; }
+    &.low { border-left-color: #66b3cc; }
+
+    &:hover, &.selected {
+        background: #2a2a2a;
+        border-color: #cc9966;
+    }
+}
+
+.caseHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.caseId {
+    font-family: monospace;
+    color: #cc9966;
+    font-weight: bold;
+}
+
+.caseStatus {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+
+    &.investigating { background: #cc9966; color: white; }
+    &.confirmed { background: #cc6666; color: white; }
+    &.false_positive { background: #66b3cc; color: white; }
+    &.resolved { background: #66a388; color: white; }
+}
+
+.caseType {
+    background: #333;
+    color: #e0e0e0;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.caseAmount {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #e0e0e0;
+    margin-bottom: 0.5rem;
+}
+
+.caseTime {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.caseDetails {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1.5rem;
+
+    h3 {
+        color: #cc9966;
+        margin-bottom: 1rem;
+    }
+}
+
+.detailsContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.detailItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #333;
+
+    label {
+        color: #888;
+        font-weight: bold;
+    }
+
+    span {
+        color: #e0e0e0;
+
+        &.critical { color: #cc6666; }
+        &.high { color: #cc9966; }
+        &.medium { color: #99cc66; }
+        &.low { color: #66b3cc; }
+    }
+}
+
+.riskFactors {
+    label {
+        color: #888;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+}
+
+.factorsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.riskFactor {
+    background: #333;
+    color: #e0e0e0;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}

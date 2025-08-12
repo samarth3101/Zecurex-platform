@@ -1,0 +1,242 @@
+.behaviorPage {
+    padding: 2rem;
+    background: #0a0a0a;
+    min-height: 100vh;
+    color: #e0e0e0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #333;
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #e0e0e0;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    &:hover {
+        background: #333;
+    }
+}
+
+.headerInfo {
+    h1 {
+        margin: 0;
+        color: #9999cc;
+        font-size: 1.5rem;
+    }
+
+    p {
+        margin: 0.25rem 0 0 0;
+        color: #888;
+        font-size: 0.9rem;
+    }
+}
+
+.behaviorMetrics {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.scoreCard {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+
+    .scoreValue {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #9999cc;
+        margin-bottom: 0.5rem;
+    }
+
+    .scoreLabel {
+        color: #888;
+        margin-bottom: 1rem;
+    }
+
+    .scoreIndicator {
+        background: #333;
+        border-radius: 4px;
+        height: 8px;
+        overflow: hidden;
+    }
+
+    .scoreBar {
+        height: 100%;
+        background: linear-gradient(to right, #9999cc, #66b3cc);
+        transition: width 0.3s ease;
+    }
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.statItem {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+
+    .statValue {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #9999cc;
+        margin-bottom: 0.5rem;
+    }
+
+    .statLabel {
+        color: #888;
+        font-size: 0.8rem;
+    }
+}
+
+.analysisSection {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+.activitiesList {
+    h3 {
+        color: #e0e0e0;
+        margin-bottom: 1rem;
+    }
+}
+
+.activityCard {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #9999cc;
+
+    &.anomaly {
+        border-left-color: #cc6666;
+        background: #1a1111;
+    }
+}
+
+.activityHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.userId {
+    font-family: monospace;
+    color: #9999cc;
+    font-weight: bold;
+}
+
+.timestamp {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.activityDetails {
+    margin-bottom: 1rem;
+}
+
+.action {
+    font-weight: bold;
+    color: #e0e0e0;
+    margin-bottom: 0.5rem;
+}
+
+.metadata {
+    display: flex;
+    gap: 1rem;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.riskAssessment {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.riskScore {
+    .highRisk { color: #cc6666; }
+    .lowRisk { color: #66a388; }
+}
+
+.anomalyFlag {
+    background: #cc6666;
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.behaviorInsights {
+    h3 {
+        color: #e0e0e0;
+        margin-bottom: 1rem;
+    }
+}
+
+.insightCard {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+
+    h4 {
+        color: #9999cc;
+        margin: 0 0 0.5rem 0;
+        font-size: 1rem;
+    }
+
+    p {
+        color: #ccc;
+        margin: 0 0 1rem 0;
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+
+    .insightAction {
+        background: #9999cc;
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        display: inline-block;
+        cursor: pointer;
+        transition: background 0.2s;
+
+        &:hover {
+            background: #7777aa;
+        }
+    }
+}

@@ -1,0 +1,153 @@
+.threatPage {
+    padding: 2rem;
+    background: #0a0a0a;
+    min-height: 100vh;
+    color: #e0e0e0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #333;
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #e0e0e0;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    &:hover {
+        background: #333;
+    }
+}
+
+.headerInfo {
+    h1 {
+        margin: 0;
+        color: #cc6666;
+        font-size: 1.5rem;
+    }
+
+    p {
+        margin: 0.25rem 0 0 0;
+        color: #888;
+        font-size: 0.9rem;
+    }
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.statCard {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+
+    .statValue {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #cc6666;
+        margin-bottom: 0.5rem;
+    }
+
+    .statLabel {
+        color: #888;
+        font-size: 0.9rem;
+    }
+}
+
+.filters {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.filterBtn {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #e0e0e0;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover, &.active {
+        background: #cc6666;
+        border-color: #cc6666;
+        color: white;
+    }
+}
+
+.threatsList {
+    display: grid;
+    gap: 1rem;
+}
+
+.threatCard {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1rem;
+    border-left: 4px solid;
+
+    &.critical { border-left-color: #cc6666; }
+    &.high { border-left-color: #cc9966; }
+    &.medium { border-left-color: #99cc66; }
+    &.low { border-left-color: #66b3cc; }
+}
+
+.threatHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.threatType {
+    background: #333;
+    color: #e0e0e0;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.threatStatus {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+
+    &.active { background: #cc6666; color: white; }
+    &.contained { background: #cc9966; color: white; }
+    &.resolved { background: #66a388; color: white; }
+}
+
+.threatDetails {
+    p {
+        margin: 0.5rem 0;
+        font-size: 0.9rem;
+        color: #ccc;
+    }
+}

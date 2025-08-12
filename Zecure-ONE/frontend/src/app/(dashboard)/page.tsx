@@ -317,6 +317,18 @@ export default function Dashboard() {
         }
     };
 
+    // Handle AI Agent Card Click
+    const handleAIAgentClick = () => {
+        if (userType === 'demo' && !isMasterMode) {
+            // Show developer panel for premium access
+            setShowDeveloperPanel(true);
+            setPasswordError('');
+        } else {
+            // Navigate to AI Agent if has access
+            router.push('/ai-agent');
+        }
+    };
+
     return (
         <div className={styles.dashboard}>
             {/* Clean Header */}
@@ -373,7 +385,6 @@ export default function Dashboard() {
             </header>
 
             {/* News Ticker Style Alert Bar */}
-            {/* News Ticker Style Alert Bar */}
             <div className={styles.alertTicker}>
                 <div className={styles.tickerLabel}>
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -383,7 +394,7 @@ export default function Dashboard() {
                 </div>
                 <div className={styles.tickerContent}>
                     <div
-                        key={currentAlertIndex} // This is crucial - forces re-render and animation
+                        key={currentAlertIndex}
                         className={styles.tickerMessage}
                         style={{ '--severity-color': getSeverityColor(alertsData[currentAlertIndex].severity) } as React.CSSProperties}
                     >
@@ -399,7 +410,6 @@ export default function Dashboard() {
                     </div>
                 </div>
             </div>
-
 
             {/* Main Dashboard */}
             <main className={styles.main}>
@@ -423,7 +433,7 @@ export default function Dashboard() {
                                     onMouseLeave={() => setActiveModule(null)}
                                     onClick={() => {
                                         if (module.isPremium && userType === 'demo' && !isMasterMode) return;
-                                        router.push(`/dashboard/${module.id}`);
+                                        router.push(`/${module.id}`); // Updated navigation path
                                     }}
                                 >
                                     <div className={styles.moduleHeader}>
@@ -463,7 +473,10 @@ export default function Dashboard() {
 
                     {/* Right Section - ZPT AI Agent */}
                     <div className={styles.aiSection}>
-                        <div className={styles.aiAgentCard}>
+                        <div 
+                            className={`${styles.aiAgentCard} ${userType === 'demo' && !isMasterMode ? styles.locked : ''}`}
+                            onClick={handleAIAgentClick}
+                        >
                             <div className={styles.agentHeader}>
                                 <div className={styles.agentAvatar}>
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -483,6 +496,17 @@ export default function Dashboard() {
                                 </div>
                             </div>
 
+                            {/* Premium badge for AI Agent when locked */}
+                            {userType === 'demo' && !isMasterMode && (
+                                <div className={styles.premiumBadge}>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                    </svg>
+                                    Premium
+                                </div>
+                            )}
+
                             <div className={styles.agentMetrics}>
                                 <div className={styles.metric}>
                                     <div className={styles.metricNumber}>247</div>
@@ -499,13 +523,29 @@ export default function Dashboard() {
                             </div>
 
                             <div className={styles.agentActions}>
-                                <button className={styles.primaryAction}>
+                                <button 
+                                    className={styles.primaryAction}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleAIAgentClick();
+                                    }}
+                                >
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                                     </svg>
                                     Chat with ZPT
                                 </button>
-                                <button className={styles.secondaryAction}>
+                                <button 
+                                    className={styles.secondaryAction}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        if (userType === 'demo' && !isMasterMode) {
+                                            setShowDeveloperPanel(true);
+                                        } else {
+                                            router.push('/ai-agent');
+                                        }
+                                    }}
+                                >
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                                     </svg>

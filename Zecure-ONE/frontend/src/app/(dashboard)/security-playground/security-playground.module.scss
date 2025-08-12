@@ -1,0 +1,380 @@
+.playgroundPage {
+    padding: 2rem;
+    background: #0a0a0a;
+    min-height: 100vh;
+    color: #e0e0e0;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #333;
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #e0e0e0;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    &:hover {
+        background: #333;
+    }
+}
+
+.headerInfo {
+    h1 {
+        margin: 0;
+        color: #99cc66;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    p {
+        margin: 0.25rem 0 0 0;
+        color: #888;
+        font-size: 0.9rem;
+    }
+}
+
+.premiumBadge {
+    background: linear-gradient(45deg, #99cc66, #66a388);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.playgroundStats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.statCard {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+
+    .statValue {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #99cc66;
+        margin-bottom: 0.5rem;
+    }
+
+    .statLabel {
+        color: #888;
+        font-size: 0.9rem;
+    }
+}
+
+.playgroundContent {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+}
+
+.simulationsList {
+    h3 {
+        color: #e0e0e0;
+        margin-bottom: 1rem;
+    }
+}
+
+.simulationsGrid {
+    display: grid;
+    gap: 1rem;
+}
+
+.simulationCard {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1rem;
+    border-left: 4px solid;
+
+    &.beginner { border-left-color: #66b3cc; }
+    &.intermediate { border-left-color: #99cc66; }
+    &.advanced { border-left-color: #cc9966; }
+    &.expert { border-left-color: #cc6666; }
+
+    &.running {
+        background: #1a1a11;
+        animation: runningPulse 2s infinite;
+    }
+
+    &.completed {
+        background: #111a11;
+    }
+}
+
+@keyframes runningPulse {
+    0%, 100% { background: #1a1a11; }
+    50% { background: #2a2a15; }
+}
+
+.simulationHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+
+    h4 {
+        margin: 0;
+        color: #e0e0e0;
+        font-size: 1.1rem;
+        flex: 1;
+    }
+}
+
+.simulationBadges {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.difficultyBadge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &.beginner { background: #66b3cc; color: white; }
+    &.intermediate { background: #99cc66; color: white; }
+    &.advanced { background: #cc9966; color: white; }
+    &.expert { background: #cc6666; color: white; }
+}
+
+.typeBadge {
+    background: #333;
+    color: #e0e0e0;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+}
+
+.simulationContent {
+    margin-bottom: 1rem;
+
+    p {
+        color: #ccc;
+        line-height: 1.4;
+        margin-bottom: 0.5rem;
+    }
+}
+
+.simulationMeta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.simulationStatus {
+    font-weight: bold;
+
+    &.available { color: #99cc66; }
+    &.running { color: #cc9966; }
+    &.completed { color: #66a388; }
+}
+
+.simulationResults {
+    background: #2a2a2a;
+    border-radius: 6px;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.resultItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.resultLabel {
+    color: #888;
+    font-size: 0.8rem;
+}
+
+.resultValue {
+    color: #99cc66;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.simulationActions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.startBtn, .stopBtn, .viewBtn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.startBtn {
+    background: #99cc66;
+    color: white;
+
+    &:hover {
+        background: #77aa44;
+    }
+}
+
+.stopBtn {
+    background: #cc6666;
+    color: white;
+
+    &:hover {
+        background: #aa4444;
+    }
+}
+
+.viewBtn {
+    background: #66b3cc;
+    color: white;
+
+    &:hover {
+        background: #4499aa;
+    }
+}
+
+.activeSimulation {
+    h3 {
+        color: #e0e0e0;
+        margin-bottom: 1rem;
+    }
+}
+
+.simulationMonitor {
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.monitorHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    h4 {
+        margin: 0;
+        color: #99cc66;
+    }
+}
+
+.runningIndicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #cc9966;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.pulse {
+    width: 8px;
+    height: 8px;
+    background: #cc9966;
+    border-radius: 50%;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.simulationProgress {
+    margin-bottom: 1rem;
+}
+
+.progressBar {
+    width: 100%;
+    height: 6px;
+    background: #333;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progressFill {
+    height: 100%;
+    background: linear-gradient(to right, #99cc66, #66a388);
+    width: 65%;
+    animation: progressAnimation 3s ease-in-out infinite;
+}
+
+@keyframes progressAnimation {
+    0%, 100% { width: 65%; }
+    50% { width: 75%; }
+}
+
+.progressText {
+    color: #888;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.liveMetrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.metric {
+    text-align: center;
+    padding: 0.5rem;
+    background: #2a2a2a;
+    border-radius: 6px;
+
+    .metricLabel {
+        display: block;
+        color: #888;
+        font-size: 0.7rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .metricValue {
+        display: block;
+        color: #99cc66;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+}
