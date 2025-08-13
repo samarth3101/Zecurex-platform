@@ -316,7 +316,7 @@
 
 .moduleCard {
   background: rgba(12, 12, 12, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.34);
   border-radius: 16px;
   padding: 1.2rem;
   cursor: pointer;
@@ -338,7 +338,7 @@
     background: var(--module-color);
     transform: scaleX(0);
     transition: transform 0.25s ease;
-    border-radius: 0; /* Remove border radius to keep it straight */
+    border-radius: 0;
   }
 
   &:hover {
