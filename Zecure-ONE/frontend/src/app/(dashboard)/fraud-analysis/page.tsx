@@ -54,12 +54,22 @@ export default function FraudAnalysis() {
     return (
         <div className={styles.fraudPage}>
             <header className={styles.header}>
-                <button className={styles.backButton} onClick={() => router.push('/dashboard')}>
+                <button
+                    className={styles.backButton}
+                    onClick={() => {
+                        if (window.history.length > 1) {
+                            router.back();
+                        } else {
+                            router.push('/?view=dashboard'); // fallback if no back history
+                        }
+                    }}
+                >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
                     </svg>
                     Back to Dashboard
                 </button>
+
                 <div className={styles.headerInfo}>
                     <h1>Fraud Analysis Hub</h1>
                     <p>Advanced fraud detection and investigation</p>

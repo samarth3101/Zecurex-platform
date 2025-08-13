@@ -78,13 +78,13 @@ export default function RealTimeAlerts() {
     }, [autoRefresh]);
 
     const handleAcknowledge = (alertId: string) => {
-        setAlerts(prev => prev.map(alert => 
+        setAlerts(prev => prev.map(alert =>
             alert.id === alertId ? { ...alert, status: 'acknowledged' as const } : alert
         ));
     };
 
     const handleResolve = (alertId: string) => {
-        setAlerts(prev => prev.map(alert => 
+        setAlerts(prev => prev.map(alert =>
             alert.id === alertId ? { ...alert, status: 'resolved' as const } : alert
         ));
     };
@@ -94,20 +94,30 @@ export default function RealTimeAlerts() {
     return (
         <div className={styles.alertsPage}>
             <header className={styles.header}>
-                <button className={styles.backButton} onClick={() => router.push('/dashboard')}>
+                <button
+                    className={styles.backButton}
+                    onClick={() => {
+                        if (window.history.length > 1) {
+                            router.back();
+                        } else {
+                            router.push('/?view=dashboard'); // fallback if no back history
+                        }
+                    }}
+                >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
                     </svg>
                     Back to Dashboard
                 </button>
+
                 <div className={styles.headerInfo}>
                     <h1>Real-Time Alerts</h1>
                     <p>Live security alerts and notifications</p>
                 </div>
                 <div className={styles.headerControls}>
                     <label className={styles.autoRefreshToggle}>
-                        <input 
-                            type="checkbox" 
+                        <input
+                            type="checkbox"
                             checked={autoRefresh}
                             onChange={(e) => setAutoRefresh(e.target.checked)}
                         />
@@ -163,7 +173,7 @@ export default function RealTimeAlerts() {
                             <div className={styles.alertSeverity}>{alert.severity}</div>
                             <div className={styles.alertTime}>{alert.timestamp}</div>
                         </div>
-                        
+
                         <div className={styles.alertContent}>
                             <h3 className={styles.alertTitle}>{alert.title}</h3>
                             <p className={styles.alertMessage}>{alert.message}</p>
@@ -172,7 +182,7 @@ export default function RealTimeAlerts() {
 
                         <div className={styles.alertActions}>
                             {alert.status === 'new' && (
-                                <button 
+                                <button
                                     className={styles.acknowledgeBtn}
                                     onClick={() => handleAcknowledge(alert.id)}
                                 >
@@ -180,7 +190,7 @@ export default function RealTimeAlerts() {
                                 </button>
                             )}
                             {alert.status !== 'resolved' && (
-                                <button 
+                                <button
                                     className={styles.resolveBtn}
                                     onClick={() => handleResolve(alert.id)}
                                 >

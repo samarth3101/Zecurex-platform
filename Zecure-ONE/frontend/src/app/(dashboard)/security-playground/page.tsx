@@ -81,7 +81,7 @@ export default function SecurityPlayground() {
     }, [router]);
 
     const startSimulation = (simulation: Simulation) => {
-        setSimulations(prev => prev.map(sim => 
+        setSimulations(prev => prev.map(sim =>
             sim.id === simulation.id ? { ...sim, status: 'running' as const } : sim
         ));
         setActiveSimulation({ ...simulation, status: 'running' });
@@ -89,7 +89,7 @@ export default function SecurityPlayground() {
 
     const stopSimulation = () => {
         if (activeSimulation) {
-            setSimulations(prev => prev.map(sim => 
+            setSimulations(prev => prev.map(sim =>
                 sim.id === activeSimulation.id ? { ...sim, status: 'available' as const } : sim
             ));
             setActiveSimulation(null);
@@ -103,12 +103,22 @@ export default function SecurityPlayground() {
     return (
         <div className={styles.playgroundPage}>
             <header className={styles.header}>
-                <button className={styles.backButton} onClick={() => router.push('/dashboard')}>
+                <button
+                    className={styles.backButton}
+                    onClick={() => {
+                        if (window.history.length > 1) {
+                            router.back();
+                        } else {
+                            router.push('/?view=dashboard'); // fallback if no back history
+                        }
+                    }}
+                >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
                     </svg>
                     Back to Dashboard
                 </button>
+
                 <div className={styles.headerInfo}>
                     <h1>
                         Security Playground
@@ -142,8 +152,8 @@ export default function SecurityPlayground() {
                     <h3>Available Simulations</h3>
                     <div className={styles.simulationsGrid}>
                         {simulations.map(simulation => (
-                            <div 
-                                key={simulation.id} 
+                            <div
+                                key={simulation.id}
                                 className={`${styles.simulationCard} ${styles[simulation.difficulty]} ${styles[simulation.status]}`}
                             >
                                 <div className={styles.simulationHeader}>
@@ -157,14 +167,14 @@ export default function SecurityPlayground() {
                                         </span>
                                     </div>
                                 </div>
-                                
+
                                 <div className={styles.simulationContent}>
                                     <p>{simulation.description}</p>
                                     <div className={styles.simulationMeta}>
                                         <span>⏱️ Duration: {simulation.duration}</span>
                                         <span className={`${styles.simulationStatus} ${styles[simulation.status]}`}>
-                                            {simulation.status === 'running' ? '🔄 Running' : 
-                                             simulation.status === 'completed' ? '✅ Completed' : '⚡ Available'}
+                                            {simulation.status === 'running' ? '🔄 Running' :
+                                                simulation.status === 'completed' ? '✅ Completed' : '⚡ Available'}
                                         </span>
                                     </div>
                                 </div>
@@ -188,7 +198,7 @@ export default function SecurityPlayground() {
 
                                 <div className={styles.simulationActions}>
                                     {simulation.status === 'available' && (
-                                        <button 
+                                        <button
                                             className={styles.startBtn}
                                             onClick={() => startSimulation(simulation)}
                                         >
@@ -196,7 +206,7 @@ export default function SecurityPlayground() {
                                         </button>
                                     )}
                                     {simulation.status === 'running' && (
-                                        <button 
+                                        <button
                                             className={styles.stopBtn}
                                             onClick={stopSimulation}
                                         >

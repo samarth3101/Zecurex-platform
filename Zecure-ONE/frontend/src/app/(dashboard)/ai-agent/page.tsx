@@ -123,12 +123,22 @@ export default function AIAgent() {
     return (
         <div className={styles.aiAgentPage}>
             <header className={styles.header}>
-                <button className={styles.backButton} onClick={() => router.push('/dashboard')}>
+                <button
+                    className={styles.backButton}
+                    onClick={() => {
+                        if (window.history.length > 1) {
+                            router.back();
+                        } else {
+                            router.push('/?view=dashboard'); // fallback if no back history
+                        }
+                    }}
+                >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
                     </svg>
                     Back to Dashboard
                 </button>
+
                 <div className={styles.headerInfo}>
                     <h1>
                         Zecure AI Agent (ZPT)
@@ -165,10 +175,10 @@ export default function AIAgent() {
                     <div className={styles.chatHeader}>
                         <div className={styles.agentAvatar}>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <rect width="16" height="12" x="4" y="8" rx="2"/>
-                                <path d="M2 14h2"/>
-                                <path d="M20 14h2"/>
-                                <circle cx="12" cy="11" r="2" fill="currentColor"/>
+                                <rect width="16" height="12" x="4" y="8" rx="2" />
+                                <path d="M2 14h2" />
+                                <path d="M20 14h2" />
+                                <circle cx="12" cy="11" r="2" fill="currentColor" />
                             </svg>
                         </div>
                         <div className={styles.agentInfo}>
@@ -225,25 +235,25 @@ export default function AIAgent() {
                                 className={styles.sendButton}
                             >
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <line x1="22" y1="2" x2="11" y2="13"/>
-                                    <polygon points="22,2 15,22 11,13 2,9 22,2"/>
+                                    <line x1="22" y1="2" x2="11" y2="13" />
+                                    <polygon points="22,2 15,22 11,13 2,9 22,2" />
                                 </svg>
                             </button>
                         </div>
                         <div className={styles.quickActions}>
-                            <button 
+                            <button
                                 className={styles.quickAction}
                                 onClick={() => setCurrentMessage('Run a comprehensive security scan')}
                             >
                                 Security Scan
                             </button>
-                            <button 
+                            <button
                                 className={styles.quickAction}
                                 onClick={() => setCurrentMessage('Check compliance status')}
                             >
                                 Compliance Check
                             </button>
-                            <button 
+                            <button
                                 className={styles.quickAction}
                                 onClick={() => setCurrentMessage('Analyze recent threats')}
                             >

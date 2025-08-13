@@ -58,12 +58,22 @@ export default function UserBehavior() {
     return (
         <div className={styles.behaviorPage}>
             <header className={styles.header}>
-                <button className={styles.backButton} onClick={() => router.push('/dashboard')}>
+                <button
+                    className={styles.backButton}
+                    onClick={() => {
+                        if (window.history.length > 1) {
+                            router.back();
+                        } else {
+                            router.push('/?view=dashboard'); // fallback if no back history
+                        }
+                    }}
+                >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
                     </svg>
                     Back to Dashboard
                 </button>
+
                 <div className={styles.headerInfo}>
                     <h1>User Behavior Analytics</h1>
                     <p>AI-powered behavioral analysis and anomaly detection</p>
@@ -75,8 +85,8 @@ export default function UserBehavior() {
                     <div className={styles.scoreValue}>{behaviorScore}%</div>
                     <div className={styles.scoreLabel}>Behavior Confidence</div>
                     <div className={styles.scoreIndicator}>
-                        <div 
-                            className={styles.scoreBar} 
+                        <div
+                            className={styles.scoreBar}
                             style={{ width: `${behaviorScore}%` }}
                         ></div>
                     </div>
@@ -101,8 +111,8 @@ export default function UserBehavior() {
                 <div className={styles.activitiesList}>
                     <h3>Recent User Activities</h3>
                     {activities.map(activity => (
-                        <div 
-                            key={activity.id} 
+                        <div
+                            key={activity.id}
                             className={`${styles.activityCard} ${activity.anomaly ? styles.anomaly : ''}`}
                         >
                             <div className={styles.activityHeader}>
