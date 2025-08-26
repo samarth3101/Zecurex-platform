@@ -2,14 +2,29 @@
 
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
+
+// Common
 import LoaderScreen from '@/components/common/LoaderScreen';
+
+// Landing Sections
 import HeroSection from '@/components/landing/HeroSection';
 import AboutSection from '@/components/landing/AboutSection';
 import HowItWorksSection from '@/components/landing/HowItWorksSection';
-import DemoSection from '@/components/landing/DemoSection';
 import ModulesSection from '@/components/landing/ModulesSection';
+import DemoSection from '@/components/landing/DemoSection';
+import CTASection from '@/components/landing/CTASection';
+import FeaturesSection from '@/components/landing/FeaturesSection';
+import MetricsSection from '@/components/landing/MetricsSection';
+import OurModels from '@/components/landing/OurModels';
+import PlaygroundSection from '@/components/landing/PlaygroundSection';
+import ProblemSection from '@/components/landing/ProblemSection';
+import TestimonialsSection from '@/components/landing/TestimonialsSection';
+import UseCasesSection from '@/components/landing/UseCasesSection';
+import VisionSection from '@/components/landing/VisionSection';
 import JoinSection from '@/components/landing/JoinSection';
 import Footer from '@/components/landing/Footer';
+
+// Dashboard
 import Dashboard from './(dashboard)/page';
 
 function PageContent() {
@@ -20,16 +35,13 @@ function PageContent() {
   const view = searchParams.get('view');
 
   useEffect(() => {
-    // Check if user has already seen the loader in this session
     const loaderSeen = sessionStorage.getItem('loaderSeen');
     
     if (loaderSeen === 'true') {
-      // Skip loader, show content immediately
       setHasSeenLoader(true);
       setIsLoading(false);
       setShowContent(true);
     } else {
-      // First visit - show loader
       setHasSeenLoader(false);
     }
   }, []);
@@ -37,16 +49,13 @@ function PageContent() {
   const handleLoadingComplete = () => {
     setIsLoading(false);
     setShowContent(true);
-    // Mark that user has seen the loader
     sessionStorage.setItem('loaderSeen', 'true');
   };
 
-  // If view=dashboard, show dashboard without loader
   if (view === 'dashboard') {
     return <Dashboard />;
   }
 
-  // Otherwise show landing page
   return (
     <>
       {isLoading && !hasSeenLoader && (
@@ -62,9 +71,18 @@ function PageContent() {
       >
         <HeroSection isVisible={showContent} />
         <AboutSection />
+        <ProblemSection />
         <HowItWorksSection />
+        <FeaturesSection />
         <ModulesSection />
+        <OurModels />
+        <UseCasesSection />
+        <MetricsSection />
+        <PlaygroundSection />
         <DemoSection />
+        <TestimonialsSection />
+        <VisionSection />
+        <CTASection />
         <JoinSection />
         <Footer />
       </main>
