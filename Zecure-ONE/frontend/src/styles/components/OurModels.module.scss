@@ -161,7 +161,9 @@
   box-shadow: 
     0 8px 32px rgba(0, 0, 0, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  
+    padding: 1.5rem;
+    gap: 1rem;
+
   // Subtle inner glow
   &::before {
     content: '';
@@ -214,8 +216,10 @@
 
 // Enhanced Architecture Layers
 .architectureLayer {
-  position: absolute;
-  left: 1rem;
+  // position: absolute;
+  position: relative;
+  
+  left: -0.01rem;
   right: 1rem;
   height: 90px;
   background: 
@@ -463,8 +467,8 @@
 }
 
 .componentIcon {
-  width: 16px;
-  height: 16px;
+  width: 26px;
+  height: 26px;
   color: rgba(var(--component-color-rgb), 1);
   margin-bottom: 0.3rem;
   transition: all 0.3s ease;
@@ -728,3 +732,5 @@
     opacity: 0.5;
   }
 }
+
+

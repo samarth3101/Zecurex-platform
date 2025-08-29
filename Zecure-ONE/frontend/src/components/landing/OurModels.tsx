@@ -85,7 +85,7 @@ export default function ArchitectureVisualization() {
       position: 1,
       color: '#00d4ff',
       components: [
-        { id: 'web-dashboard', name: 'Web Dashboard', icon: <MicroserviceIcon />, type: 'frontend', status: 'active' },
+        { id: 'web-dashboard', name: 'Web Dash', icon: <MicroserviceIcon />, type: 'frontend', status: 'active' },
         { id: 'mobile-app', name: 'Mobile App', icon: <MicroserviceIcon />, type: 'frontend', status: 'active' },
         { id: 'admin-panel', name: 'Admin Panel', icon: <MicroserviceIcon />, type: 'frontend', status: 'active' }
       ]
@@ -98,7 +98,7 @@ export default function ArchitectureVisualization() {
       color: '#02c39a',
       components: [
         { id: 'api-gateway', name: 'API Gateway', icon: <APIGatewayIcon />, type: 'api', status: 'processing' },
-        { id: 'load-balancer', name: 'Load Balancer', icon: <LoadBalancerIcon />, type: 'service', status: 'active' }
+        { id: 'load-balancer', name: 'Load Bal', icon: <LoadBalancerIcon />, type: 'service', status: 'active' }
       ]
     },
     {
@@ -123,7 +123,7 @@ export default function ArchitectureVisualization() {
         { id: 'auth-service', name: 'Auth Service', icon: <MicroserviceIcon />, type: 'service', status: 'active' },
         { id: 'monitoring', name: 'Monitoring', icon: <MicroserviceIcon />, type: 'service', status: 'processing' },
         { id: 'compliance', name: 'Compliance', icon: <MicroserviceIcon />, type: 'service', status: 'active' },
-        { id: 'incident', name: 'Incident Response', icon: <MicroserviceIcon />, type: 'service', status: 'active' }
+        { id: 'incident', name: 'Response', icon: <MicroserviceIcon />, type: 'service', status: 'active' }
       ]
     },
     {
@@ -144,7 +144,7 @@ export default function ArchitectureVisualization() {
       position: 6,
       color: '#06b6d4',
       components: [
-        { id: 'primary-db', name: 'Primary Database', icon: <DatabaseIcon />, type: 'database', status: 'active' },
+        { id: 'primary-db', name: 'Primary DB', icon: <DatabaseIcon />, type: 'database', status: 'active' },
         { id: 'analytics-db', name: 'Analytics DB', icon: <DatabaseIcon />, type: 'database', status: 'active' },
         { id: 'cache', name: 'Redis Cache', icon: <DatabaseIcon />, type: 'database', status: 'active' }
       ]
