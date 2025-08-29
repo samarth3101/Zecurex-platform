@@ -23,52 +23,52 @@ interface Component {
 // Architecture-focused icons
 const APIGatewayIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-    <path d="M2 17l10 5 10-5"/>
-    <path d="M2 12l10 5 10-5"/>
+    <path d="M12 2L2 7l10 5 10-5-10-5z" />
+    <path d="M2 17l10 5 10-5" />
+    <path d="M2 12l10 5 10-5" />
   </svg>
 );
 
 const AIEngineIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <circle cx="12" cy="12" r="4"/>
-    <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 6.34l1.41-1.41M16.25 16.25l1.41-1.41"/>
-    <circle cx="12" cy="12" r="1"/>
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 6.34l1.41-1.41M16.25 16.25l1.41-1.41" />
+    <circle cx="12" cy="12" r="1" />
   </svg>
 );
 
 const DatabaseIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <ellipse cx="12" cy="5" rx="9" ry="3"/>
-    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
-    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+    <ellipse cx="12" cy="5" rx="9" ry="3" />
+    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
   </svg>
 );
 
 const MicroserviceIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <rect x="3" y="3" width="7" height="7" rx="1"/>
-    <rect x="14" y="3" width="7" height="7" rx="1"/>
-    <rect x="3" y="14" width="7" height="7" rx="1"/>
-    <rect x="14" y="14" width="7" height="7" rx="1"/>
+    <rect x="3" y="3" width="7" height="7" rx="1" />
+    <rect x="14" y="3" width="7" height="7" rx="1" />
+    <rect x="3" y="14" width="7" height="7" rx="1" />
+    <rect x="14" y="14" width="7" height="7" rx="1" />
   </svg>
 );
 
 const SecurityLayerIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-    <path d="M9 12l2 2 4-4"/>
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+    <path d="M9 12l2 2 4-4" />
   </svg>
 );
 
 const LoadBalancerIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M12 2v20M2 12h20"/>
-    <circle cx="12" cy="12" r="3"/>
-    <circle cx="6" cy="6" r="2"/>
-    <circle cx="18" cy="6" r="2"/>
-    <circle cx="6" cy="18" r="2"/>
-    <circle cx="18" cy="18" r="2"/>
+    <path d="M12 2v20M2 12h20" />
+    <circle cx="12" cy="12" r="3" />
+    <circle cx="6" cy="6" r="2" />
+    <circle cx="18" cy="6" r="2" />
+    <circle cx="6" cy="18" r="2" />
+    <circle cx="18" cy="18" r="2" />
   </svg>
 );
 
@@ -160,7 +160,7 @@ export default function ArchitectureVisualization() {
   return (
     <section className={styles.architectureSection}>
       <div className={styles.container}>
-        
+
         {/* Header */}
         <div className={styles.header}>
           <div className={styles.headerBadge}>
@@ -170,14 +170,14 @@ export default function ArchitectureVisualization() {
             <span className={styles.accent}>Zecure</span> Platform Architecture
           </h2>
           <p className={styles.subtitle}>
-            Enterprise-grade multi-layer security architecture with AI-powered threat detection, 
+            Enterprise-grade multi-layer security architecture with AI-powered threat detection,
             microservices orchestration, and real-time data processing capabilities
           </p>
         </div>
 
         {/* Architecture Visualization */}
         <div className={styles.architectureContainer} ref={containerRef}>
-          
+
           {/* Always-Visible Data Flow Lines */}
           <svg className={styles.dataFlowSvg}>
             {architectureLayers.map((layer, index) => {
@@ -202,14 +202,13 @@ export default function ArchitectureVisualization() {
           {architectureLayers.map((layer, layerIndex) => (
             <div
               key={layer.id}
-              className={`${styles.architectureLayer} ${
-                activeLayer === layer.id ? styles.active : ''
-              }`}
+              className={`${styles.architectureLayer} ${activeLayer === layer.id ? styles.active : ''}`}
               style={{
-                top: `${10 + (layerIndex * 90)}px`, // FINAL: 10px start + 90px spacing
-                '--layer-color': layer.color,
-                animationDelay: `${layerIndex * 0.1}s`
-              } as React.CSSProperties}
+                top: `${10 + (layerIndex * 10)}px`,
+                animationDelay: `${layerIndex * 0.1}s`,
+                // Use custom property with correct typing
+                ['--layer-color' as any]: layer.color
+              }}
               onMouseEnter={() => setActiveLayer(layer.id)}
               onMouseLeave={() => setActiveLayer(null)}
             >
@@ -224,29 +223,29 @@ export default function ArchitectureVisualization() {
                 <p className={styles.layerDescription}>{layer.description}</p>
               </div>
 
-              {/* Components */}
-              <div className={styles.componentsGrid}>
-                {layer.components.map((component, compIndex) => (
-                  <div
-                    key={component.id}
-                    className={`${styles.component} ${styles[component.type]} ${styles[component.status]}`}
-                    style={{ animationDelay: `${compIndex * 0.1}s` }}
-                  >
-                    <div className={styles.componentIcon}>
-                      {component.icon}
-                    </div>
-                    <span className={styles.componentName}>{component.name}</span>
-                    <div className={`${styles.statusIndicator} ${styles[component.status]}`} />
-                  </div>
-                ))}
+          {/* Components */}
+          <div className={styles.componentsGrid}>
+            {layer.components.map((component, compIndex) => (
+              <div
+                key={component.id}
+                className={`${styles.component} ${styles[component.type]} ${styles[component.status]}`}
+                style={{ animationDelay: `${compIndex * 0.1}s` }}
+              >
+                <div className={styles.componentIcon}>
+                  {component.icon}
+                </div>
+                <span className={styles.componentName}>{component.name}</span>
+                <div className={`${styles.statusIndicator} ${styles[component.status]}`} />
               </div>
+            ))}
+          </div>
 
-              {/* Layer Glow */}
-              <div className={styles.layerGlow} />
-            </div>
-          ))}
+          {/* Layer Glow */}
+          <div className={styles.layerGlow} />
         </div>
+            ))}
       </div>
-    </section>
-  );
+    </div>
+      </section >
+    );
 }

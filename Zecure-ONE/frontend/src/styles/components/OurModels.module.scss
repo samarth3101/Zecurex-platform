@@ -18,12 +18,13 @@
     right: 0;
     bottom: 0;
     background: 
-      linear-gradient(135deg, rgba(0, 212, 255, 0.015) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(2, 195, 154, 0.02) 0%, transparent 50%);
+      linear-gradient(135deg, rgba(0, 212, 255, 0.018) 0%, transparent 55%),
+      radial-gradient(circle at 80% 20%, rgba(2, 195, 154, 0.025) 0%, transparent 50%),
+      radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.015) 0%, transparent 45%);
     pointer-events: none;
   }
 
-  // Always-visible dotted background lines
+  // Enhanced dotted grid background
   &::after {
     content: '';
     position: absolute;
@@ -31,16 +32,24 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: repeating-linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.04) 0,
-      rgba(255, 255, 255, 0.04) 1px,
-      transparent 1px,
-      transparent 25px
-    );
+    background-image: 
+      repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.03) 0,
+        rgba(255, 255, 255, 0.03) 1px,
+        transparent 1px,
+        transparent 30px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.02) 0,
+        rgba(255, 255, 255, 0.02) 1px,
+        transparent 1px,
+        transparent 30px
+      );
     pointer-events: none;
     z-index: 0;
-    opacity: 0.7;
+    opacity: 0.6;
   }
 }
 
@@ -50,10 +59,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem; // Reduced gap
+  gap: 1.5rem;
+  position: relative;
+  z-index: 1;
 }
 
-// Header
+// Enhanced Header
 .header {
   text-align: center;
   opacity: 0;
@@ -64,12 +75,24 @@
   display: inline-flex;
   align-items: center;
   padding: 0.6rem 1.4rem;
-  background: linear-gradient(135deg, rgba(0, 212, 255, 0.12), rgba(2, 195, 154, 0.08));
-  border: 1px solid rgba(0, 212, 255, 0.25);
+  background: 
+    linear-gradient(135deg, rgba(0, 212, 255, 0.12), rgba(2, 195, 154, 0.08)),
+    rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 212, 255, 0.3);
   border-radius: 25px;
-  margin-bottom: 0.8rem; // Reduced
-  backdrop-filter: blur(12px);
-  box-shadow: 0 4px 20px rgba(0, 212, 255, 0.1);
+  margin-bottom: 0.8rem;
+  backdrop-filter: blur(15px);
+  box-shadow: 
+    0 4px 20px rgba(0, 212, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 
+      0 6px 25px rgba(0, 212, 255, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
 }
 
 .badgeText {
@@ -78,21 +101,25 @@
   color: #00d4ff;
   text-transform: uppercase;
   letter-spacing: 1.2px;
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
 }
 
 .title {
-  font-size: 3rem;
+  font-size: clamp(2.2rem, 4vw, 3rem);
   font-weight: 800;
   color: #ffffff;
-  margin-bottom: 0.8rem; // Reduced
+  margin-bottom: 0.8rem;
   line-height: 1.1;
   letter-spacing: -0.02em;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
 
   .accent {
-    background: linear-gradient(135deg, #00d4ff 0%, #02c39a 100%);
+    background: linear-gradient(135deg, #00d4ff 0%, #02c39a 50%, #8b5cf6 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-size: 200% 200%;
+    animation: gradientShift 6s ease-in-out infinite;
   }
 }
 
@@ -102,25 +129,52 @@
   max-width: 700px;
   line-height: 1.6;
   margin: 0;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
 }
 
-// FINAL Architecture Container - Perfect Height
+// Enhanced Architecture Container
 .architectureContainer {
   position: relative;
   width: 100%;
-  height: 580px; // FINAL: Perfect height for all 6 layers with tight spacing
+  height: 640px;
   background: 
     linear-gradient(to bottom, 
-      rgba(0, 212, 255, 0.02) 0%, 
-      transparent 15%, 
-      transparent 85%, 
-      rgba(2, 195, 154, 0.02) 100%
-    );
+      rgba(0, 212, 255, 0.025) 0%, 
+      transparent 20%, 
+      transparent 80%, 
+      rgba(2, 195, 154, 0.025) 100%
+    ),
+    rgba(255, 255, 255, 0.01);
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   overflow: hidden;
   padding: 1rem;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  
+  // Subtle inner glow
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, 
+      rgba(0, 212, 255, 0.1), 
+      transparent 30%, 
+      transparent 70%, 
+      rgba(2, 195, 154, 0.1)
+    );
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.4;
+  }
 }
 
 .dataFlowSvg {
@@ -130,32 +184,42 @@
   width: 100%;
   height: 100%;
   z-index: 1;
+  pointer-events: none;
 }
 
-// Always-visible interconnection lines
+// Enhanced Data Flow Lines
 .dataFlow {
-  stroke: #00d4ff;
+  stroke: url(#flowGradient);
   stroke-width: 2;
-  opacity: 1;
-  filter: drop-shadow(0 0 6px rgba(0, 212, 255, 0.4));
+  opacity: 0.8;
+  filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.4));
   stroke-dasharray: 8, 8;
   animation: continuousFlow 4s linear infinite;
+  
+  // Add gradient definition in your SVG
+  &:nth-child(even) {
+    stroke: url(#flowGradient2);
+    animation-duration: 5s;
+    animation-direction: reverse;
+  }
 }
 
-// FINAL Architecture Layers - Perfect Tight Spacing
+// Enhanced Architecture Layers
 .architectureLayer {
   position: absolute;
   left: 1rem;
   right: 1rem;
-  height: 80px; // FINAL: Perfect height
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.04) 0%, 
-    rgba(255, 255, 255, 0.015) 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  height: 90px;
+  background: 
+    linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.05) 0%, 
+      rgba(255, 255, 255, 0.02) 50%,
+      rgba(255, 255, 255, 0.01) 100%
+    );
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
-  padding: 0.8rem 1.2rem; // Perfect padding
-  backdrop-filter: blur(15px);
+  padding: 0.8rem 1.2rem;
+  backdrop-filter: blur(20px);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 2;
   opacity: 0;
@@ -165,43 +229,78 @@
   gap: 1.2rem;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+
+  // Subtle hover glow effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--layer-color), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: inherit;
+    z-index: -1;
+  }
+
+  &:hover {
+    transform: translateX(3px);
+    border-color: rgba(var(--layer-color-rgb), 0.4);
+    
+    &::before {
+      opacity: 0.05;
+    }
+    
+    .componentIcon {
+      transform: scale(1.1);
+    }
+  }
 
   &.active {
     border-color: var(--layer-color);
-    background: linear-gradient(135deg, 
-      rgba(0, 212, 255, 0.06) 0%, 
-      rgba(2, 195, 154, 0.04) 100%
-    );
-    transform: scale(1.01);
+    background: 
+      linear-gradient(135deg, 
+        rgba(var(--layer-color-rgb), 0.08) 0%, 
+        rgba(var(--layer-color-rgb), 0.02) 100%
+      );
+    transform: scale(1.01) translateX(3px);
     box-shadow: 
-      0 8px 30px rgba(0, 0, 0, 0.2),
-      0 0 0 1px var(--layer-color);
+      0 8px 30px rgba(0, 0, 0, 0.25),
+      0 0 0 1px var(--layer-color),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
 
     .layerGlow {
-      opacity: 0.3;
+      opacity: 0.4;
+    }
+    
+    .componentName {
+      color: #ffffff;
     }
   }
 }
 
 .layerGlow {
   position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(135deg, var(--layer-color), transparent);
-  border-radius: 18px;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: linear-gradient(135deg, var(--layer-color), transparent 70%);
+  border-radius: 19px;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.4s ease;
   z-index: -1;
-  filter: blur(10px);
+  filter: blur(12px);
 }
 
-// Perfect Layer Header
+// Enhanced Layer Header
 .layerHeader {
   flex: 0 0 250px;
   padding-right: 1.2rem;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .layerTitleGroup {
@@ -209,6 +308,7 @@
   align-items: center;
   gap: 0.6rem;
   margin-bottom: 0.4rem;
+  
 }
 
 .layerName {
@@ -216,7 +316,9 @@
   font-weight: 700;
   color: #ffffff;
   margin: 0;
-  line-height: 1.1;
+  line-height: 1.2;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  align-items: center;
 }
 
 .layerIndicator {
@@ -225,26 +327,41 @@
   justify-content: center;
   width: 24px;
   height: 24px;
-  background: var(--layer-color);
+  background: 
+    linear-gradient(135deg, var(--layer-color), rgba(var(--layer-color-rgb), 0.7));
   border-radius: 6px;
   opacity: 0.9;
+  box-shadow: 
+    0 2px 8px rgba(var(--layer-color-rgb), 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 
+      0 4px 12px rgba(var(--layer-color-rgb), 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
 }
 
 .layerNumber {
   font-size: 0.65rem;
   font-weight: 700;
   color: #000;
-  font-family: 'Monaco', monospace;
+  font-family: 'Monaco', 'Menlo', monospace;
+  text-shadow: none;
+  line-height: 1;
 }
 
 .layerDescription {
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.75);
   margin: 0;
-  line-height: 1.2;
+  line-height: 1.3;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
-// Perfect Components Grid
+// Enhanced Components Grid
 .componentsGrid {
   display: flex;
   gap: 0.9rem;
@@ -258,8 +375,12 @@
   flex-direction: column;
   align-items: center;
   padding: 0.6rem 0.4rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: 
+    linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.06), 
+      rgba(255, 255, 255, 0.02)
+    );
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 10px;
   min-width: 65px;
   max-width: 75px;
@@ -267,98 +388,163 @@
   position: relative;
   opacity: 0;
   animation: componentAppear 0.6s ease-out forwards;
+  cursor: pointer;
 
   &:hover {
-    transform: translateY(-3px);
-    border-color: var(--layer-color);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px) scale(1.02);
+    border-color: rgba(var(--component-color-rgb), 0.6);
+    box-shadow: 
+      0 8px 25px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(var(--component-color-rgb), 0.3);
+    background: 
+      linear-gradient(135deg, 
+        rgba(var(--component-color-rgb), 0.08), 
+        rgba(var(--component-color-rgb), 0.03)
+      );
   }
 
   &.ai {
+    --component-color-rgb: 255, 107, 71;
     border-color: rgba(255, 107, 71, 0.4);
-    background: rgba(255, 107, 71, 0.06);
+    background: 
+      linear-gradient(135deg, 
+        rgba(255, 107, 71, 0.08), 
+        rgba(255, 107, 71, 0.03)
+      );
   }
 
   &.database {
+    --component-color-rgb: 6, 182, 212;
     border-color: rgba(6, 182, 212, 0.4);
-    background: rgba(6, 182, 212, 0.06);
+    background: 
+      linear-gradient(135deg, 
+        rgba(6, 182, 212, 0.08), 
+        rgba(6, 182, 212, 0.03)
+      );
   }
 
   &.api {
+    --component-color-rgb: 2, 195, 154;
     border-color: rgba(2, 195, 154, 0.4);
-    background: rgba(2, 195, 154, 0.06);
+    background: 
+      linear-gradient(135deg, 
+        rgba(2, 195, 154, 0.08), 
+        rgba(2, 195, 154, 0.03)
+      );
   }
 
   &.frontend {
+    --component-color-rgb: 0, 212, 255;
     border-color: rgba(0, 212, 255, 0.4);
-    background: rgba(0, 212, 255, 0.06);
+    background: 
+      linear-gradient(135deg, 
+        rgba(0, 212, 255, 0.08), 
+        rgba(0, 212, 255, 0.03)
+      );
   }
 
   &.service {
+    --component-color-rgb: 139, 92, 246;
     border-color: rgba(139, 92, 246, 0.4);
-    background: rgba(139, 92, 246, 0.06);
+    background: 
+      linear-gradient(135deg, 
+        rgba(139, 92, 246, 0.08), 
+        rgba(139, 92, 246, 0.03)
+      );
   }
 }
 
 .componentIcon {
   width: 16px;
   height: 16px;
-  color: var(--layer-color);
+  color: rgba(var(--component-color-rgb), 1);
   margin-bottom: 0.3rem;
+  transition: all 0.3s ease;
 
   svg {
     width: 100%;
     height: 100%;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
   }
 }
 
 .componentName {
   font-size: 0.6rem;
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(255, 255, 255, 0.9);
   text-align: center;
   font-weight: 500;
   line-height: 1.1;
+  transition: color 0.3s ease;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
 }
 
+// Enhanced Status Indicators
 .statusIndicator {
   position: absolute;
   top: -2px;
   right: -2px;
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  border: 2px solid #000;
+  border: 2px solid #000000;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
 
   &.active {
     background: #22c55e;
+    box-shadow: 
+      0 0 12px rgba(34, 197, 94, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
     animation: statusPulse 2.5s ease-in-out infinite;
   }
 
   &.processing {
-    background: #f59e0b;
+    background: linear-gradient(45deg, #f59e0b, #f97316);
+    box-shadow: 
+      0 0 12px rgba(245, 158, 11, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
     animation: processingBlink 1.2s ease-in-out infinite;
   }
 
   &.standby {
     background: #6b7280;
+    box-shadow: 
+      0 0 8px rgba(107, 114, 128, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
 }
 
-// Animations
+// Enhanced Animations
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { 
+    opacity: 0; 
+    transform: translateY(30px);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0);
+  }
 }
 
 @keyframes layerAppear {
-  from { opacity: 0; transform: translateX(-40px); }
-  to { opacity: 1; transform: translateX(0); }
+  from { 
+    opacity: 0; 
+    transform: translateX(-40px) scale(0.98);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0) scale(1);
+  }
 }
 
 @keyframes componentAppear {
-  from { opacity: 0; transform: scale(0.8); }
-  to { opacity: 1; transform: scale(1); }
+  from { 
+    opacity: 0; 
+    transform: scale(0.8) translateY(10px);
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1) translateY(0);
+  }
 }
 
 @keyframes continuousFlow {
@@ -366,17 +552,28 @@
   100% { stroke-dashoffset: -32; }
 }
 
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
 @keyframes statusPulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.3); opacity: 0.8; }
+  0%, 100% { 
+    transform: scale(1); 
+    opacity: 1; 
+  }
+  50% { 
+    transform: scale(1.4); 
+    opacity: 0.8; 
+  }
 }
 
 @keyframes processingBlink {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
+  50% { opacity: 0.4; }
 }
 
-// Responsive Design
+// Enhanced Responsive Design
 @media (max-width: 1200px) {
   .architectureContainer { 
     height: 680px; 
@@ -394,7 +591,7 @@
     flex: none;
     padding-right: 0;
     border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     padding-bottom: 0.6rem;
     width: 100%;
   }
@@ -448,5 +645,78 @@
   
   .architectureLayer {
     height: 100px;
+  }
+  
+  .componentIcon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+// Performance optimizations
+.architectureLayer,
+.component,
+.componentIcon,
+.statusIndicator {
+  will-change: transform, opacity;
+}
+
+
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .architectureLayer {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  .component {
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+  
+  .componentName,
+  .layerName {
+    color: #ffffff;
+  }
+}
+
+
+
+.layerHeader {
+  flex: 0 0 330px; 
+  display: flex;
+  flex-direction: column;
+}
+
+.layerTitleGroup {
+  align-items: baseline;
+}
+
+
+.layerIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 1rem;
+}
+
+.layerNumber {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 1px;
+  font-family: 'Space Mono', monospace; // keeps the numeric look
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -8px;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.5;
   }
 }
