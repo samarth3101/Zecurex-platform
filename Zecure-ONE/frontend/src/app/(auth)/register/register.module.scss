@@ -1,0 +1,610 @@
+.registerContainer {
+  min-height: 100vh;
+  background: 
+    linear-gradient(135deg, #000000 0%, #0a0a0f 25%, #000000 50%, #0f0f1a 100%);
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.backgroundEffects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gradientOrb {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  background: 
+    radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  top: -400px;
+  left: -400px;
+  animation: float 25s ease-in-out infinite;
+}
+
+.gridPattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 2px,
+      transparent 60px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      rgba(255, 255, 255, 0.015) 1px,
+      transparent 2px,
+      transparent 60px
+    );
+  opacity: 0.7;
+}
+
+.registerContent {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+// Form Side
+.formSide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: 
+    linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.02) 0%, 
+      rgba(255, 255, 255, 0.005) 100%
+    );
+  backdrop-filter: blur(10px);
+  overflow-y: auto;
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 450px;
+}
+
+.formHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.logoIcon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #00d4ff, #02c39a);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  box-shadow: 0 6px 20px rgba(0, 212, 255, 0.3);
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.logoText {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #ffffff;
+
+  .accent {
+    color: #00d4ff;
+  }
+}
+
+.formTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.formSubtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+}
+
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.nameRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.inputLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding: 0.875rem 2.5rem 0.875rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+
+  &:focus {
+    outline: none;
+    border-color: #00d4ff;
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  &.inputError {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  }
+}
+
+.inputIcon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: rgba(255, 255, 255, 0.5);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.passwordStrength {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.strengthBar {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.strengthFill {
+  height: 100%;
+  transition: width 0.3s ease, background-color 0.3s ease;
+  border-radius: 2px;
+}
+
+.strengthLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  min-width: 70px;
+  text-align: right;
+}
+
+.errorText {
+  font-size: 0.75rem;
+  color: #ef4444;
+  margin-top: 0.25rem;
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0.5rem 0;
+}
+
+.checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.4;
+
+  input[type="checkbox"] {
+    display: none;
+  }
+}
+
+.checkmark {
+  width: 16px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  margin-top: 2px;
+
+  svg {
+    width: 10px;
+    height: 10px;
+    color: transparent;
+    transition: color 0.3s ease;
+  }
+
+  input:checked + & {
+    background: #00d4ff;
+    border-color: #00d4ff;
+
+    svg {
+      color: #000;
+    }
+  }
+}
+
+.link {
+  color: #00d4ff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #02c39a;
+  }
+}
+
+.registerButton {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #00d4ff 0%, #02c39a 100%);
+  color: #000;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 6px 20px rgba(0, 212, 255, 0.3);
+  margin-top: 0.5rem;
+
+  &:hover:not(:disabled) {
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.loadingSpinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-top: 2px solid #000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.formFooter {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+  }
+}
+
+.loginLink {
+  color: #00d4ff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #02c39a;
+  }
+}
+
+// Benefits Side
+.benefitsSide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background: 
+    linear-gradient(135deg, 
+      rgba(0, 212, 255, 0.05) 0%, 
+      transparent 50%,
+      rgba(139, 92, 246, 0.03) 100%
+    );
+}
+
+.benefitsContent {
+  max-width: 480px;
+}
+
+.benefitsTitle {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 2rem;
+  line-height: 1.2;
+
+  .highlight {
+    background: linear-gradient(135deg, #00d4ff, #02c39a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+.benefitsList {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.benefit {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.benefitIcon {
+  width: 48px;
+  height: 48px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00d4ff;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.1);
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.benefit {
+  h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+.trustBadges {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.trustBadge {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.trustNumber {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #00d4ff;
+  margin-bottom: 0.25rem;
+}
+
+.trustLabel {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+// Animations
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(2deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Responsive Design
+@media (max-width: 1200px) {
+  .registerContent {
+    grid-template-columns: 1fr;
+  }
+
+  .benefitsSide {
+    order: -1;
+    padding: 2rem;
+  }
+
+  .benefitsContent {
+    max-width: none;
+  }
+
+  .benefitsTitle {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .benefitsList {
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .formSide {
+    padding: 1.5rem;
+  }
+
+  .benefitsSide {
+    padding: 1.5rem;
+  }
+
+  .nameRow {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .benefitsList {
+    gap: 1.25rem;
+  }
+
+  .benefit {
+    gap: 0.75rem;
+
+    h4 {
+      font-size: 1rem;
+    }
+
+    p {
+      font-size: 0.85rem;
+    }
+  }
+
+  .benefitIcon {
+    width: 40px;
+    height: 40px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .trustBadges {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .formSide {
+    padding: 1rem;
+  }
+
+  .benefitsSide {
+    padding: 1rem;
+  }
+
+  .formTitle {
+    font-size: 1.5rem;
+  }
+
+  .benefitsTitle {
+    font-size: 1.6rem;
+  }
+
+  .checkboxGroup {
+    gap: 1rem;
+  }
+
+  .checkbox {
+    font-size: 0.8rem;
+  }
+}

@@ -168,7 +168,7 @@ export default function HeroSection({ isVisible = false }: HeroSectionProps) {
             </div>
 
             <div className={styles.buttons}>
-              <Button
+              {/* <Button
                 size="lg"
                 className={styles.demoButton}
                 onClick={handleVideoModalOpen}
@@ -185,8 +185,8 @@ export default function HeroSection({ isVisible = false }: HeroSectionProps) {
                 onClick={handleGetStarted}
                 aria-label="Get started with Zecure ONE"
               >
-                Get Started
-              </Button>
+                Learn More
+              </Button> */}
             </div>
 
             {/* Compact Stats and Social Proof Row */}

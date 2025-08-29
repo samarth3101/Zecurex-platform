@@ -1,0 +1,462 @@
+.loginContainer {
+  min-height: 100vh;
+  background: 
+    linear-gradient(135deg, #000000 0%, #0a0a0f 25%, #000000 50%, #0f0f1a 100%);
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.backgroundEffects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.gradientOrb {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: 
+    radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  top: -300px;
+  right: -300px;
+  animation: float 20s ease-in-out infinite;
+}
+
+.gridPattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      rgba(255, 255, 255, 0.02) 1px,
+      transparent 2px,
+      transparent 60px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      rgba(255, 255, 255, 0.015) 1px,
+      transparent 2px,
+      transparent 60px
+    );
+  opacity: 0.7;
+}
+
+.loginContent {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+
+// Branding Side
+.brandingSide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background: 
+    linear-gradient(135deg, 
+      rgba(0, 212, 255, 0.05) 0%, 
+      transparent 50%,
+      rgba(139, 92, 246, 0.03) 100%
+    );
+}
+
+.brandingContent {
+  max-width: 500px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.logoIcon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #00d4ff, #02c39a);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+
+  svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.logoText {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #ffffff;
+
+  .accent {
+    color: #00d4ff;
+  }
+}
+
+.brandingTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+
+  .highlight {
+    background: linear-gradient(135deg, #00d4ff, #02c39a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+.brandingSubtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.featureIcon {
+  width: 24px;
+  height: 24px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00d4ff;
+  flex-shrink: 0;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+// Form Side
+.formSide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background: 
+    linear-gradient(135deg, 
+      rgba(255, 255, 255, 0.02) 0%, 
+      rgba(255, 255, 255, 0.005) 100%
+    );
+  backdrop-filter: blur(10px);
+}
+
+.formContainer {
+  width: 100%;
+  max-width: 400px;
+}
+
+.formHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.formTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.formSubtitle {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inputLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding: 1rem 3rem 1rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+
+  &:focus {
+    outline: none;
+    border-color: #00d4ff;
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.inputIcon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.passwordToggle {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: rgba(255, 255, 255, 0.5);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.formOptions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.5rem 0;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+
+  input[type="checkbox"] {
+    display: none;
+  }
+}
+
+.checkmark {
+  width: 18px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+
+  svg {
+    width: 12px;
+    height: 12px;
+    color: transparent;
+    transition: color 0.3s ease;
+  }
+
+  input:checked + & {
+    background: #00d4ff;
+    border-color: #00d4ff;
+
+    svg {
+      color: #000;
+    }
+  }
+}
+
+.forgotLink {
+  font-size: 0.875rem;
+  color: #00d4ff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #02c39a;
+  }
+}
+
+.loginButton {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, #00d4ff 0%, #02c39a 100%);
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+
+  &:hover {
+    box-shadow: 0 12px 35px rgba(0, 212, 255, 0.4);
+    transform: translateY(-2px);
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.loadingSpinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-top: 2px solid #000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.formFooter {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+  }
+}
+
+.registerLink {
+  color: #00d4ff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #02c39a;
+  }
+}
+
+// Animations
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Responsive Design
+@media (max-width: 1024px) {
+  .loginContent {
+    grid-template-columns: 1fr;
+  }
+
+  .brandingSide {
+    display: none;
+  }
+
+  .formSide {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .formSide {
+    padding: 1.5rem;
+  }
+
+  .brandingTitle {
+    font-size: 2rem;
+  }
+
+  .formTitle {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .formSide {
+    padding: 1rem;
+  }
+
+  .formOptions {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+}
