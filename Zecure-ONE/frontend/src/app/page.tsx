@@ -12,15 +12,13 @@ import AboutSection from '@/components/landing/AboutSection';
 import HowItWorksSection from '@/components/landing/HowItWorksSection';
 import ModulesSection from '@/components/landing/ModulesSection';
 import DemoSection from '@/components/landing/DemoSection';
-import CTASection from '@/components/landing/CTASection';
+
 import FeaturesSection from '@/components/landing/FeaturesSection';
-import MetricsSection from '@/components/landing/MetricsSection';
+
 import OurModels from '@/components/landing/OurModels';
-import PlaygroundSection from '@/components/landing/PlaygroundSection';
+
 import ProblemSection from '@/components/landing/ProblemSection';
-import TestimonialsSection from '@/components/landing/TestimonialsSection';
-import UseCasesSection from '@/components/landing/UseCasesSection';
-import VisionSection from '@/components/landing/VisionSection';
+
 import JoinSection from '@/components/landing/JoinSection';
 import Footer from '@/components/landing/Footer';
 
@@ -76,13 +74,8 @@ function PageContent() {
         <FeaturesSection />
         <ModulesSection />
         <OurModels />
-        <UseCasesSection />
-        <MetricsSection />
-        <PlaygroundSection />
+
         <DemoSection />
-        <TestimonialsSection />
-        <VisionSection />
-        <CTASection />
         <JoinSection />
         <Footer />
       </main>

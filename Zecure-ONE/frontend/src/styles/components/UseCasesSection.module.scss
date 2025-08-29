@@ -1,0 +1,532 @@
+.useCasesSection {
+  min-height: 100vh;
+  background: 
+    linear-gradient(135deg, #ffffff 0%, #f8fafc 50%, #ffffff 100%);
+  color: #1a1a1a;
+  padding: 6rem 2rem;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 40% 60%, rgba(34, 197, 94, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      repeating-linear-gradient(
+        90deg,
+        transparent 0,
+        rgba(0, 0, 0, 0.015) 1px,
+        transparent 2px,
+        transparent 60px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent 0,
+        rgba(0, 0, 0, 0.01) 1px,
+        transparent 2px,
+        transparent 60px
+      );
+    pointer-events: none;
+    opacity: 0.7;
+  }
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+// Header Section
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.5rem;
+  background: 
+    linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(139, 92, 246, 0.05));
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 30px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0066cc;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 212, 255, 0.1);
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.1;
+
+  .accent {
+    background: linear-gradient(135deg, #00d4ff 0%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: #4a5568;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+// Use Cases Grid
+.useCasesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+// Use Case Card
+.useCaseCard {
+  position: relative;
+  background: 
+    linear-gradient(145deg, 
+      rgba(255, 255, 255, 0.9) 0%, 
+      rgba(255, 255, 255, 0.7) 100%
+    );
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  padding: 2rem;
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--card-color), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    border-color: rgba(var(--card-color-rgb, 0, 212, 255), 0.3);
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.1),
+      0 0 0 1px rgba(var(--card-color-rgb, 0, 212, 255), 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+    &::before {
+      opacity: 1;
+    }
+
+    .cardGlow {
+      opacity: 0.6;
+    }
+
+    .iconContainer {
+      transform: scale(1.1);
+      color: var(--card-color);
+    }
+
+    .cardTitle {
+      color: var(--card-color);
+    }
+  }
+
+  &.hovered {
+    .benefits .benefit {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+.cardGlow {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, var(--card-color), transparent 70%);
+  border-radius: 26px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+  filter: blur(20px);
+}
+
+// Industry Badge
+.industryBadge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.4rem 0.8rem;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4a5568;
+  backdrop-filter: blur(10px);
+}
+
+// Icon Container
+.iconContainer {
+  width: 60px;
+  height: 60px;
+  background: 
+    linear-gradient(135deg, 
+      rgba(var(--card-color-rgb, 0, 212, 255), 0.15) 0%, 
+      rgba(var(--card-color-rgb, 0, 212, 255), 0.05) 100%
+    );
+  border: 1px solid rgba(var(--card-color-rgb, 0, 212, 255), 0.2);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  color: var(--card-color);
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 4px 15px rgba(var(--card-color-rgb, 0, 212, 255), 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+  svg {
+    width: 28px;
+    height: 28px;
+    stroke-width: 2.5;
+  }
+}
+
+// Card Content
+.cardContent {
+  flex: 1;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 1rem 0;
+  transition: color 0.3s ease;
+  line-height: 1.2;
+}
+
+.cardProblem {
+  font-size: 0.95rem;
+  color: #4a5568;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+// Solution Section
+.solution {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 12px;
+  border-left: 3px solid var(--card-color);
+}
+
+.solutionTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--card-color);
+  margin: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.solutionText {
+  font-size: 0.9rem;
+  color: #2d3748;
+  line-height: 1.4;
+  margin: 0;
+  font-weight: 500;
+}
+
+// Benefits
+.benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.benefit {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: #2d3748;
+  font-weight: 500;
+  opacity: 0.8;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.benefitIcon {
+  width: 18px;
+  height: 18px;
+  background: var(--card-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  svg {
+    width: 10px;
+    height: 10px;
+    stroke: white;
+    stroke-width: 3;
+  }
+}
+
+// Status Indicator
+.statusIndicator {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--card-color);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(var(--card-color-rgb, 0, 212, 255), 0.3);
+
+  span {
+    position: relative;
+    z-index: 1;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, var(--card-color), transparent, var(--card-color));
+    border-radius: inherit;
+    animation: shimmer 2s infinite;
+  }
+}
+
+// Call to Action
+.cta {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: 
+    linear-gradient(135deg, 
+      rgba(0, 212, 255, 0.05) 0%, 
+      rgba(139, 92, 246, 0.03) 100%
+    );
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  border-radius: 24px;
+  backdrop-filter: blur(10px);
+}
+
+.ctaText {
+  font-size: 1.2rem;
+  color: #2d3748;
+  margin: 0 0 2rem 0;
+  line-height: 1.5;
+
+  strong {
+    color: #1a1a1a;
+    font-weight: 700;
+  }
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #00d4ff 0%, #0066cc 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 4px 15px rgba(0, 212, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+  svg {
+    width: 18px;
+    height: 18px;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
+    box-shadow: 
+      0 8px 25px rgba(0, 212, 255, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+    svg {
+      transform: translateX(4px);
+    }
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 
+      0 0 0 3px rgba(0, 212, 255, 0.3),
+      0 8px 25px rgba(0, 212, 255, 0.4);
+  }
+}
+
+// Animations
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+// Responsive Design
+@media (max-width: 1024px) {
+  .useCasesGrid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .useCaseCard {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .useCasesSection {
+    padding: 4rem 1rem;
+  }
+
+  .useCasesGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .header {
+    margin-bottom: 3rem;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .useCaseCard {
+    padding: 1.5rem;
+  }
+
+  .cardTitle {
+    font-size: 1.3rem;
+  }
+
+  .cta {
+    padding: 2rem 1rem;
+  }
+
+  .ctaText {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .useCasesSection {
+    padding: 3rem 1rem;
+  }
+
+  .useCaseCard {
+    padding: 1.25rem;
+  }
+
+  .iconContainer {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 1rem;
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .cardTitle {
+    font-size: 1.2rem;
+  }
+
+  .cardProblem,
+  .solutionText {
+    font-size: 0.875rem;
+  }
+}
+
+// Component-specific color variables
+.useCaseCard {
+  &:nth-child(1) { --card-color-rgb: 0, 212, 255; }
+  &:nth-child(2) { --card-color-rgb: 34, 197, 94; }
+  &:nth-child(3) { --card-color-rgb: 139, 92, 246; }
+  &:nth-child(4) { --card-color-rgb: 245, 158, 11; }
+  &:nth-child(5) { --card-color-rgb: 239, 68, 68; }
+  &:nth-child(6) { --card-color-rgb: 6, 182, 212; }
+}
+
+// Performance optimizations
+.useCaseCard,
+.iconContainer,
+.ctaButton {
+  will-change: transform, box-shadow;
+}
+
+
+@media (prefers-contrast: high) {
+  .useCaseCard {
+    border-color: #333;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .cardTitle,
+  .solutionText,
+  .benefit {
+    color: #000;
+  }
+}
