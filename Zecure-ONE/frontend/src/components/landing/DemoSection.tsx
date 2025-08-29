@@ -53,9 +53,14 @@ export default function DemoSection() {
   const [showOverlay, setShowOverlay] = useState(true);
 
   // Handle navigation to dashboard with query parameter
+  // const handleGetStarted = () => {
+  //   router.push('/?view=dashboard'); // Add query parameter to differentiate
+  // };
+
   const handleGetStarted = () => {
-    router.push('/?view=dashboard'); // Add query parameter to differentiate
-  };
+  router.push("/login?redirect=/dashboard");
+};
+
 
   useEffect(() => {
     const interval = setInterval(() => {
