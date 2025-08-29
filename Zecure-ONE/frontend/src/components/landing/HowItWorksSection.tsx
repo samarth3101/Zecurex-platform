@@ -140,22 +140,6 @@ export default function HowItWorksSection() {
             </div>
           ))}
         </div>
-
-        {/* Performance Stats */}
-        <div className={styles.statsContainer}>
-          <div className={styles.stat}>
-            <div className={styles.statNumber}>&lt;100ms</div>
-            <div className={styles.statLabel}>Detection Speed</div>
-          </div>
-          <div className={styles.stat}>
-            <div className={styles.statNumber}>99.97%</div>
-            <div className={styles.statLabel}>Accuracy Rate</div>
-          </div>
-          <div className={styles.stat}>
-            <div className={styles.statNumber}>24/7</div>
-            <div className={styles.statLabel}>Active Protection</div>
-          </div>
-        </div>
       </div>
     </section>
   );
