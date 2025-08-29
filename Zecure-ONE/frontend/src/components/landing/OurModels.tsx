@@ -3,359 +3,249 @@
 import { useEffect, useState, useRef } from 'react';
 import styles from '@/styles/components/OurModels.module.scss';
 
-interface ModuleData {
+interface ArchitectureLayer {
+  id: string;
+  name: string;
+  description: string;
+  components: Component[];
+  color: string;
+  position: number;
+}
+
+interface Component {
   id: string;
   name: string;
   icon: React.ReactNode;
-  description: string;
-  color: string;
-  position: 'left' | 'right';
+  type: 'service' | 'database' | 'api' | 'frontend' | 'ai';
+  status: 'active' | 'processing' | 'standby';
 }
 
-// Clean, professional icons
-const EngineIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-    <circle cx="12" cy="12" r="4"/>
-    <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 6.34l1.41-1.41M16.25 16.25l1.41-1.41"/>
+// Architecture-focused icons
+const APIGatewayIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+    <path d="M2 17l10 5 10-5"/>
+    <path d="M2 12l10 5 10-5"/>
   </svg>
 );
 
-const ThreatIcon = () => (
+const AIEngineIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <circle cx="12" cy="12" r="4"/>
+    <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 6.34l1.41-1.41M16.25 16.25l1.41-1.41"/>
+    <circle cx="12" cy="12" r="1"/>
+  </svg>
+);
+
+const DatabaseIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <ellipse cx="12" cy="5" rx="9" ry="3"/>
+    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+  </svg>
+);
+
+const MicroserviceIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <rect x="3" y="3" width="7" height="7" rx="1"/>
+    <rect x="14" y="3" width="7" height="7" rx="1"/>
+    <rect x="3" y="14" width="7" height="7" rx="1"/>
+    <rect x="14" y="14" width="7" height="7" rx="1"/>
+  </svg>
+);
+
+const SecurityLayerIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
     <path d="M9 12l2 2 4-4"/>
   </svg>
 );
 
-const AnalyticsIcon = () => (
+const LoadBalancerIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M3 3v18h18"/>
-    <path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/>
-  </svg>
-);
-
-const CloudIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
-  </svg>
-);
-
-const IdentityIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-    <circle cx="12" cy="7" r="4"/>
-  </svg>
-);
-
-const EndpointIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-    <line x1="8" y1="21" x2="16" y2="21"/>
-    <line x1="12" y1="17" x2="12" y2="21"/>
-  </svg>
-);
-
-const NetworkIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M12 2v20M2 12h20"/>
     <circle cx="12" cy="12" r="3"/>
-    <path d="M12 1v6m0 6v6"/>
-    <path d="m5.64 7.05 4.95 4.95m4.95-4.95-4.95 4.95"/>
+    <circle cx="6" cy="6" r="2"/>
+    <circle cx="18" cy="6" r="2"/>
+    <circle cx="6" cy="18" r="2"/>
+    <circle cx="18" cy="18" r="2"/>
   </svg>
 );
 
-const ComplianceIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-    <polyline points="14,2 14,8 20,8"/>
-    <line x1="16" y1="13" x2="8" y2="13"/>
-  </svg>
-);
-
-const AutomationIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-  </svg>
-);
-
-export default function OurModels() {
+export default function ArchitectureVisualization() {
   const [mounted, setMounted] = useState(false);
-  const [hoveredModule, setHoveredModule] = useState<string | null>(null);
+  const [activeLayer, setActiveLayer] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Enhanced platform modules with better color distribution
-  const modules: ModuleData[] = [
-    // Left Side Modules - Detection & Intelligence
+  const architectureLayers: ArchitectureLayer[] = [
     {
-      id: 'threat-detection',
-      name: 'Threat Detection',
-      icon: <ThreatIcon />,
-      description: 'AI-powered real-time threat identification and advanced persistent threat detection',
-      color: '#ff6b7a',
-      position: 'left'
+      id: 'presentation',
+      name: 'Presentation Layer',
+      description: 'User interfaces, dashboards, and client applications across web and mobile platforms',
+      position: 1,
+      color: '#00d4ff',
+      components: [
+        { id: 'web-dashboard', name: 'Web Dashboard', icon: <MicroserviceIcon />, type: 'frontend', status: 'active' },
+        { id: 'mobile-app', name: 'Mobile App', icon: <MicroserviceIcon />, type: 'frontend', status: 'active' },
+        { id: 'admin-panel', name: 'Admin Panel', icon: <MicroserviceIcon />, type: 'frontend', status: 'active' }
+      ]
     },
     {
-      id: 'behavioral-analytics',
-      name: 'Behavioral Analytics',
-      icon: <AnalyticsIcon />,
-      description: 'Advanced user behavior analysis and anomaly detection with machine learning',
-      color: '#c084fc',
-      position: 'left'
+      id: 'api-gateway',
+      name: 'API Gateway & Load Balancer',
+      description: 'Intelligent traffic management, authentication, rate limiting, and request routing',
+      position: 2,
+      color: '#02c39a',
+      components: [
+        { id: 'api-gateway', name: 'API Gateway', icon: <APIGatewayIcon />, type: 'api', status: 'processing' },
+        { id: 'load-balancer', name: 'Load Balancer', icon: <LoadBalancerIcon />, type: 'service', status: 'active' }
+      ]
     },
     {
-      id: 'network-monitoring',
-      name: 'Network Monitoring',
-      icon: <NetworkIcon />,
-      description: 'Continuous network traffic analysis and intrusion detection systems',
-      color: '#38bdf8',
-      position: 'left'
+      id: 'ai-core',
+      name: 'AI Security Engine',
+      description: 'Advanced machine learning models for threat detection, behavioral analysis, and predictive security',
+      position: 3,
+      color: '#ff6b47',
+      components: [
+        { id: 'threat-ai', name: 'Threat Detection AI', icon: <AIEngineIcon />, type: 'ai', status: 'processing' },
+        { id: 'behavior-ai', name: 'Behavior Analysis', icon: <AIEngineIcon />, type: 'ai', status: 'active' },
+        { id: 'prediction-ai', name: 'Predictive Engine', icon: <AIEngineIcon />, type: 'ai', status: 'active' }
+      ]
     },
     {
-      id: 'intelligent-automation',
-      name: 'AI Automation',
-      icon: <AutomationIcon />,
-      description: 'Intelligent threat response automation and orchestrated security workflows',
-      color: '#fb7185',
-      position: 'left'
-    },
-    
-    // Right Side Modules - Protection & Management
-    {
-      id: 'cloud-security',
-      name: 'Cloud Security',
-      icon: <CloudIcon />,
-      description: 'Multi-cloud security orchestration and cloud workload protection platform',
-      color: '#60a5fa',
-      position: 'right'
+      id: 'microservices',
+      name: 'Microservices Layer',
+      description: 'Distributed cloud-native services with auto-scaling, fault tolerance, and service mesh integration',
+      position: 4,
+      color: '#8b5cf6',
+      components: [
+        { id: 'auth-service', name: 'Auth Service', icon: <MicroserviceIcon />, type: 'service', status: 'active' },
+        { id: 'monitoring', name: 'Monitoring', icon: <MicroserviceIcon />, type: 'service', status: 'processing' },
+        { id: 'compliance', name: 'Compliance', icon: <MicroserviceIcon />, type: 'service', status: 'active' },
+        { id: 'incident', name: 'Incident Response', icon: <MicroserviceIcon />, type: 'service', status: 'active' }
+      ]
     },
     {
-      id: 'identity-protection',
-      name: 'Identity Protection',
-      icon: <IdentityIcon />,
-      description: 'Zero-trust identity verification and privileged access management',
-      color: '#fbbf24',
-      position: 'right'
+      id: 'security',
+      name: 'Security Infrastructure',
+      description: 'End-to-end encryption, zero-trust architecture, and advanced key management protocols',
+      position: 5,
+      color: '#ffa500',
+      components: [
+        { id: 'encryption', name: 'Encryption Layer', icon: <SecurityLayerIcon />, type: 'service', status: 'active' },
+        { id: 'key-mgmt', name: 'Key Management', icon: <SecurityLayerIcon />, type: 'service', status: 'active' }
+      ]
     },
     {
-      id: 'endpoint-security',
-      name: 'Endpoint Security',
-      icon: <EndpointIcon />,
-      description: 'Comprehensive endpoint detection and response with device protection',
-      color: '#34d399',
-      position: 'right'
-    },
-    {
-      id: 'compliance-management',
-      name: 'Compliance',
-      icon: <ComplianceIcon />,
-      description: 'Automated regulatory compliance management and governance frameworks',
-      color: '#a78bfa',
-      position: 'right'
+      id: 'data',
+      name: 'Data Layer',
+      description: 'High-performance databases, data lakes, real-time analytics, and distributed caching systems',
+      position: 6,
+      color: '#06b6d4',
+      components: [
+        { id: 'primary-db', name: 'Primary Database', icon: <DatabaseIcon />, type: 'database', status: 'active' },
+        { id: 'analytics-db', name: 'Analytics DB', icon: <DatabaseIcon />, type: 'database', status: 'active' },
+        { id: 'cache', name: 'Redis Cache', icon: <DatabaseIcon />, type: 'database', status: 'active' }
+      ]
     }
   ];
-
-  // Balanced aesthetic positioning algorithm
-  const calculatePositions = () => {
-    if (!containerRef.current) return [];
-    
-    const containerWidth = containerRef.current.offsetWidth;
-    const containerHeight = containerRef.current.offsetHeight;
-    const centerX = containerWidth / 2;
-    const centerY = containerHeight / 2;
-    
-    const leftModules = modules.filter(m => m.position === 'left');
-    const rightModules = modules.filter(m => m.position === 'right');
-    
-    const positions: Array<{x: number, y: number}> = [];
-    
-    // Balanced spacing for left side modules (reduced from previous)
-    const leftRadius = Math.min(containerWidth * 0.36, containerHeight * 0.38); // Reduced from 0.42
-    const leftTotalHeight = containerHeight * 0.65; // Reduced from 0.8
-    const leftSpacing = leftTotalHeight / Math.max(leftModules.length - 1, 1);
-    const leftStartY = centerY - (leftTotalHeight / 2);
-    
-    leftModules.forEach((_, index) => {
-      const y = leftStartY + (leftSpacing * index);
-      const x = centerX - leftRadius;
-      positions.push({ x, y });
-    });
-    
-    // Balanced spacing for right side modules (reduced from previous)
-    const rightRadius = Math.min(containerWidth * 0.36, containerHeight * 0.38); // Reduced from 0.42
-    const rightTotalHeight = containerHeight * 0.65; // Reduced from 0.8
-    const rightSpacing = rightTotalHeight / Math.max(rightModules.length - 1, 1);
-    const rightStartY = centerY - (rightTotalHeight / 2);
-    
-    rightModules.forEach((_, index) => {
-      const y = rightStartY + (rightSpacing * index);
-      const x = centerX + rightRadius;
-      positions.push({ x, y });
-    });
-    
-    return positions;
-  };
-
-  const [positions, setPositions] = useState<Array<{x: number, y: number}>>([]);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  useEffect(() => {
-    if (mounted) {
-      const updatePositions = () => {
-        setPositions(calculatePositions());
-      };
-      
-      updatePositions();
-      
-      let timeoutId: NodeJS.Timeout;
-      const handleResize = () => {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(updatePositions, 100);
-      };
-      
-      window.addEventListener('resize', handleResize);
-      return () => {
-        window.removeEventListener('resize', handleResize);
-        clearTimeout(timeoutId);
-      };
-    }
-  }, [mounted]);
-
   if (!mounted) return null;
 
   return (
-    <section className={styles.ourModels}>
+    <section className={styles.architectureSection}>
       <div className={styles.container}>
         
-        {/* Enhanced Header */}
+        {/* Header */}
         <div className={styles.header}>
           <div className={styles.headerBadge}>
-            <span className={styles.badgeText}>Platform Architecture</span>
+            <span className={styles.badgeText}>System Architecture</span>
           </div>
           <h2 className={styles.title}>
-            <span className={styles.accent}>Zecure Platform</span> Ecosystem
+            <span className={styles.accent}>Zecure</span> Platform Architecture
           </h2>
           <p className={styles.subtitle}>
-            AI-powered cybersecurity modules orchestrated by the central Zecure Engine
+            Enterprise-grade multi-layer security architecture with AI-powered threat detection, 
+            microservices orchestration, and real-time data processing capabilities
           </p>
         </div>
 
-        {/* Enhanced Network Visualization */}
-        <div className={styles.networkContainer} ref={containerRef}>
+        {/* Architecture Visualization */}
+        <div className={styles.architectureContainer} ref={containerRef}>
           
-          {/* Connection Lines */}
-          <svg className={styles.connectionsSvg}>
-            {positions.map((position, index) => (
-              <line
-                key={`connection-${index}`}
-                x1="50%"
-                y1="50%"
-                x2={position.x}
-                y2={position.y}
-                className={`${styles.connection} ${styles[modules[index].position]} ${hoveredModule === modules[index].id ? styles.active : ''}`}
-                style={{
-                  animationDelay: `${index * 0.1}s`,
-                  stroke: hoveredModule === modules[index].id ? modules[index].color : undefined
-                }}
-              />
-            ))}
+          {/* Always-Visible Data Flow Lines */}
+          <svg className={styles.dataFlowSvg}>
+            {architectureLayers.map((layer, index) => {
+              if (index === architectureLayers.length - 1) return null;
+              const currentY = 10 + (index * 90) + 45; // Center of current layer
+              const nextY = 10 + ((index + 1) * 90); // Top of next layer
+              return (
+                <line
+                  key={`flow-${index}`}
+                  x1="50%"
+                  y1={currentY}
+                  x2="50%"
+                  y2={nextY}
+                  className={styles.dataFlow}
+                  style={{ animationDelay: `${index * 0.2}s` }}
+                />
+              );
+            })}
           </svg>
 
-
-
-          {/* Center Node - Enhanced Zecure Engine */}
-          <div className={styles.centerNode}>
-            <div className={styles.centerInner}>
-              <div className={styles.centerIcon}>
-                <EngineIcon />
-              </div>
-              <div className={styles.centerLabel}>
-                Zecure Engine
-              </div>
-              <div className={styles.centerSubtitle}>
-                AI Core
-              </div>
-            </div>
-            <div className={styles.pulseRing}></div>
-            <div className={styles.outerRing}></div>
-          </div>
-
-          {/* Module Nodes */}
-          {modules.map((module, index) => {
-            const position = positions[index];
-            if (!position) return null;
-
-            return (
-              <div
-                key={module.id}
-                className={`${styles.moduleNode} ${styles[module.position]} ${hoveredModule === module.id ? styles.hovered : ''}`}
-                style={{
-                  left: `${position.x}px`,
-                  top: `${position.y}px`,
-                  transform: 'translate(-50%, -50%)',
-                  animationDelay: `${index * 0.2}s`,
-                  '--module-color': module.color
-                } as React.CSSProperties}
-                onMouseEnter={() => setHoveredModule(module.id)}
-                onMouseLeave={() => setHoveredModule(null)}
-              >
-                <div 
-                  className={styles.moduleInner}
-                  style={{ 
-                    borderColor: hoveredModule === module.id ? module.color : undefined
-                  }}
-                >
-                  <div 
-                    className={styles.moduleIcon}
-                    style={{ color: module.color }}
-                  >
-                    {module.icon}
-                  </div>
-                  <div className={styles.moduleLabel}>
-                    {module.name}
+          {/* Architecture Layers - FINAL CORRECT POSITIONING */}
+          {architectureLayers.map((layer, layerIndex) => (
+            <div
+              key={layer.id}
+              className={`${styles.architectureLayer} ${
+                activeLayer === layer.id ? styles.active : ''
+              }`}
+              style={{
+                top: `${10 + (layerIndex * 90)}px`, // FINAL: 10px start + 90px spacing
+                '--layer-color': layer.color,
+                animationDelay: `${layerIndex * 0.1}s`
+              } as React.CSSProperties}
+              onMouseEnter={() => setActiveLayer(layer.id)}
+              onMouseLeave={() => setActiveLayer(null)}
+            >
+              {/* Layer Header */}
+              <div className={styles.layerHeader}>
+                <div className={styles.layerTitleGroup}>
+                  <h3 className={styles.layerName}>{layer.name}</h3>
+                  <div className={styles.layerIndicator}>
+                    <span className={styles.layerNumber}>{String(layerIndex + 1).padStart(2, '0')}</span>
                   </div>
                 </div>
-
-                {/* Fixed Tooltip with proper pointing */}
-                {hoveredModule === module.id && (
-                  <div className={`${styles.tooltip} ${styles[module.position]}`}>
-                    <div className={styles.tooltipContent}>
-                      <div className={styles.tooltipHeader}>
-                        <div 
-                          className={styles.tooltipIcon}
-                          style={{ color: module.color }}
-                        >
-                          {module.icon}
-                        </div>
-                        <h4 className={styles.tooltipTitle}>{module.name}</h4>
-                      </div>
-                      <p className={styles.tooltipDescription}>{module.description}</p>
-                    </div>
-                    <div className={styles.tooltipArrow}></div>
-                  </div>
-                )}
+                <p className={styles.layerDescription}>{layer.description}</p>
               </div>
-            );
-          })}
-        </div>
 
-        {/* Enhanced Stats */}
-        <div className={styles.statsContainer}>
-          <div className={styles.statItem}>
-            <div className={styles.statNumber}>8</div>
-            <div className={styles.statLabel}>Security Modules</div>
-          </div>
-          <div className={styles.statItem}>
-            <div className={styles.statNumber}>24/7</div>
-            <div className={styles.statLabel}>AI Monitoring</div>
-          </div>
-          <div className={styles.statItem}>
-            <div className={styles.statNumber}>&lt;1ms</div>
-            <div className={styles.statLabel}>Response Time</div>
-          </div>
-        </div>
+              {/* Components */}
+              <div className={styles.componentsGrid}>
+                {layer.components.map((component, compIndex) => (
+                  <div
+                    key={component.id}
+                    className={`${styles.component} ${styles[component.type]} ${styles[component.status]}`}
+                    style={{ animationDelay: `${compIndex * 0.1}s` }}
+                  >
+                    <div className={styles.componentIcon}>
+                      {component.icon}
+                    </div>
+                    <span className={styles.componentName}>{component.name}</span>
+                    <div className={`${styles.statusIndicator} ${styles[component.status]}`} />
+                  </div>
+                ))}
+              </div>
 
+              {/* Layer Glow */}
+              <div className={styles.layerGlow} />
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

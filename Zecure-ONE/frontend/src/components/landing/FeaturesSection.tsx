@@ -117,7 +117,7 @@ export default function FeaturesSection() {
     {
       id: 'ai-detection',
       title: 'AI-Powered Threat Detection',
-      description: 'Advanced machine learning identifies zero-day attacks and anomalous behavior patterns that traditional security misses.',
+      description: 'Advanced machine learning identifies zero-day attacks & anomalous behavior patterns traditional security misses.',
       icon: <ShieldIcon />,
       color: '#00d4ff',
       stats: { value: '99.7%', label: 'Detection Rate' },
