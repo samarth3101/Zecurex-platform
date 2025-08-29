@@ -46,18 +46,23 @@
 }
 
 .badge {
-    display: inline-block;
-    background: linear-gradient(135deg, #1a1a1a, #222222);
-    color: #cccccc;
-    border: 1px solid #333333;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 500;
-    padding: 0.5rem 1.4rem;
-    margin-bottom: 1.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(2, 195, 154, 0.1));
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  color: #00d4ff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(10px);
+
+  .badgeIcon {
+    font-size: 0.9rem;
+    animation: pulse 2s ease-in-out infinite;
+  }
 }
 
 .title {

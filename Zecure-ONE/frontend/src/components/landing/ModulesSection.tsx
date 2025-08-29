@@ -285,9 +285,6 @@ export default function ModulesSection() {
         {/* Updated Header with Icon */}
         <header className={`${styles.header} ${isVisible ? styles.visible : ''}`}>
           <div className={styles.badge}>
-            <div className={styles.badgeIcon}>
-              <EnterpriseSecurityIcon />
-            </div>
             <span className={styles.badgeText}>Enterprise Security Platform</span>
           </div>
           <h2 className={styles.title}>
