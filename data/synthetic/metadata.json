@@ -1,0 +1,61 @@
+{
+    "dataset_version": "1.0.0",
+    "generation_timestamp": "2026-08-21T06:41:23.783688+00:00",
+    "random_seed": 42,
+    "row_count": 100000,
+    "fraud_count": 744,
+    "legitimate_count": 99256,
+    "fraud_rate": 0.00744,
+    "scenario_distribution": {
+        "repeated_failures": 229,
+        "velocity_attack": 175,
+        "payment_method_switch": 169,
+        "amount_anomaly": 63,
+        "refund_abuse": 57,
+        "international_anomaly": 51
+    },
+    "train_count": 70000,
+    "validation_count": 15000,
+    "test_count": 15000,
+    "feature_list": [
+        "transaction_id",
+        "merchant_id",
+        "customer_id",
+        "razorpay_payment_id",
+        "razorpay_order_id",
+        "timestamp",
+        "amount",
+        "currency",
+        "status",
+        "payment_method",
+        "international",
+        "email_hash",
+        "contact_hash",
+        "card_id_hash",
+        "bank",
+        "wallet",
+        "amount_refunded",
+        "refund_status",
+        "error_code",
+        "error_source",
+        "error_step",
+        "error_reason",
+        "device_id",
+        "ip_hash",
+        "geo_region",
+        "session_id",
+        "label",
+        "fraud_scenario"
+    ],
+    "ground_truth_fields": [
+        "label",
+        "fraud_scenario"
+    ],
+    "synthetic_enrichment_fields": [
+        "device_id",
+        "ip_hash",
+        "geo_region",
+        "session_id"
+    ],
+    "generation_method": "deterministic_simulation"
+}
