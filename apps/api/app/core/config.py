@@ -1,10 +1,11 @@
-from typing import List, Union
+from typing import List, Union, Optional
 from pydantic import AnyHttpUrl, validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     ENVIRONMENT: str = "development"
     DATABASE_URL: str
+    TEST_DATABASE_URL: Optional[str] = None
     CORS_ORIGINS: str = "http://localhost:3000"
     
     RAZORPAY_KEY_ID: str = ""
