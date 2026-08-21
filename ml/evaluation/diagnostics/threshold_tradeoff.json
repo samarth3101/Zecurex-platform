@@ -1,0 +1,101 @@
+[
+    {
+        "threshold": 0.2,
+        "precision": 0.17781690140845072,
+        "recall": 0.9901960784313726,
+        "f1": 0.30149253731343284,
+        "false_positive_rate": 0.031346489461672705,
+        "flagged_transaction_count": 568,
+        "fraud_amount_captured": 2745281.3399999994,
+        "fraud_capture_rate": 0.9954790158066157,
+        "legitimate_amount_flagged": 2523810.9400000004
+    },
+    {
+        "threshold": 0.3,
+        "precision": 0.20159680638722555,
+        "recall": 0.9901960784313726,
+        "f1": 0.33499170812603646,
+        "false_positive_rate": 0.026849241508927372,
+        "flagged_transaction_count": 501,
+        "fraud_amount_captured": 2745281.3399999994,
+        "fraud_capture_rate": 0.9954790158066157,
+        "legitimate_amount_flagged": 2119928.3
+    },
+    {
+        "threshold": 0.4,
+        "precision": 0.2564102564102564,
+        "recall": 0.9803921568627451,
+        "f1": 0.4065040650406504,
+        "false_positive_rate": 0.019465700093972346,
+        "flagged_transaction_count": 390,
+        "fraud_amount_captured": 2737081.4299999992,
+        "fraud_capture_rate": 0.992505608958448,
+        "legitimate_amount_flagged": 1472909.3299999998
+    },
+    {
+        "threshold": 0.45,
+        "precision": 0.2996941896024465,
+        "recall": 0.9607843137254902,
+        "f1": 0.4568764568764569,
+        "false_positive_rate": 0.01537119076386092,
+        "flagged_transaction_count": 327,
+        "fraud_amount_captured": 2713751.6299999994,
+        "fraud_capture_rate": 0.9840458835362932,
+        "legitimate_amount_flagged": 1169480.95
+    },
+    {
+        "threshold": 0.5,
+        "precision": 0.35661764705882354,
+        "recall": 0.9509803921568627,
+        "f1": 0.5187165775401069,
+        "false_positive_rate": 0.011746543160155725,
+        "flagged_transaction_count": 272,
+        "fraud_amount_captured": 2710298.75,
+        "fraud_capture_rate": 0.9827938189358404,
+        "legitimate_amount_flagged": 896197.97
+    },
+    {
+        "threshold": 0.6,
+        "precision": 0.7565217391304347,
+        "recall": 0.8529411764705882,
+        "f1": 0.8018433179723502,
+        "false_positive_rate": 0.001879446905624916,
+        "flagged_transaction_count": 115,
+        "fraud_amount_captured": 2645951.9,
+        "fraud_capture_rate": 0.9594607135178521,
+        "legitimate_amount_flagged": 169084.87999999998
+    },
+    {
+        "threshold": 0.7,
+        "precision": 0.9651162790697675,
+        "recall": 0.8137254901960784,
+        "f1": 0.8829787234042553,
+        "false_positive_rate": 0.0002013693113169553,
+        "flagged_transaction_count": 86,
+        "fraud_amount_captured": 2628667.53,
+        "fraud_capture_rate": 0.9531931491026008,
+        "legitimate_amount_flagged": 46436.46
+    },
+    {
+        "threshold": 0.8,
+        "precision": 0.9875,
+        "recall": 0.7745098039215687,
+        "f1": 0.8681318681318682,
+        "false_positive_rate": 6.712310377231843e-05,
+        "flagged_transaction_count": 80,
+        "fraud_amount_captured": 2228496.4799999995,
+        "fraud_capture_rate": 0.8080852954178122,
+        "legitimate_amount_flagged": 22970.85
+    },
+    {
+        "threshold": 0.9,
+        "precision": 1.0,
+        "recall": 0.6862745098039216,
+        "f1": 0.813953488372093,
+        "false_positive_rate": 0.0,
+        "flagged_transaction_count": 70,
+        "fraud_amount_captured": 1679808.6800000004,
+        "fraud_capture_rate": 0.6091231041222941,
+        "legitimate_amount_flagged": 0.0
+    }
+]

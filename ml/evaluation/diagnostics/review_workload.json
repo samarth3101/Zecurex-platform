@@ -1,0 +1,8 @@
+{
+    "total_transactions": 15000,
+    "transactions_flagged": 327,
+    "actual_fraud_among_flagged": 98,
+    "legitimate_transactions_flagged": 229,
+    "flag_rate": 0.0218,
+    "fraud_percentage_among_flagged": 0.2996941896024465
+}

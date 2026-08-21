@@ -1,0 +1,247 @@
+[
+    {
+        "rank": 1,
+        "feature": "transaction_hour",
+        "importance": 0.517813873281969
+    },
+    {
+        "rank": 2,
+        "feature": "customer_txn_count_15m",
+        "importance": 0.09175103842034582
+    },
+    {
+        "rank": 3,
+        "feature": "merchant_txn_count_1h",
+        "importance": 0.05687447422549759
+    },
+    {
+        "rank": 4,
+        "feature": "amount_log",
+        "importance": 0.05056383002671254
+    },
+    {
+        "rank": 5,
+        "feature": "amount",
+        "importance": 0.031706427974605454
+    },
+    {
+        "rank": 6,
+        "feature": "ip_transaction_count_1h",
+        "importance": 0.012900131376793623
+    },
+    {
+        "rank": 7,
+        "feature": "is_new_region",
+        "importance": 0.009240991678783849
+    },
+    {
+        "rank": 8,
+        "feature": "device_transaction_count_1h",
+        "importance": 0.008972625830909742
+    },
+    {
+        "rank": 9,
+        "feature": "customer_transaction_count_1h",
+        "importance": 0.00527840987029724
+    },
+    {
+        "rank": 10,
+        "feature": "is_new_payment_method",
+        "importance": 0.004796435916164033
+    },
+    {
+        "rank": 11,
+        "feature": "merchant_unique_customer_count_24h",
+        "importance": 0.0032220763298855593
+    },
+    {
+        "rank": 12,
+        "feature": "amount_vs_customer_max",
+        "importance": 0.0024552058485621587
+    },
+    {
+        "rank": 13,
+        "feature": "international_change",
+        "importance": 0.0019307040527828168
+    },
+    {
+        "rank": 14,
+        "feature": "x0_upi",
+        "importance": 0.001867172559459096
+    },
+    {
+        "rank": 15,
+        "feature": "merchant_txn_count_5m",
+        "importance": 0.0016864089014075878
+    },
+    {
+        "rank": 16,
+        "feature": "x0_wallet",
+        "importance": 0.0013196962140520352
+    },
+    {
+        "rank": 17,
+        "feature": "customer_txn_count_5m",
+        "importance": 0.0011934069036812823
+    },
+    {
+        "rank": 18,
+        "feature": "merchant_avg_amount_24h",
+        "importance": 0.0009322260519612158
+    },
+    {
+        "rank": 19,
+        "feature": "customer_avg_amount_7d",
+        "importance": 0.0009126470612652815
+    },
+    {
+        "rank": 20,
+        "feature": "merchant_transaction_count_24h",
+        "importance": 0.0008684834739114855
+    },
+    {
+        "rank": 21,
+        "feature": "customer_consecutive_failures",
+        "importance": 0.0008377377119263896
+    },
+    {
+        "rank": 22,
+        "feature": "amount_vs_customer_avg",
+        "importance": 0.0005926275593868713
+    },
+    {
+        "rank": 23,
+        "feature": "customer_total_spend_7d",
+        "importance": 0.0005923333313169854
+    },
+    {
+        "rank": 24,
+        "feature": "customer_unique_regions_30d",
+        "importance": 0.0004657424529273646
+    },
+    {
+        "rank": 25,
+        "feature": "customer_std_amount_7d",
+        "importance": 0.00037494124499546364
+    },
+    {
+        "rank": 26,
+        "feature": "merchant_refund_rate_7d",
+        "importance": 0.00018710667310901653
+    },
+    {
+        "rank": 27,
+        "feature": "customer_failure_count_1h",
+        "importance": 0.0001605675902760506
+    },
+    {
+        "rank": 28,
+        "feature": "customer_failed_attempts_5m",
+        "importance": 8.572468273904122e-07
+    },
+    {
+        "rank": 29,
+        "feature": "customer_refund_count_7d",
+        "importance": 0.0
+    },
+    {
+        "rank": 30,
+        "feature": "customer_payment_method_changes_24h",
+        "importance": 0.0
+    },
+    {
+        "rank": 31,
+        "feature": "customer_failure_count_24h",
+        "importance": -6.608301646109372e-05
+    },
+    {
+        "rank": 32,
+        "feature": "customer_refund_rate_30d",
+        "importance": -0.00012192065601721592
+    },
+    {
+        "rank": 33,
+        "feature": "is_weekend",
+        "importance": -0.000340745464383474
+    },
+    {
+        "rank": 34,
+        "feature": "customer_success_rate_24h",
+        "importance": -0.0003784891685818303
+    },
+    {
+        "rank": 35,
+        "feature": "international_flag",
+        "importance": -0.00045223755962697787
+    },
+    {
+        "rank": 36,
+        "feature": "ip_unique_customers_24h",
+        "importance": -0.00046531308078217036
+    },
+    {
+        "rank": 37,
+        "feature": "customer_max_amount_7d",
+        "importance": -0.0004912887181104386
+    },
+    {
+        "rank": 38,
+        "feature": "customer_failure_rate_7d",
+        "importance": -0.0005198342420487778
+    },
+    {
+        "rank": 39,
+        "feature": "x0_netbanking",
+        "importance": -0.000659763291456561
+    },
+    {
+        "rank": 40,
+        "feature": "merchant_failure_rate_24h",
+        "importance": -0.0007689504465388852
+    },
+    {
+        "rank": 41,
+        "feature": "customer_avg_amount_24h",
+        "importance": -0.0009662608010999385
+    },
+    {
+        "rank": 42,
+        "feature": "customer_transaction_count_24h",
+        "importance": -0.0010034825028538252
+    },
+    {
+        "rank": 43,
+        "feature": "customer_transaction_count_7d",
+        "importance": -0.0013898086727353487
+    },
+    {
+        "rank": 44,
+        "feature": "amount_zscore_customer",
+        "importance": -0.001389867100637443
+    },
+    {
+        "rank": 45,
+        "feature": "device_unique_customers_7d",
+        "importance": -0.0014105715898268035
+    },
+    {
+        "rank": 46,
+        "feature": "customer_device_count_30d",
+        "importance": -0.0020193968126440255
+    },
+    {
+        "rank": 47,
+        "feature": "customer_unique_payment_methods_7d",
+        "importance": -0.0023783069316578144
+    },
+    {
+        "rank": 48,
+        "feature": "x0_card",
+        "importance": -0.0027362890149515316
+    },
+    {
+        "rank": 49,
+        "feature": "transaction_day_of_week",
+        "importance": -0.005307178839828164
+    }
+]
