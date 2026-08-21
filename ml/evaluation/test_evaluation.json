@@ -1,0 +1,88 @@
+{
+    "experiment_id": "exp_phase5d",
+    "timestamp": 1787296471.963437,
+    "model_name": "Random_Forest",
+    "threshold": 0.45,
+    "test_metrics": {
+        "threshold": 0.45,
+        "precision": 0.2996941896024465,
+        "recall": 0.9607843137254902,
+        "f1": 0.4568764568764569,
+        "pr_auc": 0.9160434766856362,
+        "roc_auc": 0.9984074714595195,
+        "fpr": 0.01537119076386092,
+        "brier_score": 0.007653656111571781,
+        "fraud_amount_captured": 2713751.6299999994,
+        "total_fraud_amount": 2757749.0799999996,
+        "fraud_capture_rate": 0.9840458835362932,
+        "legitimate_amount_flagged": 1169480.95,
+        "false_positive_cost": 12619.48095,
+        "synthetic_utility": 2701132.149049999,
+        "false_positives": 229,
+        "true_positives": 98,
+        "false_negatives": 4,
+        "true_negatives": 14669
+    },
+    "top_features": [
+        {
+            "feature": "transaction_hour",
+            "importance": 0.517813873281969
+        },
+        {
+            "feature": "customer_txn_count_15m",
+            "importance": 0.09175103842034582
+        },
+        {
+            "feature": "merchant_txn_count_1h",
+            "importance": 0.05687447422549759
+        },
+        {
+            "feature": "amount_log",
+            "importance": 0.05056383002671254
+        },
+        {
+            "feature": "amount",
+            "importance": 0.031706427974605454
+        },
+        {
+            "feature": "ip_transaction_count_1h",
+            "importance": 0.012900131376793623
+        },
+        {
+            "feature": "is_new_region",
+            "importance": 0.009240991678783849
+        },
+        {
+            "feature": "device_transaction_count_1h",
+            "importance": 0.008972625830909742
+        },
+        {
+            "feature": "customer_transaction_count_1h",
+            "importance": 0.00527840987029724
+        },
+        {
+            "feature": "is_new_payment_method",
+            "importance": 0.004796435916164033
+        },
+        {
+            "feature": "merchant_unique_customer_count_24h",
+            "importance": 0.0032220763298855593
+        },
+        {
+            "feature": "amount_vs_customer_max",
+            "importance": 0.0024552058485621587
+        },
+        {
+            "feature": "international_change",
+            "importance": 0.0019307040527828168
+        },
+        {
+            "feature": "x0_upi",
+            "importance": 0.001867172559459096
+        },
+        {
+            "feature": "merchant_txn_count_5m",
+            "importance": 0.0016864089014075878
+        }
+    ]
+}
