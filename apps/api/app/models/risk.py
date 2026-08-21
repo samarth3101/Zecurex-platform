@@ -1,12 +1,15 @@
 from typing import Optional, Any, Dict, List
 import uuid
-from sqlalchemy import String, Float, ForeignKey, JSON
+from sqlalchemy import String, Float, ForeignKey, JSON, UniqueConstraint
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.models.base import BaseModel
 
 class RiskAssessment(BaseModel):
     __tablename__ = "risk_assessments"
+    __table_args__ = (
+        UniqueConstraint("transaction_id", "model_version", name="uq_risk_assessment_txn_model_version"),
+    )
 
     transaction_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("transactions.id", ondelete="CASCADE"), index=True)
     

@@ -16,6 +16,12 @@ class Transaction(BaseModel):
     method: Mapped[str] = mapped_column(String)
 
     international: Mapped[bool] = mapped_column(Boolean, default=False)
+    
+    customer_id: Mapped[str] = mapped_column(String, index=True)
+    merchant_id: Mapped[str] = mapped_column(String, index=True)
+    device_id: Mapped[Optional[str]] = mapped_column(String, index=True, nullable=True)
+    ip_hash: Mapped[Optional[str]] = mapped_column(String, index=True, nullable=True)
+    geo_region: Mapped[Optional[str]] = mapped_column(String, nullable=True)
 
     email_hash: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     contact_hash: Mapped[Optional[str]] = mapped_column(String, nullable=True)
