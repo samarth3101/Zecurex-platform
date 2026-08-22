@@ -1,0 +1,122 @@
+[
+  {
+    "scenario": "1. Legitimate",
+    "transaction_id": "pay_cab16fbb10274e",
+    "risk_score": 0.02113897146601324,
+    "risk_level": "LOW",
+    "decision": "ALLOW",
+    "investigation": {
+      "status": "COMPLETED",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "recommendation": "ALLOW",
+      "summary": "A 500 INR UPI transaction was authorized for a customer who appears to be new or inactive for the past 7 days. The transaction occurred at an unusual hour, but other velocity and historical data suggest a low risk profile.",
+      "key_findings": []
+    }
+  },
+  {
+    "scenario": "2. Amount Anomaly",
+    "transaction_id": "pay_18ec631e4fe547",
+    "risk_score": 0.3978753494694233,
+    "risk_level": "MEDIUM",
+    "decision": "MONITOR",
+    "investigation": {
+      "status": "COMPLETED",
+      "severity": "MEDIUM",
+      "confidence": "MEDIUM",
+      "recommendation": "MONITOR",
+      "summary": "A 50,000 INR card transaction was authorized, flagged as MEDIUM risk due to occurring at an unusual hour, being the customer's first transaction in over 7 days, and having an amount significantly higher than their historical average.",
+      "key_findings": []
+    }
+  },
+  {
+    "scenario": "3. Velocity Attack",
+    "transaction_id": "pay_cb417173be394e",
+    "risk_score": 0.3007990968107719,
+    "risk_level": "MEDIUM",
+    "decision": "MONITOR",
+    "investigation": {
+      "status": "COMPLETED",
+      "severity": "MEDIUM",
+      "confidence": "LOW",
+      "recommendation": "REVIEW",
+      "summary": "A 100 INR wallet transaction occurred at an unusual hour (4 AM) for a customer with no prior transactions in the last 7 days. The Zecure ML Risk Engine flagged it as MEDIUM risk, primarily citing high transaction velocity in the last 15 minutes, which directly contradicts the provided velocity evidence.",
+      "key_findings": []
+    }
+  },
+  {
+    "scenario": "4. Repeated Failures",
+    "transaction_id": "pay_794170a1341141",
+    "risk_score": 0.12783020302644232,
+    "risk_level": "LOW",
+    "decision": "ALLOW",
+    "investigation": {
+      "status": "COMPLETED",
+      "severity": "LOW",
+      "confidence": "MEDIUM",
+      "recommendation": "ALLOW",
+      "summary": "A 5000 INR card transaction was authorized for a new customer. The transaction occurred at an unusual hour (4 AM) but otherwise shows no high-risk velocity or device sharing.",
+      "key_findings": []
+    }
+  },
+  {
+    "scenario": "5. Payment Method Switching",
+    "transaction_id": "pay_7946fd59f7ad4a",
+    "risk_score": 0.3110503825044973,
+    "risk_level": "MEDIUM",
+    "decision": "MONITOR",
+    "investigation": {
+      "status": "COMPLETED",
+      "severity": "MEDIUM",
+      "confidence": "MEDIUM",
+      "recommendation": "MONITOR",
+      "summary": "A 2000.0 INR EMI transaction was authorized for a customer with no prior transaction history in the last 7 days. The transaction occurred at an unusual hour (4) and was flagged with a MEDIUM risk level.",
+      "key_findings": []
+    }
+  },
+  {
+    "scenario": "6. Abuse Ring",
+    "transaction_id": "pay_34c0755e30c541",
+    "risk_score": 0.09111766174906996,
+    "risk_level": "LOW",
+    "decision": "ALLOW",
+    "investigation": {
+      "status": "COMPLETED",
+      "severity": "LOW",
+      "confidence": "MEDIUM",
+      "recommendation": "ALLOW",
+      "summary": "A domestic UPI transaction of 999.0 INR was authorized. The transaction occurred at an unusual hour (4) and appears to be the customer's first transaction in the last 7 days. Despite these observations, the overall risk assessment is low.",
+      "key_findings": []
+    }
+  },
+  {
+    "scenario": "7. International Anomaly",
+    "transaction_id": "pay_b19af5917c6044",
+    "risk_score": 0.16667390450018044,
+    "risk_level": "LOW",
+    "decision": "ALLOW",
+    "investigation": {
+      "status": "COMPLETED",
+      "severity": "LOW",
+      "confidence": "MEDIUM",
+      "recommendation": "ALLOW",
+      "summary": "An international card transaction for 15000 INR was authorized. The transaction occurred at an unusual hour, and the customer has no prior transaction history in the last 7 days. The risk engine assessed the transaction as LOW risk and recommended to ALLOW it.",
+      "key_findings": []
+    }
+  },
+  {
+    "scenario": "8. Refund Abuse",
+    "transaction_id": "pay_027ac5c9542443",
+    "risk_score": 0.003372916003660325,
+    "risk_level": "LOW",
+    "decision": "ALLOW",
+    "investigation": {
+      "status": "COMPLETED",
+      "severity": "LOW",
+      "confidence": "HIGH",
+      "recommendation": "ALLOW",
+      "summary": "A 3000 INR UPI transaction was authorized. The transaction was flagged due to occurring at an unusual hour and being the customer's first transaction. However, the overall risk score is very low, and other velocity checks show no suspicious activity.",
+      "key_findings": []
+    }
+  }
+]

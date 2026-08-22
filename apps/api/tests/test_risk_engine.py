@@ -10,6 +10,17 @@ def ensure_model_loaded():
     # ModelLoader will load the default joblib file
     ModelLoader.get_instance()
 
+from sqlalchemy.ext.asyncio import AsyncSession
+from app.core.database import get_db
+
+@pytest.fixture(autouse=True)
+def override_get_db_fixture(db_session: AsyncSession):
+    async def _override_get_db():
+        yield db_session
+    app.dependency_overrides[get_db] = _override_get_db
+    yield
+    app.dependency_overrides.clear()
+
 @pytest.mark.asyncio
 async def test_risk_engine_valid_request():
     payload = {
@@ -63,30 +74,28 @@ async def test_risk_engine_idempotency():
     assert data1["id"] == data2["id"] # Should return exact same DB record
 
 @pytest.mark.asyncio
-async def test_risk_engine_velocity_attack():
-    from app.core.database import AsyncSessionLocal
+async def test_risk_engine_velocity_attack(db_session: AsyncSession):
     from app.models.transaction import Transaction
     
     base_time = datetime.datetime.now(datetime.timezone.utc)
     
     # 1. Insert history
-    async with AsyncSessionLocal() as db:
-        for i in range(5):
-            t = base_time - datetime.timedelta(minutes=2 * (5 - i))
-            tx = Transaction(
-                razorpay_payment_id=f"pay_hist_{uuid.uuid4().hex[:10]}",
-                amount=100.0,
-                currency="INR",
-                status="authorized",
-                method="wallet",
-                international=False,
-                customer_id="pytest_cust_velocity",
-                merchant_id="pytest_merch_2",
-                device_id="pytest_dev",
-                created_at=t
-            )
-            db.add(tx)
-        await db.commit()
+    for i in range(5):
+        t = base_time - datetime.timedelta(minutes=2 * (5 - i))
+        tx = Transaction(
+            razorpay_payment_id=f"pay_hist_{uuid.uuid4().hex[:10]}",
+            amount=100.0,
+            currency="INR",
+            status="authorized",
+            method="wallet",
+            international=False,
+            customer_id="pytest_cust_velocity",
+            merchant_id="pytest_merch_2",
+            device_id="pytest_dev",
+            created_at=t
+        )
+        db_session.add(tx)
+        await db_session.commit()
 
     # 2. Target transaction
     payload = {

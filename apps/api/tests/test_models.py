@@ -58,7 +58,9 @@ async def test_transaction_and_relationships(db_session: AsyncSession):
         amount=500.0,
         currency="INR",
         status="captured",
-        method="card"
+        method="card",
+        customer_id="cust_test_1",
+        merchant_id="merch_test_1"
     )
     db_session.add(tx)
     await db_session.commit()
