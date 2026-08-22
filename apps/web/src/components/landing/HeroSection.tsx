@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 import Lottie from 'lottie-react';
 import Button from '@/components/common/Button';
 import styles from '@/styles/components/Hero.module.scss';
+import DotGrid from '@/components/ui/DotGrid';
 
 // Direct import of JSON animation
 import heroAnimation from '@/assets/animations/hero.json';
@@ -124,21 +125,18 @@ export default function HeroSection({ isVisible = false }: HeroSectionProps) {
   return (
     <section className={styles.hero}>
       {/* Animated Background Layer */}
-      <div className={styles.animatedBackground}>
-        <div className={styles.gridLines}></div>
-        <div className={styles.floatingParticles}>
-          {[...Array(12)].map((_, i) => (
-            <div 
-              key={i} 
-              className={styles.particle} 
-              style={{
-                left: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${3 + Math.random() * 4}s`
-              }}
-            />
-          ))}
-        </div>
+      <div className={styles.animatedBackground} style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+        <DotGrid
+          dotSize={3}
+          gap={24}
+          baseColor="#1a1a1a"
+          activeColor="#00d4ff"
+          proximity={150}
+          shockRadius={300}
+          shockStrength={3}
+          resistance={800}
+          returnDuration={2}
+        />
       </div>
 
       <div className={styles.container}>
