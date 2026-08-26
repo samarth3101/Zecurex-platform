@@ -1,51 +1,96 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// Footer — state-of-the-art 3-column layout
+// ─────────────────────────────────────────────────────────────────────────────
+
+$cyan:        #00d4ff;
+$cyan-glow:   rgba(0, 212, 255, 0.5);
+$white:       #ffffff;
+$text-muted:  #6b7280;
+$text-faint:  #4b5563;
+$border:      rgba(255, 255, 255, 0.06);
+
+// ── Column proportions — same for main row AND bottom row ─────────────────────
+$col-left:    340px;
+$col-centre:  1fr;
+$col-right:   340px;
+
+// ── Outer ─────────────────────────────────────────────────────────────────────
 .footer {
-  background: #000000; /* Plain black background */
-  width: 100vw;
-  border-top: 1px solid #222222;
-  padding: 3rem 2rem 2rem 2rem;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   position: relative;
-  margin-top: auto;
+  background: #000;
+  width: 100%;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+// ── Cyan accent gradient across the very top ──────────────────────────────────
+.accentLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0,212,255,0.6) 30%,
+    rgba(0,212,255,0.9) 50%,
+    rgba(0,212,255,0.6) 70%,
+    transparent 100%
+  );
 }
 
 .container {
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
+  padding: 0 2.5rem;
+
+  @media (max-width: 768px) { padding: 0 1.5rem; }
 }
 
-/* Simplified Footer Content */
-.footerContent {
+// ── MAIN ROW ─────────────────────────────────────────────────────────────────
+.mainRow {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  margin-bottom: 2rem;
-  align-items: start;
+  grid-template-columns: $col-left $col-centre $col-right;
+  align-items: center;
+  padding: 2.5rem 0 2rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    row-gap: 2.5rem;
+    padding: 2rem 0 1.75rem;
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    row-gap: 2rem;
+    padding: 1.75rem 0 1.5rem;
+    text-align: center;
+  }
 }
 
-/* Brand Section */
+// ── LEFT: Brand ───────────────────────────────────────────────────────────────
 .brandSection {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.875rem;
+
+  @media (max-width: 600px) { align-items: center; }
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
-  margin-bottom: 0.5rem;
+  gap: 0.6rem;
 }
 
 .logoIcon {
-  width: 28px;
-  height: 28px;
-  color: #66b3cc;
-  
-  svg {
-    width: 100%;
-    height: 100%;
-  }
+  width: 22px;
+  height: 22px;
+  color: $cyan;
+  flex-shrink: 0;
+  svg { width: 100%; height: 100%; }
 }
 
 .logoText {
@@ -55,219 +100,126 @@
 }
 
 .brandName {
-  font-size: 1.3rem;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1.1rem;
   font-weight: 700;
-  color: #ffffff;
+  color: $white;
   letter-spacing: -0.02em;
 }
 
 .brandSuffix {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #66b3cc;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: $cyan;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
 }
 
 .brandDescription {
-  font-size: 0.9rem;
-  color: #888888;
-  line-height: 1.5;
-  max-width: 280px;
+  font-size: 0.82rem;
+  color: $text-muted;
+  line-height: 1.65;
+  max-width: 230px;
   margin: 0;
+
+  @media (max-width: 600px) { max-width: 100%; }
 }
 
-/* Single Line Links Section */
-.linksSection {
+// ── CENTRE: Lottie ────────────────────────────────────────────────────────────
+.lottieCol {
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 1024px) {
+    grid-column: 1 / -1;
+    order: -1;
+  }
 }
 
-.footerLinks {
+.lottieAnim {
+  width: 148px;
+  height: 148px;
+
+  @media (max-width: 600px) {
+    width: 110px;
+    height: 110px;
+  }
+}
+
+// ── RIGHT: Links 2×2 ──────────────────────────────────────────────────────────
+.linksCol {
   display: flex;
-  flex-wrap: nowrap; /* Prevent wrapping to keep all links on one line */
-  gap: 1rem; /* Reduced gap for tighter spacing */
   justify-content: flex-end;
-  white-space: nowrap; /* Prevent text wrapping */
+
+  @media (max-width: 1024px) { justify-content: flex-start; }
+  @media (max-width: 600px)  { justify-content: center; }
+}
+
+.linksGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem 0.5rem;
 }
 
 .footerLink {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  color: #aaaaaa;
+  gap: 0.45rem;
+  color: #6b7280;
   text-decoration: none;
-  font-size: 0.85rem;
-  font-weight: 500;
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  transition: color 0.3s ease; /* Only color transition, no transform */
-  
+  font-size: 0.82rem;
+  font-weight: 400;
+  padding: 0.45rem 0.6rem;
+  border-radius: 6px;
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+
   &:hover,
   &.hovered {
-    color: #ffffff; /* Only color change on hover */
-    background: #111111;    
-    .linkIcon {
-      color: #66b3cc;
-    }
+    color: $white;
+    background: rgba(255,255,255,0.04);
+    .linkIcon { color: $cyan; }
   }
 }
 
 .linkIcon {
-  width: 14px;
-  height: 14px;
-  color: #666666;
-  transition: color 0.3s ease; /* Only color transition */
-  
-  svg {
-    width: 100%;
-    height: 100%;
-  }
+  width: 12px;
+  height: 12px;
+  color: #374151;
+  transition: color 0.2s;
+  flex-shrink: 0;
+  svg { width: 100%; height: 100%; }
 }
 
-.linkText {
-  transition: color 0.3s ease; /* Only color transition */
-}
+.linkText { transition: color 0.2s; }
 
-/* Simple Divider */
+// ── DIVIDER ───────────────────────────────────────────────────────────────────
 .divider {
-  width: 100%;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    #333333 50%,
-    transparent 100%
-  );
-  margin: 2rem 0 1.5rem 0;
+  background: $border;
 }
 
-/* Simple Bottom Section */
-.bottomSection {
+// ── BOTTOM ROW ─────────────────────────────────────────────────────
+.bottomRow {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  padding: 1rem 0 1.25rem;
 }
 
 .copyright {
-  font-size: 0.8rem;
-  color: #666666;
-  
-  span {
-    color: inherit;
-  }
+  font-size: 0.73rem;
+  color: $text-faint;
+  font-weight: 400;
+  letter-spacing: 0.01em;
 }
 
 .copyrightBrand {
-  color: #66b3cc !important;
+  color: $cyan;
   font-weight: 600;
 }
 
-.footerMeta {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.buildStatus {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.75rem;
-  color: #777777;
-}
-
-.statusDot {
-  width: 6px;
-  height: 6px;
-  background: #66a388;
-  border-radius: 50%;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-.version {
-  font-size: 0.75rem;
-  color: #555555;
-  font-weight: 500;
-  padding: 0.2rem 0.6rem;
-  background: #111111;
-  border: 1px solid #222222;
-  border-radius: 6px;
-}
-
-/* Simple Animations */
 @keyframes pulse {
-  0%, 100% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
-    box-shadow: 0 0 8px currentColor;
-  }
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-  .footerContent {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    text-align: center;
-  }
-  
-  .linksSection {
-    justify-content: center;
-  }
-  
-  .footerLinks {
-    justify-content: center;
-  }
-  
-  .bottomSection {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-  }
-}
-
-@media (max-width: 768px) {
-  .footer {
-    padding: 2.5rem 1rem 1.5rem 1rem;
-  }
-  
-  .footerLinks {
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    gap: 0.8rem;
-    justify-content: center;
-  }
-  
-  .footerLink {
-    min-width: auto; /* Remove fixed width for mobile */
-  }
-  
-  .footerMeta {
-    flex-direction: column;
-    gap: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .footer {
-    padding: 2rem 1rem 1rem 1rem;
-  }
-  
-  .brandDescription {
-    text-align: center;
-    max-width: 100%;
-  }
-  
-  .logo {
-    justify-content: center;
-  }
-  
-  .footerLinks {
-    flex-direction: column; /* Stack vertically on very small screens */
-    align-items: center;
-  }
+  0%, 100% { opacity: 0.5; box-shadow: 0 0 0 rgba(34,197,94,0); }
+  50%       { opacity: 1;   box-shadow: 0 0 7px rgba(34,197,94,0.6); }
 }

@@ -36,3 +36,9 @@ class TransactionResponse(TransactionBase):
     updated_at: Optional[datetime] = None
 
     model_config = ConfigDict(from_attributes=True)
+
+class DashboardTransactionResponse(TransactionResponse):
+    risk_score: Optional[float] = None
+    risk_level: Optional[str] = None
+    
+    model_config = ConfigDict(from_attributes=True)

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
-from app.api.routes import risk, investigations
+from app.api.routes import risk, investigations, dashboard
 
 app = FastAPI(
     title="Zecure API",
@@ -23,3 +23,4 @@ async def health_check():
 
 app.include_router(risk.router, prefix="/api/v1")
 app.include_router(investigations.router, prefix="/api/v1")
+app.include_router(dashboard.router, prefix="/api/v1")

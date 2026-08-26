@@ -8,7 +8,7 @@ const inter = Inter({
   display: 'swap',
 });
 
-export const meta: Metadata = {
+export const metadata: Metadata = {
   title: 'Zecure ONE - AI-Powered Cybersecurity Platform',
   description: 'The AI Agent That Watches Over You. Advanced threat detection, real-time fraud prevention, and intelligent security monitoring.',
   keywords: 'AI security, cybersecurity, threat detection, fraud prevention, machine learning',

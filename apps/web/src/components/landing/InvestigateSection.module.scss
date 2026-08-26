@@ -1,0 +1,182 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// InvestigateSection — "Knowing something is risky isn't enough. Know why."
+// Zecure Landing Page · Section 03
+// ─────────────────────────────────────────────────────────────────────────────
+
+$cyan:        #00d4ff;
+$cyan-dim:    rgba(0, 212, 255, 0.16);
+$cyan-border: rgba(0, 212, 255, 0.28);
+$cyan-glow:   rgba(0, 212, 255, 0.07);
+$white:       #ffffff;
+$text-main:   #e5e7eb;
+$text-muted:  #9ca3af;
+$text-faint:  #6b7280;
+$bg-deep:     rgba(6, 6, 10, 0.96);
+$bg-signal:   rgba(10, 10, 16, 0.92);
+$red:         #f87171;
+$green:       #22c55e;
+
+// ── Section ───────────────────────────────────────────────────────────────────
+.section {
+  position: relative;
+  width: 100%;
+  background: #000;
+  overflow-x: hidden;
+  padding: 3rem 1.5rem 7rem 1.5rem;
+
+  @media (min-width: 1024px) {
+    padding: 3rem 5rem 8rem 5rem;
+  }
+}
+
+// ── Background grid ───────────────────────────────────────────────────────────
+.bgGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+// ── Inner: two-column desktop ─────────────────────────────────────────────────
+.inner {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: center;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 440px 1fr;
+    gap: 5rem;
+  }
+}
+
+// ── Left: header ──────────────────────────────────────────────────────────────
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  @media (max-width: 1023px) {
+    text-align: center;
+    align-items: center;
+  }
+}
+
+.eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: $cyan;
+}
+
+.headline {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: clamp(1.9rem, 3vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: $white;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.headlineAccent {
+  color: $cyan;
+}
+
+.body {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.88rem, 1.2vw, 1rem);
+  font-weight: 300;
+  line-height: 1.75;
+  color: $text-muted;
+  margin: 0;
+}
+
+// ── Image Wrapper ─────────────────────────────────────────────────────────────
+.imageWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.investigateImage {
+  width: 100%;
+  max-width: 600px; // Image shouldn't be too huge
+  height: auto;
+  border-radius: 12px;
+  // Optional: add a subtle glow if desired, or let the image stand alone
+  // box-shadow: 0 0 30px rgba(0, 212, 255, 0.05);
+}
+
+// ── Key message (spans full width below grid) ─────────────────────────────────
+.keyMessage {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.keyLine {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: clamp(1.2rem, 2.2vw, 1.75rem);
+  font-weight: 400;
+  color: $white;
+  text-align: center;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.keyAccent {
+  color: $cyan;
+}
+
+.pillars {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pillar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.pillarLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: $cyan;
+  font-weight: 500;
+}
+
+.pillarSub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: $text-faint;
+}
+
+.credibility {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  color: $text-faint;
+  text-align: center;
+  margin: 0;
+  max-width: 520px;
+  line-height: 1.6;
+}

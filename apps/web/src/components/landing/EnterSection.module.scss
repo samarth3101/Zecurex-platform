@@ -1,0 +1,229 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// EnterSection — "See what Zecure sees."
+// Zecure Landing Page · Section 04 CTA
+// ─────────────────────────────────────────────────────────────────────────────
+
+$cyan:       #00d4ff;
+$cyan-dim:   rgba(0, 212, 255, 0.15);
+$cyan-glow:  rgba(0, 212, 255, 0.12);
+$white:      #ffffff;
+$text-muted: #9ca3af;
+$text-faint: #6b7280;
+
+// ── Section ───────────────────────────────────────────────────────────────────
+.section {
+  position: relative;
+  width: 100%;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  padding: 128px 1.5rem; // Exactly 2 grid cells (2 * 64px) top and bottom
+}
+
+// ── Background layers ─────────────────────────────────────────────────────────
+.ambient {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 60% at 50% 50%,
+    rgba(0, 212, 255, 0.04) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.bgGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.12) 1px, transparent 1px),
+    radial-gradient(circle at 0 0, rgba(0,212,255,0.18) 1.5px, transparent 1.5px);
+  background-size: 64px 64px, 64px 64px, 64px 64px;
+  // calc(50% + 32px) places a vertical line EXACTLY in the horizontal center
+  background-position: calc(50% + 32px) 0;
+  pointer-events: none;
+}
+
+.radialGlow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,212,255,0.06) 0%, transparent 65%);
+  pointer-events: none;
+  will-change: opacity;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none !important;
+    opacity: 0.5;
+  }
+}
+
+// ── Inner content (Fixed Grid Snapping) ───────────────────────────────────────
+.inner {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  gap: 0; // Using explicit // Fixed heights for snapping
+}
+
+.textGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 384px; // Exactly 6 grid cells (6 * 64px)
+}
+
+.eyebrow {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: $cyan;
+  margin: 0 0 0.75rem 0;
+}
+
+.headline {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  font-weight: 400;
+  color: $white;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 0 0 1.5rem 0;
+}
+
+.subtext {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.92rem, 1.4vw, 1.1rem);
+  font-weight: 300;
+  color: $text-muted;
+  max-width: 480px;
+  line-height: 1.75;
+  margin: 0;
+}
+
+// ── CTA button ────────────────────────────────────────────────────────────────
+.ctaBtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  background: transparent;
+  border: 1px solid rgba(0, 212, 255, 0.5);
+  color: $white;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  border-radius: 8px;
+  cursor: pointer;
+  overflow: hidden;
+  will-change: transform;
+  
+  // Snap dimensions: exactly 4 grid cells wide, 1 grid cell tall
+  width: 256px;
+  height: 64px;
+  margin: 0;
+  padding: 0; // Handled by flex centering
+
+  // fill sweep on hover
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: $cyan;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+  }
+
+  &:hover::before,
+  &:focus-visible::before {
+    transform: scaleX(1);
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: #000;
+    border-color: $cyan;
+    outline: none;
+
+    .arrow { color: #000; }
+  }
+
+  span { position: relative; z-index: 1; }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::before { display: none; }
+    &:hover { background: $cyan-dim; }
+  }
+}
+
+.arrow {
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+
+// ── Button pulse ring ─────────────────────────────────────────────────────────
+.btnPulse {
+  position: absolute;
+  inset: -2px;
+  border-radius: 10px;
+  border: 1px solid $cyan;
+  pointer-events: none;
+  will-change: opacity, transform;
+  z-index: 0;
+
+  @media (prefers-reduced-motion: reduce) {
+    display: none;
+  }
+}
+
+// ── Tag strip ─────────────────────────────────────────────────────────────────
+.tagStrip {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0;
+  height: 64px; // 1 grid cell
+}
+
+.tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  color: $text-faint;
+  letter-spacing: 0.08em;
+}
+
+.tagDot {
+  color: rgba(0, 212, 255, 0.4);
+}
+
+// Mobile fallback - drop exact grid snapping if text wraps unpredictably
+@media (max-width: 640px) {
+  .section { padding: 4rem 1.5rem; }
+  .inner { gap: 1.5rem; }
+  .textGroup, .ctaBtn, .tagStrip {
+    height: auto;
+  }
+  .ctaBtn {
+    width: auto;
+    padding: 0.875rem 2.25rem;
+  }
+}

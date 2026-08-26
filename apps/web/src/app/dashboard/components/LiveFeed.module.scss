@@ -1,0 +1,96 @@
+.feedList {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.feedItem {
+  padding: 16px 24px;
+  border-bottom: 1px solid #1f2128;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background-color: #1a1c23;
+  }
+  
+  &.selected {
+    background-color: #1f2128;
+    border-left: 3px solid #66d1ff;
+  }
+
+  &.critical .riskBadge {
+    color: #ff4d4f;
+    background-color: rgba(255, 77, 79, 0.1);
+    border: 1px solid rgba(255, 77, 79, 0.2);
+  }
+
+  &.high .riskBadge {
+    color: #faad14;
+    background-color: rgba(250, 173, 20, 0.1);
+    border: 1px solid rgba(250, 173, 20, 0.2);
+  }
+
+  &.medium .riskBadge {
+    color: #1890ff;
+    background-color: rgba(24, 144, 255, 0.1);
+    border: 1px solid rgba(24, 144, 255, 0.2);
+  }
+
+  &.low .riskBadge {
+    color: #52c41a;
+    background-color: rgba(82, 196, 26, 0.1);
+    border: 1px solid rgba(82, 196, 26, 0.2);
+  }
+}
+
+.riskBadge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: #a0a4b8;
+  background-color: #1a1c23;
+  border: 1px solid #2d303b;
+}
+
+.itemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.amount {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.time {
+  font-size: 0.85rem;
+  color: #a0a4b8;
+}
+
+.itemDetails {
+  display: flex;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: #a0a4b8;
+}
+
+.method {
+  background-color: #1a1c23;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.loading, .error {
+  padding: 24px;
+  text-align: center;
+  color: #a0a4b8;
+}
+
+.error {
+  color: #ff6b6b;
+}

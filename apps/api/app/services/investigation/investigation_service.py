@@ -1,6 +1,5 @@
 import uuid
 from datetime import datetime, timezone
-import time
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import HTTPException
@@ -25,7 +24,22 @@ class InvestigationService:
         transaction = tx_result.scalars().first()
         if not transaction:
             raise HTTPException(status_code=404, detail="Transaction not found")
+        
+        return await cls._run_investigation_logic(transaction, db)
+
+    @classmethod
+    async def run_investigation_by_uuid(cls, transaction_uuid: uuid.UUID, db: AsyncSession) -> InvestigationResponse:
+        # 1. Retrieve transaction
+        tx_stmt = select(Transaction).where(Transaction.id == transaction_uuid)
+        tx_result = await db.execute(tx_stmt)
+        transaction = tx_result.scalars().first()
+        if not transaction:
+            raise HTTPException(status_code=404, detail="Transaction not found")
             
+        return await cls._run_investigation_logic(transaction, db)
+
+    @classmethod
+    async def _run_investigation_logic(cls, transaction: Transaction, db: AsyncSession) -> InvestigationResponse:
         # 2. Retrieve RiskAssessment
         ra_stmt = select(RiskAssessment).where(RiskAssessment.transaction_id == transaction.id).order_by(RiskAssessment.created_at.desc())
         ra_result = await db.execute(ra_stmt)
@@ -130,10 +144,6 @@ class InvestigationService:
         
     @staticmethod
     def _to_response(inv: Investigation, ra: RiskAssessment, tx: Transaction) -> InvestigationResponse:
-        key_findings = None
-        if inv.reasoning and isinstance(inv.reasoning, dict):
-            pass # We didn't add key_findings column, maybe we should just return what we have
-            
         return InvestigationResponse(
             investigation_id=inv.id,
             transaction_id=tx.id,
@@ -143,6 +153,7 @@ class InvestigationService:
             risk_level=ra.risk_level,
             summary=inv.summary,
             severity=inv.severity,
+            key_findings=inv.key_findings,
             recommendation=inv.recommendation,
             confidence=inv.confidence,
             agent_model=inv.agent_model,
