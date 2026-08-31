@@ -1,0 +1,203 @@
+.riskPulseContainer {
+  background: #0d1017;
+  border: 1px solid #1c2230;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titleGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.label {
+  font-family: 'Inter', monospace, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #64748b;
+}
+
+.heading {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin: 0;
+}
+
+.liveIndicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  border-radius: 4px;
+}
+
+.pulseDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px rgba(34, 197, 94, 0.8);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.pulseText {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #22c55e;
+}
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.metricItem {
+  background: #121722;
+  border: 1px solid #1e2638;
+  border-radius: 6px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.metricHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+.metricIcon {
+  color: #64748b;
+
+  &.highRisk {
+    color: #ef4444;
+  }
+  &.reviewRisk {
+    color: #f59e0b;
+  }
+}
+
+.metricValue {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #f8fafc;
+  line-height: 1.2;
+
+  &.highRisk {
+    color: #f87171;
+  }
+  &.reviewRisk {
+    color: #fbbf24;
+  }
+}
+
+.metricSub {
+  font-size: 0.7rem;
+  color: #64748b;
+}
+
+.distributionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 10px;
+  border-top: 1px solid #1a202c;
+}
+
+.distributionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+}
+
+.distLabel {
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.legend {
+  display: flex;
+  gap: 12px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #94a3b8;
+  font-family: monospace;
+  font-size: 0.65rem;
+}
+
+.legendDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+
+  &.low { background: #22c55e; }
+  &.medium { background: #3b82f6; }
+  &.high { background: #f59e0b; }
+  &.critical { background: #ef4444; }
+}
+
+.distributionBar {
+  display: flex;
+  height: 6px;
+  width: 100%;
+  background: #171d2b;
+  border-radius: 3px;
+  overflow: hidden;
+  gap: 2px;
+}
+
+.barSegment {
+  height: 100%;
+  transition: width 0.4s ease;
+
+  &.low { background: #22c55e; }
+  &.medium { background: #3b82f6; }
+  &.high { background: #f59e0b; }
+  &.critical { background: #ef4444; }
+}
+
+.emptyBar {
+  width: 100%;
+  background: #171d2b;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}

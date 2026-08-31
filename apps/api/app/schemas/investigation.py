@@ -28,10 +28,10 @@ class StructuredEvidence(BaseModel):
 class InvestigationReasoning(BaseModel):
     what_happened: str
     why_flagged: str
-    what_changed_from_normal: str
-    multiple_independent_signals: str
-    evidence_weakening_concern: str
-    what_should_happen_next: str
+    what_changed_from_normal: Optional[str] = None
+    multiple_independent_signals: Optional[str] = None
+    evidence_weakening_concern: Optional[str] = None
+    what_should_happen_next: Optional[str] = None
 
 class InvestigationResult(BaseModel):
     summary: str
@@ -50,6 +50,8 @@ class InvestigationResponse(BaseModel):
     risk_level: Optional[str] = None
     summary: Optional[str] = None
     severity: Optional[str] = None
+    reasoning: Optional[InvestigationReasoning] = None
+    evidence: Optional[Dict[str, Any]] = None
     key_findings: Optional[List[str]] = None
     recommendation: Optional[str] = None
     confidence: Optional[str] = None

@@ -1,74 +1,102 @@
-.dashboardGrid {
+.overviewContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.heroSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2px;
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.heroHeading {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0;
+}
+
+.heroSub {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.workspaceGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  height: 100%;
+  grid-template-columns: 480px 1fr;
+  gap: 16px;
+  align-items: flex-start;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .feedCol {
   display: flex;
   flex-direction: column;
-  background-color: #111216;
-  border: 1px solid #1f2128;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.feedHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
-  border-bottom: 1px solid #1f2128;
-  
-  h2 {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 600;
-  }
-}
-
-.simulateBtn {
-  background-color: rgba(255, 107, 107, 0.1);
-  color: #ff6b6b;
-  border: 1px solid rgba(255, 107, 107, 0.2);
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-  
-  &:hover:not(:disabled) {
-    background-color: rgba(255, 107, 107, 0.2);
-  }
-  
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+  position: sticky;
+  top: 0;
+  max-height: calc(100vh - 170px);
 }
 
 .detailCol {
-  background-color: #111216;
-  border: 1px solid #1f2128;
-  border-radius: 12px;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  min-height: 520px;
 }
 
 .emptyDetail {
-  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #a0a4b8;
+  min-height: 520px;
+  background: #090c12;
+  border: 1px dashed #1a2233;
+  border-radius: 8px;
+  padding: 40px 20px;
+}
+
+.emptyCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  padding: 32px;
-  
-  p {
-    max-width: 300px;
-    line-height: 1.5;
+  gap: 8px;
+  max-width: 320px;
+
+  h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #cbd5e1;
+    margin: 0;
   }
+
+  p {
+    font-size: 0.75rem;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.4;
+  }
+}
+
+.emptyPulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+  margin-bottom: 4px;
 }

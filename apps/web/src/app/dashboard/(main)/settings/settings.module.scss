@@ -1,0 +1,132 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.headerCard {
+  background: #0d111a;
+  border: 1px solid #1c2638;
+  border-radius: 8px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #f8fafc;
+    letter-spacing: 0.04em;
+    margin: 0;
+  }
+}
+
+.icon {
+  color: #38bdf8;
+}
+
+.subtext {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: #0d111a;
+  border: 1px solid #1c2638;
+  border-radius: 8px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #171f2e;
+  padding-bottom: 8px;
+
+  h3 {
+    font-family: 'Inter', monospace, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #f1f5f9;
+    margin: 0;
+  }
+}
+
+.cardIcon {
+  color: #38bdf8;
+}
+
+.cardDesc {
+  font-size: 0.72rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.configRows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 6px;
+}
+
+.configRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px;
+  background: #111622;
+  border: 1px solid #1a2233;
+  border-radius: 5px;
+  font-size: 0.75rem;
+}
+
+.cfgKey {
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.cfgVal {
+  font-family: 'Inter', monospace, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  &.allow {
+    color: #22c55e;
+  }
+  &.review {
+    color: #fbbf24;
+  }
+  &.critical {
+    color: #ef4444;
+  }
+}

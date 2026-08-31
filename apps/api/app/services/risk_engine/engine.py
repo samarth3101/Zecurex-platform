@@ -49,7 +49,17 @@ class RiskEngine:
         result = await db_session.execute(stmt)
         transaction = result.scalar_one_or_none()
         
-        if not transaction:
+        if transaction:
+            # Idempotency: return existing assessment if already evaluated for this model version
+            ra_stmt = select(RiskAssessment).where(
+                RiskAssessment.transaction_id == transaction.id,
+                RiskAssessment.model_version == meta["model_version"]
+            )
+            ra_result = await db_session.execute(ra_stmt)
+            existing_ra = ra_result.scalar_one_or_none()
+            if existing_ra:
+                return existing_ra
+        else:
             transaction = Transaction(
                 razorpay_payment_id=tx_data["razorpay_payment_id"],
                 amount=tx_data["amount"],

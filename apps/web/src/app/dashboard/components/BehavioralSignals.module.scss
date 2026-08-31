@@ -1,0 +1,198 @@
+.signalsContainer {
+  background: #0d111a;
+  border: 1px solid #1a2233;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-bottom: 1px solid #171f2e;
+  padding-bottom: 10px;
+}
+
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  font-family: 'Inter', monospace, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #64748b;
+}
+
+.badge {
+  font-family: 'Inter', monospace, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.heading {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin: 0;
+}
+
+.subtext {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.signalsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.signalCard {
+  background: #111622;
+  border: 1px solid #1c2638;
+  border-radius: 6px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &.flagged {
+    border-color: rgba(239, 68, 68, 0.25);
+    background: rgba(239, 68, 68, 0.03);
+    .iconWrap {
+      color: #f87171;
+      background: rgba(239, 68, 68, 0.1);
+    }
+  }
+
+  &.normal {
+    border-color: rgba(34, 197, 94, 0.2);
+    .iconWrap {
+      color: #4ade80;
+      background: rgba(34, 197, 94, 0.1);
+    }
+  }
+}
+
+.signalTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.signalTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.iconWrap {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.featureName {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  text-transform: capitalize;
+}
+
+.anomalyBadge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Inter', monospace, sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+.normalBadge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Inter', monospace, sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+.observedRow {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 0.72rem;
+}
+
+.observedLabel {
+  color: #64748b;
+}
+
+.observedVal {
+  font-family: monospace;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.baselineVal {
+  font-family: monospace;
+  color: #64748b;
+  font-size: 0.68rem;
+}
+
+.description {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.emptySignals {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px;
+  background: #111622;
+  border: 1px dashed #1e2638;
+  border-radius: 6px;
+  color: #64748b;
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+.emptyIcon {
+  color: #475569;
+}

@@ -153,6 +153,8 @@ class InvestigationService:
             risk_level=ra.risk_level,
             summary=inv.summary,
             severity=inv.severity,
+            reasoning=inv.reasoning,
+            evidence=inv.evidence,
             key_findings=inv.key_findings,
             recommendation=inv.recommendation,
             confidence=inv.confidence,

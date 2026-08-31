@@ -1,21 +1,37 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { ZecureAPI } from '@/lib/api';
+import { X, ShieldAlert, CreditCard, User, Globe, Network, Clock, ShieldCheck, Loader2 } from 'lucide-react';
+import { 
+  ZecureAPI, 
+  TransactionRecord, 
+  RiskAssessmentRecord, 
+  InvestigationRecord, 
+  AuditEventRecord 
+} from '@/lib/api';
+import DecisionPipeline from './DecisionPipeline';
+import BehavioralSignals from './BehavioralSignals';
+import InvestigationPanel from './InvestigationPanel';
+import EvidencePanel from './EvidencePanel';
+import AuditTimeline from './AuditTimeline';
 import styles from './TransactionDetail.module.scss';
 
-export default function TransactionDetail({ transactionId, onClose }: { transactionId: string, onClose: () => void }) {
+interface TransactionDetailProps {
+  transactionId: string;
+  onClose?: () => void;
+}
+
+export default function TransactionDetail({ transactionId, onClose }: TransactionDetailProps) {
   const [data, setData] = useState<{
-    tx: any,
-    risk: any,
-    inv: any,
-    audit: any[]
+    tx: TransactionRecord | null;
+    risk: RiskAssessmentRecord | null;
+    inv: InvestigationRecord | null;
+    audit: AuditEventRecord[];
   } | null>(null);
   
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<'INTELLIGENCE' | 'BEHAVIOR' | 'INVESTIGATION' | 'EVIDENCE' | 'AUDIT'>('INTELLIGENCE');
 
   useEffect(() => {
     let mounted = true;
@@ -32,10 +48,10 @@ export default function TransactionDetail({ transactionId, onClose }: { transact
         
         if (mounted) {
           setData({ tx, risk, inv, audit });
-          setError('');
+          setError(null);
         }
-      } catch (err: any) {
-        if (mounted) setError('Failed to load detail: ' + err.message);
+      } catch (err: unknown) {
+        if (mounted) setError(err instanceof Error ? err.message : 'Failed to load transaction data');
       } finally {
         if (mounted) setLoading(false);
       }
@@ -47,118 +63,182 @@ export default function TransactionDetail({ transactionId, onClose }: { transact
   }, [transactionId]);
 
   if (loading) {
-    return <div className={styles.loading}>Loading detail...</div>;
+    return (
+      <div className={styles.container}>
+        <div className={styles.loadingState}>
+          <Loader2 className={styles.spin} size={28} />
+          <span>Retrieving behavioral risk signals and AI evidence...</span>
+        </div>
+      </div>
+    );
   }
 
   if (error || !data || !data.tx) {
-    return <div className={styles.error}>{error || 'Transaction not found'}</div>;
+    return (
+      <div className={styles.container}>
+        <div className={styles.errorState}>
+          <ShieldAlert size={28} />
+          <h4>Transaction Intelligence Unavailable</h4>
+          <p>{error || 'Unable to locate transaction record in database.'}</p>
+          {onClose && <button onClick={onClose} className={styles.backBtn}>Return to Feed</button>}
+        </div>
+      </div>
+    );
   }
 
   const { tx, risk, inv, audit } = data;
+  const riskScoreVal = risk?.risk_score !== undefined && risk?.risk_score !== null ? (risk.risk_score * 100).toFixed(0) : '--';
+  const riskLevel = risk?.risk_level || tx.risk_level || 'LOW';
+  const decision = risk?.decision || (riskLevel === 'HIGH' || riskLevel === 'CRITICAL' ? 'REVIEW' : 'ALLOW');
 
   return (
     <div className={styles.container}>
+      {/* Top Bar Header */}
       <header className={styles.header}>
-        <div className={styles.headerLeft}>
-          <h3>Transaction Detail</h3>
-          <span className={styles.txId}>{tx.id}</span>
+        <div className={styles.headerMeta}>
+          <span className={styles.sectionLabel}>TRANSACTION INTELLIGENCE WORKSPACE</span>
+          <div className={styles.idRow}>
+            <h2 className={styles.txId}>{tx.razorpay_payment_id || tx.id}</h2>
+            <span className={styles.uuidBadge}>UUID: {tx.id.substring(0, 8)}...</span>
+          </div>
         </div>
-        <button className={styles.closeBtn} onClick={onClose}>&times;</button>
+        {onClose && (
+          <button className={styles.closeBtn} onClick={onClose} title="Close Workspace">
+            <X size={18} />
+          </button>
+        )}
       </header>
 
-      <div className={styles.scrollArea}>
-        <section className={styles.section}>
-          <h4>Overview</h4>
-          <div className={styles.grid}>
-            <div className={styles.metric}>
-              <label>Amount</label>
-              <span>₹{tx.amount.toLocaleString()}</span>
-            </div>
-            <div className={styles.metric}>
-              <label>Status</label>
-              <span className={styles.statusBadge}>{tx.status}</span>
-            </div>
-            <div className={styles.metric}>
-              <label>Method</label>
-              <span>{tx.method.toUpperCase()}</span>
+      {/* Hero Telemetry Card */}
+      <div className={styles.heroCard}>
+        {/* Left: Key Payment Context */}
+        <div className={styles.paymentContext}>
+          <div className={styles.amountBlock}>
+            <span className={styles.amountLabel}>TRANSACTION AMOUNT</span>
+            <div className={styles.amountValue}>
+              ₹{tx.amount.toLocaleString()} <span className={styles.currency}>{tx.currency}</span>
             </div>
           </div>
-        </section>
 
-        {risk && (
-          <section className={styles.section}>
-            <h4>Risk Assessment</h4>
-            <div className={`${styles.riskBanner} ${styles[risk.risk_level?.toLowerCase() || 'low']}`}>
-              <div className={styles.riskScore}>
-                <span className={styles.score}>{risk.risk_score?.toFixed(2) || 'N/A'}</span>
-                <span className={styles.level}>{risk.risk_level || 'UNKNOWN'} RISK</span>
-              </div>
-              <div className={styles.decision}>
-                Decision: <strong>{risk.decision}</strong>
-              </div>
+          <div className={styles.contextGrid}>
+            <div className={styles.contextItem}>
+              <CreditCard size={12} className={styles.ctxIcon} />
+              <span>Method: <strong>{tx.method.toUpperCase()}</strong></span>
             </div>
-            
-            {risk.risk_factors?.top_signals && risk.risk_factors.top_signals.length > 0 && (
-              <div className={styles.signalsContainer}>
-                <h5>Behavioral Signals</h5>
-                <ul className={styles.signalsList}>
-                  {risk.risk_factors.top_signals.map((sig: any, idx: number) => (
-                    <li key={idx}>
-                      <span className={styles.sigFeature}>{sig.feature}</span>
-                      <span className={styles.sigDesc}>{sig.description}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </section>
-        )}
-
-        {inv && (
-          <section className={styles.section}>
-            <h4>AI Investigation</h4>
-            <div className={styles.investigationCard}>
-              <div className={styles.invStatus}>
-                Status: {inv.status} | Confidence: {inv.confidence}
-              </div>
-              <div className={styles.reasoning}>
-                {inv.summary && <p>{inv.summary}</p>}
-                
-                {inv.key_findings && inv.key_findings.length > 0 && (
-                  <div className={styles.keyFindings}>
-                    <h5>Key Findings:</h5>
-                    <ul>
-                      {inv.key_findings.map((finding: string, idx: number) => (
-                        <li key={idx}>{finding}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                
-                {inv.recommendation && (
-                  <div className={styles.recommendation}>
-                    <strong>Recommendation:</strong> {inv.recommendation}
-                  </div>
-                )}
-              </div>
+            <div className={styles.contextItem}>
+              <User size={12} className={styles.ctxIcon} />
+              <span>Customer: <strong>{tx.customer_id ? tx.customer_id.substring(0, 14) : 'Anonymous'}</strong></span>
             </div>
-          </section>
-        )}
-
-        <section className={styles.section}>
-          <h4>Auditable Activity Trail</h4>
-          <div className={styles.auditList}>
-            {audit.map((event, idx) => (
-              <div key={event.id || idx} className={styles.auditEvent}>
-                <div className={styles.auditTime}>{new Date(event.created_at).toLocaleTimeString()}</div>
-                <div className={styles.auditContent}>
-                  <strong>{event.actor_type}</strong> - {event.action}
-                </div>
-              </div>
-            ))}
-            {audit.length === 0 && <div className={styles.emptyAudit}>No activity recorded yet.</div>}
+            <div className={styles.contextItem}>
+              <Globe size={12} className={styles.ctxIcon} />
+              <span>Geo: <strong>{tx.geo_region || 'Domestic (IN)'}</strong></span>
+            </div>
+            <div className={styles.contextItem}>
+              <Network size={12} className={styles.ctxIcon} />
+              <span>IP: <strong>{tx.ip_hash ? tx.ip_hash.substring(0, 14) : 'Recorded'}</strong></span>
+            </div>
+            <div className={styles.contextItem}>
+              <Clock size={12} className={styles.ctxIcon} />
+              <span>Timestamp: <strong>{new Date(tx.created_at).toLocaleString()}</strong></span>
+            </div>
+            <div className={styles.contextItem}>
+              <ShieldCheck size={12} className={styles.ctxIcon} />
+              <span>Merchant: <strong>{tx.merchant_id || 'merch_default'}</strong></span>
+            </div>
           </div>
-        </section>
+        </div>
+
+        {/* Right: Risk Score & Decision Gauge */}
+        <div className={`${styles.riskGaugeBlock} ${styles[`risk_${riskLevel.toLowerCase()}`]}`}>
+          <span className={styles.gaugeLabel}>ML RISK ASSESSMENT</span>
+          <div className={styles.scoreRow}>
+            <span className={styles.scoreNumber}>{riskScoreVal}</span>
+            <span className={styles.scoreScale}>/ 100</span>
+          </div>
+
+          <div className={styles.badgeRow}>
+            <span className={`${styles.riskLevelBadge} ${styles[riskLevel.toLowerCase()]}`}>
+              {riskLevel} RISK
+            </span>
+            <span className={`${styles.decisionBadge} ${styles[decision.toLowerCase()]}`}>
+              {decision}
+            </span>
+          </div>
+
+          <span className={styles.modelMeta}>
+            Engine: {risk?.model_name || 'Random Forest'} · v{risk?.model_version || '1.0'}
+          </span>
+        </div>
+      </div>
+
+      {/* Horizontal Decision Pipeline */}
+      <DecisionPipeline transaction={tx} riskAssessment={risk} investigation={inv} />
+
+      {/* Workspace Tabs */}
+      <div className={styles.tabNav}>
+        <button
+          type="button"
+          className={`${styles.tabBtn} ${activeTab === 'INTELLIGENCE' ? styles.active : ''}`}
+          onClick={() => setActiveTab('INTELLIGENCE')}
+        >
+          Overview
+        </button>
+        <button
+          type="button"
+          className={`${styles.tabBtn} ${activeTab === 'BEHAVIOR' ? styles.active : ''}`}
+          onClick={() => setActiveTab('BEHAVIOR')}
+        >
+          Behavioral Signals ({risk?.risk_factors?.top_signals?.length || 46})
+        </button>
+        <button
+          type="button"
+          className={`${styles.tabBtn} ${activeTab === 'INVESTIGATION' ? styles.active : ''}`}
+          onClick={() => setActiveTab('INVESTIGATION')}
+        >
+          AI Investigation {inv && `(${inv.recommendation || 'Grounded'})`}
+        </button>
+        <button
+          type="button"
+          className={`${styles.tabBtn} ${activeTab === 'EVIDENCE' ? styles.active : ''}`}
+          onClick={() => setActiveTab('EVIDENCE')}
+        >
+          Evidence & Provenance
+        </button>
+        <button
+          type="button"
+          className={`${styles.tabBtn} ${activeTab === 'AUDIT' ? styles.active : ''}`}
+          onClick={() => setActiveTab('AUDIT')}
+        >
+          Audit Trail ({audit.length})
+        </button>
+      </div>
+
+      {/* Workspace Tab Content */}
+      <div className={styles.workspaceBody}>
+        {activeTab === 'INTELLIGENCE' && (
+          <div className={styles.allPanels}>
+            <BehavioralSignals riskAssessment={risk} investigation={inv} />
+            <InvestigationPanel investigation={inv} riskAssessment={risk} />
+            <EvidencePanel transaction={tx} riskAssessment={risk} investigation={inv} />
+            <AuditTimeline events={audit} />
+          </div>
+        )}
+
+        {activeTab === 'BEHAVIOR' && (
+          <BehavioralSignals riskAssessment={risk} investigation={inv} />
+        )}
+
+        {activeTab === 'INVESTIGATION' && (
+          <InvestigationPanel investigation={inv} riskAssessment={risk} />
+        )}
+
+        {activeTab === 'EVIDENCE' && (
+          <EvidencePanel transaction={tx} riskAssessment={risk} investigation={inv} />
+        )}
+
+        {activeTab === 'AUDIT' && (
+          <AuditTimeline events={audit} />
+        )}
       </div>
     </div>
   );

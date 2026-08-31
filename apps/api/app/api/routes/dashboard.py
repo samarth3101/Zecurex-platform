@@ -104,6 +104,42 @@ async def get_risk_assessment(transaction_id: uuid.UUID, db: AsyncSession = Depe
         raise HTTPException(status_code=404, detail="Risk assessment not found")
     return assessment
 
+@router.get("/investigations", response_model=list[InvestigationResponse], dependencies=[Depends(verify_dashboard_auth)])
+async def list_investigations(limit: int = 50, db: AsyncSession = Depends(get_db)):
+    """
+    List recent investigations across transactions for the Investigations queue.
+    """
+    stmt = (
+        select(Investigation, RiskAssessment)
+        .outerjoin(RiskAssessment, RiskAssessment.id == Investigation.risk_assessment_id)
+        .order_by(desc(Investigation.created_at))
+        .limit(limit)
+    )
+    result = await db.execute(stmt)
+    rows = result.all()
+
+    responses = []
+    for inv, ra in rows:
+        responses.append(InvestigationResponse(
+            investigation_id=inv.id,
+            transaction_id=inv.transaction_id,
+            risk_assessment_id=inv.risk_assessment_id,
+            status=inv.status,
+            risk_score=ra.risk_score if ra else None,
+            risk_level=ra.risk_level if ra else None,
+            summary=inv.summary,
+            severity=inv.severity,
+            reasoning=inv.reasoning,
+            evidence=inv.evidence,
+            key_findings=inv.key_findings,
+            recommendation=inv.recommendation,
+            confidence=inv.confidence,
+            agent_model=inv.agent_model,
+            agent_version=inv.agent_version,
+            completed_at=inv.completed_at,
+        ))
+    return responses
+
 @router.get("/investigations/{transaction_id}", response_model=InvestigationResponse, dependencies=[Depends(verify_dashboard_auth)])
 async def get_investigation(transaction_id: uuid.UUID, db: AsyncSession = Depends(get_db)):
     # Fetch investigation
@@ -129,6 +165,8 @@ async def get_investigation(transaction_id: uuid.UUID, db: AsyncSession = Depend
         risk_level=ra.risk_level if ra else None,
         summary=inv.summary,
         severity=inv.severity,
+        reasoning=inv.reasoning,
+        evidence=inv.evidence,
         key_findings=inv.key_findings,
         recommendation=inv.recommendation,
         confidence=inv.confidence,
@@ -136,6 +174,15 @@ async def get_investigation(transaction_id: uuid.UUID, db: AsyncSession = Depend
         agent_version=inv.agent_version,
         completed_at=inv.completed_at,
     )
+
+@router.get("/audit", response_model=list[AuditEventResponse], dependencies=[Depends(verify_dashboard_auth)])
+async def list_audit_events(limit: int = 100, db: AsyncSession = Depends(get_db)):
+    """
+    List all recent audit events across the platform for the Audit Trail explorer.
+    """
+    stmt = select(AuditEvent).order_by(desc(AuditEvent.created_at)).limit(limit)
+    result = await db.execute(stmt)
+    return result.scalars().all()
 
 @router.get("/audit/{transaction_id}", response_model=list[AuditEventResponse], dependencies=[Depends(verify_dashboard_auth)])
 async def get_audit_trail(transaction_id: uuid.UUID, db: AsyncSession = Depends(get_db)):
@@ -173,20 +220,21 @@ async def get_model_performance():
     """
     Fetch ML model performance metrics directly from the training evaluation output.
     """
-    # Assuming project root is two levels up from apps/api
-    project_root = Path(__file__).resolve().parents[5] 
-    # __file__ is apps/api/app/api/routes/dashboard.py
-    # parents[0]: routes, [1]: api, [2]: app, [3]: api, [4]: apps, [5]: project_root
+    # Invariant workspace root derived from __file__
+    candidate_paths = [
+        Path(__file__).resolve().parents[5] / "ml/evaluation/test_evaluation.json",
+        Path(__file__).resolve().parents[4] / "ml/evaluation/test_evaluation.json",
+        Path("ml/evaluation/test_evaluation.json").resolve(),
+        Path("../../ml/evaluation/test_evaluation.json").resolve(),
+    ]
     
-    # Wait, let's just use the known relative path from the api directory, or a fallback.
-    # It's better to just search from cwd if we are running in apps/api
-    eval_file = Path("../../ml/evaluation/test_evaluation.json").resolve()
-    
-    if not eval_file.exists():
-        # Fallback if running from root
-        eval_file = Path("ml/evaluation/test_evaluation.json").resolve()
-        
-    if not eval_file.exists():
+    eval_file = None
+    for p in candidate_paths:
+        if p.exists():
+            eval_file = p
+            break
+            
+    if not eval_file or not eval_file.exists():
         raise HTTPException(status_code=404, detail="Performance metrics not found")
         
     try:

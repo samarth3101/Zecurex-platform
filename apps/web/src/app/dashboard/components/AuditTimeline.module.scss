@@ -1,0 +1,225 @@
+.auditContainer {
+  background: #0d111a;
+  border: 1px solid #1a2233;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-bottom: 1px solid #171f2e;
+  padding-bottom: 10px;
+}
+
+.titleGroup {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.historyIcon {
+  color: #38bdf8;
+}
+
+.label {
+  font-family: 'Inter', monospace, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #64748b;
+}
+
+.heading {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin: 0;
+}
+
+.subtext {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.timelineList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.timelineItem {
+  display: flex;
+  gap: 12px;
+}
+
+.nodeColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 24px;
+  flex-shrink: 0;
+}
+
+.nodeDot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #111622;
+  border: 1px solid #1f2a3c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.agentIcon {
+  color: #38bdf8;
+}
+
+.engineIcon {
+  color: #f59e0b;
+}
+
+.userIcon {
+  color: #a855f7;
+}
+
+.nodeLine {
+  width: 1.5px;
+  flex: 1;
+  background: #1a2333;
+  min-height: 24px;
+  margin: 2px 0;
+}
+
+.eventCard {
+  background: #111622;
+  border: 1px solid #1c2638;
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.eventHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actorAction {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.actorType {
+  font-family: 'Inter', monospace, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.08);
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+.actionName {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  text-transform: capitalize;
+}
+
+.eventTypeBadge {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-family: 'Inter', monospace, sans-serif;
+  font-size: 0.58rem;
+  font-weight: 600;
+  color: #94a3b8;
+  background: #151d2a;
+  border: 1px solid #1f2a3a;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.eventTime {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Inter', monospace, sans-serif;
+  font-size: 0.65rem;
+  color: #64748b;
+}
+
+.stateDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 4px;
+  border-top: 1px solid #171e2c;
+  font-size: 0.7rem;
+}
+
+.metaRow {
+  code {
+    font-family: monospace;
+    font-size: 0.68rem;
+    color: #94a3b8;
+    background: #0b0f16;
+    padding: 2px 6px;
+    border-radius: 3px;
+    display: block;
+    word-break: break-all;
+  }
+}
+
+.transitionRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: monospace;
+  font-size: 0.65rem;
+}
+
+.statePrev {
+  color: #f87171;
+}
+
+.transArrow {
+  color: #64748b;
+}
+
+.stateNew {
+  color: #4ade80;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px;
+  background: #111622;
+  border: 1px dashed #1e2638;
+  border-radius: 6px;
+  color: #64748b;
+  text-align: center;
+  font-size: 0.75rem;
+}
+
+.emptyIcon {
+  color: #475569;
+}
