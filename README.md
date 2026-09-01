@@ -23,7 +23,7 @@
 
 ---
 
-## 30-Second Executive Summary
+## Executive Summary
 
 > **Core Philosophy**: *"ML detects patterns. Deterministic policy classifies risk. Gemini investigates evidence. Human operators make the final call."*
 
@@ -37,7 +37,7 @@ Zecure is an **AI-assisted payment fraud risk management platform** for online m
 
 ---
 
-## Track 02 — AI Risk Manager Alignment
+## AI Risk Manager Alignment
 
 > **Track Goal**: *"Stop the merchant losing money to fraud, returns and chargebacks. Build a working detector, verifier or auto-responder for one class of loss, with measured precision and recall on a held-out test set. Strictly defense-only."*
 
@@ -498,18 +498,6 @@ npm run build
 - **Merchant-Specific Dynamic Thresholding**: Automated adjustment of $\tau$ based on individual merchant margin profiles and false-positive tolerance.
 
 ---
-
-## Hackathon Submission
-
-- **Event**: Razorpay Buildathon
-- **Track**: AI Risk Manager (Track 02)
-- **Developer**: Samarth Patil
-- **GitHub**: [@samarth3101](https://github.com/samarth3101)
-- **Portfolio**: [samarthppatil.netlify.app](https://samarthppatil.netlify.app)
-- **Email**: [samarth.patil3101@gmail.com](mailto:samarth.patil3101@gmail.com)
-
----
-
 ## License
 
 This project is licensed under the MIT License.
