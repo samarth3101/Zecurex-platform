@@ -2,6 +2,7 @@ from typing import Optional, Dict, Any
 from app.core.config import settings
 from app.services.email.provider import EmailProvider
 from app.services.email.dev_provider import DevelopmentEmailProvider
+from app.services.email.resend_provider import ResendEmailProvider
 
 class EmailService:
     """
@@ -16,12 +17,13 @@ class EmailService:
             provider_type = settings.EMAIL_PROVIDER.lower()
             if provider_type in ("development", "console", "dev"):
                 self.provider = DevelopmentEmailProvider()
+            elif provider_type == "resend":
+                self.provider = ResendEmailProvider(
+                    api_key=settings.RESEND_API_KEY,
+                    default_from=settings.EMAIL_FROM
+                )
             else:
-                # Fallback to dev provider in non-prod
-                if not settings.is_production:
-                    self.provider = DevelopmentEmailProvider()
-                else:
-                    raise RuntimeError(f"Unknown or unconfigured email provider: {settings.EMAIL_PROVIDER}")
+                raise RuntimeError(f"Unknown or unconfigured email provider: {settings.EMAIL_PROVIDER}")
 
     def _render_html_template(self, title: str, headline: str, message: str, highlight_box: Optional[str] = None, footer_note: Optional[str] = None) -> str:
         """

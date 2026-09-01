@@ -11,7 +11,11 @@ async def lifespan(app: FastAPI):
         if settings.EMAIL_PROVIDER.lower() in ("development", "console", "dev"):
             raise RuntimeError(
                 "CRITICAL SECURITY CONFIGURATION: EMAIL_PROVIDER=development cannot be used when running in production mode. "
-                "Configure a valid SMTP/production email provider."
+                "Configure a valid production email provider such as EMAIL_PROVIDER=resend."
+            )
+        if settings.EMAIL_PROVIDER.lower() == "resend" and not settings.RESEND_API_KEY:
+            raise RuntimeError(
+                "CRITICAL SECURITY CONFIGURATION: RESEND_API_KEY must be configured when running with EMAIL_PROVIDER=resend in production."
             )
         if "change-in-production" in settings.AUTH_SESSION_SECRET:
             raise RuntimeError(

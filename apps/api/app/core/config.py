@@ -23,8 +23,9 @@ class Settings(BaseSettings):
     MAX_OTP_ATTEMPTS: int = 5
 
     # Email Provider Abstraction
-    EMAIL_PROVIDER: str = "development"  # "development", "console", "smtp"
-    EMAIL_FROM: str = "security@zecure.one"
+    EMAIL_PROVIDER: str = "development"  # "development", "resend", "console", "smtp"
+    EMAIL_FROM: str = "onboarding@resend.dev"
+    RESEND_API_KEY: Optional[str] = None
     APP_BASE_URL: str = "http://localhost:3000"
 
     # SMTP Configuration (for future Gmail/SMTP integration)
