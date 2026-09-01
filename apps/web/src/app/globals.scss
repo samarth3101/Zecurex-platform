@@ -126,7 +126,7 @@ html {
 
 // globe
 /* BUTTON STYLES */
-:global(.button) {
+.button {
   font-weight: 500;
   border-radius: 8px;
   cursor: pointer;
@@ -145,7 +145,7 @@ html {
   }
 }
 
-:global(.primary) {
+.primary {
   background: #ffffff;
   color: #000000;
   
@@ -155,7 +155,7 @@ html {
   }
 }
 
-:global(.outline) {
+.outline {
   background: rgba(255, 255, 255, 0.05);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -167,7 +167,7 @@ html {
   }
 }
 
-:global(.lg) {
+.lg {
   padding: 1rem 2.5rem;
   font-size: 0.95rem;
   min-width: 180px;

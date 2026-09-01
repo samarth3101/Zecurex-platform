@@ -13,8 +13,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Always allow access to the login page itself
-  if (pathname === LOGIN_PATH || pathname.startsWith(LOGIN_PATH + '/')) {
+  // Always allow access to auth pages (login, register, forgot-password)
+  if (
+    pathname === LOGIN_PATH ||
+    pathname.startsWith(LOGIN_PATH + '/') ||
+    pathname.startsWith('/dashboard/register') ||
+    pathname.startsWith('/dashboard/forgot-password')
+  ) {
     return NextResponse.next();
   }
 
