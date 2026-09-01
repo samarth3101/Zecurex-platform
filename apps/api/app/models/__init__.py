@@ -4,6 +4,14 @@ from app.models.transaction import Transaction
 from app.models.risk import RiskAssessment
 from app.models.investigation import Investigation
 from app.models.audit import AuditEvent
+from app.models.auth import (
+    User,
+    Session,
+    TrustedDevice,
+    VerificationCode,
+    RecoveryCode,
+    SecurityEvent,
+)
 
 __all__ = [
     "BaseModel",
@@ -12,4 +20,10 @@ __all__ = [
     "RiskAssessment",
     "Investigation",
     "AuditEvent",
+    "User",
+    "Session",
+    "TrustedDevice",
+    "VerificationCode",
+    "RecoveryCode",
+    "SecurityEvent",
 ]

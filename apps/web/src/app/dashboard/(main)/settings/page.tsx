@@ -1,10 +1,69 @@
 'use client';
 
-import React from 'react';
-import { Sliders, Server, Shield, Sparkles, Database, CheckCircle2, Lock, Cpu } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import {
+  Sliders,
+  Server,
+  Shield,
+  Sparkles,
+  Database,
+  CheckCircle2,
+  Lock,
+  Cpu,
+  Smartphone,
+  Activity,
+  Laptop,
+  AlertCircle
+} from 'lucide-react';
+import { ZecureAPI, SecuritySessionRecord, SecurityEventRecord } from '@/lib/api';
 import styles from './settings.module.scss';
 
 export default function SettingsDiagnosticsPage() {
+  const [sessions, setSessions] = useState<SecuritySessionRecord[]>([]);
+  const [activities, setActivities] = useState<SecurityEventRecord[]>([]);
+  const [loadingSessions, setLoadingSessions] = useState(true);
+  const [revokingId, setRevokingId] = useState<string | null>(null);
+
+  const loadSecurityData = async () => {
+    try {
+      const [sessData, actData] = await Promise.all([
+        ZecureAPI.getSecuritySessions().catch(() => []),
+        ZecureAPI.getSecurityActivity().catch(() => [])
+      ]);
+      setSessions(sessData);
+      setActivities(actData);
+    } catch {
+      // Ignored
+    } finally {
+      setLoadingSessions(false);
+    }
+  };
+
+  useEffect(() => {
+    loadSecurityData();
+  }, []);
+
+  const handleRevoke = async (sessionId: string) => {
+    setRevokingId(sessionId);
+    try {
+      await ZecureAPI.revokeSession(sessionId);
+      await loadSecurityData();
+    } catch {
+      // Ignored
+    } finally {
+      setRevokingId(null);
+    }
+  };
+
+  const formatTimestamp = (iso: string) => {
+    try {
+      const d = new Date(iso);
+      return d.toLocaleString([], { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+    } catch {
+      return iso;
+    }
+  };
+
   return (
     <div className={styles.container}>
       {/* Overview */}
@@ -14,7 +73,7 @@ export default function SettingsDiagnosticsPage() {
           <h2>CONTROL ROOM DIAGNOSTICS & SYSTEM CONFIGURATION</h2>
         </div>
         <p className={styles.subtext}>
-          Active operational parameters, decision thresholds, and AI provider configurations for the Zecure platform.
+          Active operational parameters, decision thresholds, active sessions, and security event trails for the Zecure platform.
         </p>
       </div>
 
@@ -131,12 +190,86 @@ export default function SettingsDiagnosticsPage() {
             </div>
             <div className={styles.configRow}>
               <span className={styles.cfgKey}>Authentication</span>
-              <span className={styles.cfgVal}><Lock size={11} /> HttpOnly Secure Session Cookies</span>
+              <span className={styles.cfgVal}><Lock size={11} /> Scrypt + Session Tokens</span>
             </div>
             <div className={styles.configRow}>
-              <span className={styles.cfgKey}>Environment</span>
-              <span className={styles.cfgVal}>Live Demo Pipeline</span>
+              <span className={styles.cfgKey}>Email Provider</span>
+              <span className={styles.cfgVal}>DevelopmentEmailProvider</span>
             </div>
+          </div>
+        </div>
+
+        {/* Active Sessions */}
+        <div className={styles.card}>
+          <div className={styles.cardHeader}>
+            <Laptop size={14} className={styles.cardIcon} />
+            <h3>ACTIVE SESSIONS</h3>
+          </div>
+          <p className={styles.cardDesc}>
+            Authorized sessions recognized by the server. Revoking immediately destroys the session.
+          </p>
+
+          <div className={styles.sessionsList}>
+            {sessions.length === 0 ? (
+              <div className={styles.configRow}>
+                <span className={styles.cfgKey}>Current Session (Default Operator)</span>
+                <span className={styles.currentBadge}>ACTIVE</span>
+              </div>
+            ) : (
+              sessions.map((sess) => (
+                <div key={sess.id} className={styles.sessionItem}>
+                  <div className={styles.sessionInfo}>
+                    <span className={styles.sessionDevice}>
+                      {sess.device_name}
+                      {sess.is_current && <span className={styles.currentBadge}>Current</span>}
+                    </span>
+                    <span className={styles.sessionMeta}>
+                      IP: {sess.ip_address || '127.0.0.1'} · Last active: {formatTimestamp(sess.last_seen_at)}
+                    </span>
+                  </div>
+                  {!sess.is_current && (
+                    <button
+                      type="button"
+                      disabled={revokingId === sess.id}
+                      onClick={() => handleRevoke(sess.id)}
+                      className={styles.revokeBtn}
+                    >
+                      {revokingId === sess.id ? 'Revoking...' : 'Revoke'}
+                    </button>
+                  )}
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+
+        {/* Security Activity */}
+        <div className={styles.card}>
+          <div className={styles.cardHeader}>
+            <Activity size={14} className={styles.cardIcon} />
+            <h3>SECURITY ACTIVITY</h3>
+          </div>
+          <p className={styles.cardDesc}>
+            Real-time audit log of operator authentications, step-up verifications, and credential events.
+          </p>
+
+          <div className={styles.activityList}>
+            {activities.length === 0 ? (
+              <div className={styles.configRow}>
+                <span className={styles.cfgKey}>System Initialized</span>
+                <span className={styles.cfgVal}>Audited</span>
+              </div>
+            ) : (
+              activities.map((act) => (
+                <div key={act.id} className={styles.activityItem}>
+                  <div className={styles.activityLeft}>
+                    <span className={styles.activityType}>{act.event_type}</span>
+                    <span className={styles.activityDevice}>{act.device_info || 'Device'}</span>
+                  </div>
+                  <span className={styles.activityTime}>{formatTimestamp(act.created_at)}</span>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>

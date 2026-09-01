@@ -32,7 +32,7 @@
 }
 
 .icon {
-  color: #38bdf8;
+  color: #00d4ff;
 }
 
 .subtext {
@@ -79,7 +79,7 @@
 }
 
 .cardIcon {
-  color: #38bdf8;
+  color: #00d4ff;
 }
 
 .cardDesc {
@@ -120,13 +120,110 @@
   align-items: center;
   gap: 5px;
 
-  &.allow {
-    color: #22c55e;
+  &.allow { color: #22c55e; }
+  &.review { color: #fbbf24; }
+  &.critical { color: #ef4444; }
+}
+
+.sessionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sessionItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: #111622;
+  border: 1px solid #1a2233;
+  border-radius: 6px;
+}
+
+.sessionInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sessionDevice {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.currentBadge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #00d4ff;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.sessionMeta {
+  font-size: 0.7rem;
+  color: #64748b;
+}
+
+.revokeBtn {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: #ef4444;
   }
-  &.review {
-    color: #fbbf24;
-  }
-  &.critical {
-    color: #ef4444;
-  }
+}
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.activityItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 10px;
+  background: #111622;
+  border: 1px solid #1a2233;
+  border-radius: 5px;
+  font-size: 0.72rem;
+}
+
+.activityLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.activityType {
+  font-family: monospace;
+  font-weight: 600;
+  color: #00d4ff;
+}
+
+.activityDevice {
+  color: #94a3b8;
+}
+
+.activityTime {
+  color: #64748b;
+  font-size: 0.68rem;
 }

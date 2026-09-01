@@ -1,3 +1,4 @@
+from typing import Optional, List, Dict, Any
 from fastapi import APIRouter, Depends, HTTPException, status, Response, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, desc
@@ -23,40 +24,107 @@ from pydantic import BaseModel
 
 router = APIRouter(prefix="/dashboard", tags=["dashboard"])
 
+from app.core.config import settings
+from app.services.auth.auth_service import AuthService
+
 # Simple Login Schema
 class LoginRequest(BaseModel):
-    passcode: str
+    passcode: Optional[str] = None
+    email: Optional[str] = None
+    password: Optional[str] = None
 
 # Dependency for authenticating dashboard routes
-def verify_dashboard_auth(request: Request):
+async def verify_dashboard_auth(request: Request, db: AsyncSession = Depends(get_db)):
     token = request.cookies.get("zecure_admin_token")
-    # For hackathon demo, we check against a fixed environment variable or default
-    expected_token = os.getenv("ZECURE_ADMIN_KEY", "dev2024")
-    if token != expected_token:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid or missing authentication token")
-    return True
+    if not token:
+        auth_header = request.headers.get("Authorization")
+        if auth_header and auth_header.startswith("Bearer "):
+            token = auth_header.split(" ")[1]
+
+    if not token:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Authentication session required."
+        )
+
+    # In production, ONLY valid database sessions are accepted
+    if settings.is_production:
+        user = await AuthService.authenticate_session(db, token)
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid or expired session token."
+            )
+        return True
+
+    # In non-production, check database session first, then dev fallback
+    user = await AuthService.authenticate_session(db, token)
+    if user:
+        return True
+
+    expected_dev_token = os.getenv("ZECURE_ADMIN_KEY", "dev2024")
+    if token == expected_dev_token:
+        return True
+
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Invalid or expired authentication session."
+    )
 
 @router.post("/auth/login")
-async def login(request: LoginRequest, response: Response):
+async def login(request: LoginRequest, response: Response, db: AsyncSession = Depends(get_db)):
     """
-    Hackathon-safe auth endpoint that sets a secure HttpOnly cookie.
+    Dashboard login endpoint with production database authentication and dev fallback.
     """
-    expected_passcode = os.getenv("ZECURE_ADMIN_KEY", "dev2024")
-    if request.passcode == expected_passcode:
-        response.set_cookie(
-            key="zecure_admin_token",
-            value=expected_passcode,
-            httponly=True,
-            samesite="lax",
-            secure=False, # Set to False for local dev
-            max_age=3600 * 24 # 1 day
+    # Seed dev operator if in development
+    if not settings.is_production:
+        await AuthService.bootstrap_dev_operator(db)
+
+    # If email + password are provided, use AuthService
+    if request.email and request.password:
+        status_code, message, session_token, user, _ = await AuthService.login(
+            db=db,
+            email=request.email,
+            password=request.password
         )
-        return {"status": "success"}
-    raise HTTPException(status_code=401, detail="Invalid passcode")
+        if status_code == "authenticated" and session_token:
+            response.set_cookie(
+                key="zecure_admin_token",
+                value=session_token,
+                httponly=True,
+                samesite="lax",
+                secure=settings.is_production,
+                max_age=settings.SESSION_MAX_AGE_SECONDS,
+                path="/"
+            )
+            return {"status": "success"}
+        elif status_code == "requires_verification":
+            return {"status": "requires_verification"}
+        raise HTTPException(status_code=401, detail=message)
+
+    # If legacy passcode is provided (development only)
+    if not settings.is_production:
+        expected_passcode = os.getenv("ZECURE_ADMIN_KEY", "dev2024")
+        if request.passcode == expected_passcode:
+            response.set_cookie(
+                key="zecure_admin_token",
+                value=expected_passcode,
+                httponly=True,
+                samesite="lax",
+                secure=False,
+                max_age=3600 * 24,
+                path="/"
+            )
+            return {"status": "success"}
+
+    raise HTTPException(status_code=401, detail="Invalid credentials")
 
 @router.post("/auth/logout")
-async def logout(response: Response):
-    response.delete_cookie("zecure_admin_token")
+async def logout(request: Request, response: Response, db: AsyncSession = Depends(get_db)):
+    token = request.cookies.get("zecure_admin_token")
+    if token:
+        await AuthService.logout(db, token)
+    response.delete_cookie("zecure_admin_token", path="/")
     return {"status": "logged_out"}
 
 @router.get("/transactions", response_model=list[DashboardTransactionResponse], dependencies=[Depends(verify_dashboard_auth)])

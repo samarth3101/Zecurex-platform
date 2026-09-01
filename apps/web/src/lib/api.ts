@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:8000/api/v1';
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/api/v1';
 
 export interface TransactionRecord {
   id: string;
@@ -138,6 +138,43 @@ export interface SimulatePaymentPayload {
   international?: boolean;
 }
 
+export interface UserRecord {
+  id: string;
+  email: string;
+  name?: string | null;
+  email_verified: boolean;
+  role: string;
+  created_at: string;
+}
+
+export interface AuthStatusResponse {
+  status: 'authenticated' | 'requires_verification' | 'registration_pending' | 'password_reset_pending' | 'password_reset_completed' | 'failed';
+  message: string;
+  user?: UserRecord;
+  recovery_codes?: string[];
+  dev_otp?: string;
+}
+
+export interface SecuritySessionRecord {
+  id: string;
+  device_name: string;
+  ip_address?: string | null;
+  is_current: boolean;
+  is_trusted: boolean;
+  last_seen_at: string;
+  created_at: string;
+  expires_at: string;
+}
+
+export interface SecurityEventRecord {
+  id: string;
+  event_type: string;
+  device_info?: string | null;
+  ip_address?: string | null;
+  details?: Record<string, unknown> | null;
+  created_at: string;
+}
+
 const fetchWithAuth = async <T>(endpoint: string, options: RequestInit = {}): Promise<T> => {
   const url = `${API_BASE}${endpoint}`;
   const response = await fetch(url, {
@@ -163,12 +200,72 @@ const fetchWithAuth = async <T>(endpoint: string, options: RequestInit = {}): Pr
 };
 
 export const ZecureAPI = {
-  login: (passcode: string) => fetchWithAuth<{ status: string }>('/dashboard/auth/login', {
-    method: 'POST',
-    body: JSON.stringify({ passcode })
-  }),
+  // Legacy / Quick Login
+  login: (passcodeOrEmail: string, password?: string): Promise<{ status: string }> => {
+    if (password) {
+      return fetchWithAuth<{ status: string }>('/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({ email: passcodeOrEmail, password })
+      });
+    }
+    return fetchWithAuth<{ status: string }>('/dashboard/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ passcode: passcodeOrEmail })
+    });
+  },
+
+  // Full Modular Auth Suite
+  register: (payload: { email: string; password: string; name?: string }): Promise<AuthStatusResponse> =>
+    fetchWithAuth<AuthStatusResponse>('/auth/register', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    }),
+
+  verifyRegistration: (payload: { email: string; code: string }): Promise<AuthStatusResponse> =>
+    fetchWithAuth<AuthStatusResponse>('/auth/verify-registration', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    }),
+
+  loginWithCredentials: (payload: { email: string; password: string }): Promise<AuthStatusResponse> =>
+    fetchWithAuth<AuthStatusResponse>('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    }),
+
+  verifyLoginStepUp: (payload: { email: string; code: string; trust_device: boolean }): Promise<AuthStatusResponse> =>
+    fetchWithAuth<AuthStatusResponse>('/auth/verify-login', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    }),
+
+  forgotPassword: (email: string): Promise<AuthStatusResponse> =>
+    fetchWithAuth<AuthStatusResponse>('/auth/forgot-password', {
+      method: 'POST',
+      body: JSON.stringify({ email })
+    }),
+
+  resetPassword: (payload: { email: string; code: string; new_password: string }): Promise<AuthStatusResponse> =>
+    fetchWithAuth<AuthStatusResponse>('/auth/reset-password', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    }),
+
+  getMe: (): Promise<UserRecord> =>
+    fetchWithAuth<UserRecord>('/auth/me'),
+
+  getSecuritySessions: (): Promise<SecuritySessionRecord[]> =>
+    fetchWithAuth<SecuritySessionRecord[]>('/auth/security/sessions'),
+
+  revokeSession: (sessionId: string): Promise<{ status: string; session_id: string }> =>
+    fetchWithAuth<{ status: string; session_id: string }>(`/auth/security/sessions/${sessionId}`, {
+      method: 'DELETE'
+    }),
+
+  getSecurityActivity: (): Promise<SecurityEventRecord[]> =>
+    fetchWithAuth<SecurityEventRecord[]>('/auth/security/activity'),
   
-  logout: () => fetchWithAuth<{ status: string }>('/dashboard/auth/logout', {
+  logout: () => fetchWithAuth<{ status: string }>('/auth/logout', {
     method: 'POST'
   }),
   
