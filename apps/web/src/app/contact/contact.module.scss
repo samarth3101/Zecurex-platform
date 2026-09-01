@@ -1,0 +1,122 @@
+.pageWrapper {
+  min-height: 100vh;
+  background: #000000;
+  color: #ffffff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.topBar {
+  padding: 1.5rem 0;
+  background: #000000;
+}
+
+.topBarContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: #888888;
+  text-decoration: none;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 6rem;
+  flex: 1;
+  width: 100%;
+}
+
+.title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #a1a1aa;
+  margin: 0 0 3rem 0;
+  line-height: 1.6;
+}
+
+.linksList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 3.5rem;
+}
+
+.linkRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: #080808;
+  border-radius: 6px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s;
+
+  &:hover {
+    background: #111111;
+    .linkLabel { color: #00d4ff; }
+  }
+}
+
+.linkLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.linkLabel {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  transition: color 0.2s;
+}
+
+.linkValue {
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #71717a;
+}
+
+.linkIcon {
+  color: #52525b;
+}
+
+.aboutSection {
+  h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 0.5rem 0;
+  }
+
+  p {
+    font-size: 0.92rem;
+    color: #a1a1aa;
+    line-height: 1.65;
+    margin: 0;
+  }
+}

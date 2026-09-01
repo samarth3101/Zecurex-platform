@@ -1,15 +1,16 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import Lottie from 'lottie-react';
 import monitorAnimation from '../../../public/lottie-footer.json';
 import styles from '@/styles/components/Footer.module.scss';
 
 const LINKS = [
-  { name: 'Documentation',    href: '#', icon: 'docs'    },
-  { name: 'Contact',          href: '#', icon: 'contact' },
-  { name: 'Privacy Policy',   href: '#', icon: 'privacy' },
-  { name: 'Terms of Service', href: '#', icon: 'terms'   },
+  { name: 'Documentation',    href: '/docs',    icon: 'docs'    },
+  { name: 'Contact',          href: '/contact', icon: 'contact' },
+  { name: 'Privacy Policy',   href: '/privacy', icon: 'privacy' },
+  { name: 'Terms of Service', href: '/terms',   icon: 'terms'   },
 ];
 
 const getIcon = (type: string) => {
@@ -93,7 +94,7 @@ export default function Footer() {
           <div className={styles.linksCol}>
             <div className={styles.linksGrid}>
               {LINKS.map((link) => (
-                <a
+                <Link
                   key={link.name}
                   href={link.href}
                   className={`${styles.footerLink} ${hoveredLink === link.name ? styles.hovered : ''}`}
@@ -102,7 +103,7 @@ export default function Footer() {
                 >
                   <span className={styles.linkIcon}>{getIcon(link.icon)}</span>
                   <span className={styles.linkText}>{link.name}</span>
-                </a>
+                </Link>
               ))}
             </div>
           </div>
