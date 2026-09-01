@@ -214,7 +214,7 @@ export default function LoginPage() {
         )}
 
         <div className={styles.switchAuth}>
-          Don't have an operator account?
+          Don&apos;t have an operator account?
           <Link href="/dashboard/register">Register</Link>
         </div>
 

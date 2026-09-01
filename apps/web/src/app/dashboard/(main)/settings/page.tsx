@@ -10,10 +10,8 @@ import {
   CheckCircle2,
   Lock,
   Cpu,
-  Smartphone,
   Activity,
   Laptop,
-  AlertCircle
 } from 'lucide-react';
 import { ZecureAPI, SecuritySessionRecord, SecurityEventRecord } from '@/lib/api';
 import styles from './settings.module.scss';
@@ -21,7 +19,6 @@ import styles from './settings.module.scss';
 export default function SettingsDiagnosticsPage() {
   const [sessions, setSessions] = useState<SecuritySessionRecord[]>([]);
   const [activities, setActivities] = useState<SecurityEventRecord[]>([]);
-  const [loadingSessions, setLoadingSessions] = useState(true);
   const [revokingId, setRevokingId] = useState<string | null>(null);
 
   const loadSecurityData = async () => {
@@ -34,8 +31,6 @@ export default function SettingsDiagnosticsPage() {
       setActivities(actData);
     } catch {
       // Ignored
-    } finally {
-      setLoadingSessions(false);
     }
   };
 

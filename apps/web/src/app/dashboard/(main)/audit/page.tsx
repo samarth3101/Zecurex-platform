@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { History, Search, RefreshCw, ArrowUpRight, ShieldAlert, Loader2, Sparkles, Shield, User, Clock, ArrowRight } from 'lucide-react';
+import { Search, RefreshCw, ArrowUpRight, ShieldAlert, Loader2, Sparkles, Shield, User, Clock } from 'lucide-react';
 import { ZecureAPI, AuditEventRecord } from '@/lib/api';
 import TransactionDetail from '../../components/TransactionDetail';
 import styles from './audit.module.scss';

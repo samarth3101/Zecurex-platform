@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ShieldCheck, Lock, Mail, KeyRound, Loader2, User, ShieldAlert, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Lock, Mail, KeyRound, Loader2, User, CheckCircle2 } from 'lucide-react';
 import { ZecureAPI } from '@/lib/api';
 import styles from './register.module.scss';
 
