@@ -141,8 +141,8 @@ async def login_user(
             key="zecure_admin_token",
             value=session_token,
             httponly=True,
-            samesite="lax",
-            secure=settings.is_production,
+            samesite="none" if settings.is_production else "lax",
+            secure=True if settings.is_production else False,
             max_age=settings.SESSION_MAX_AGE_SECONDS,
             path="/"
         )
@@ -184,8 +184,8 @@ async def verify_login_stepup(
         key="zecure_admin_token",
         value=session_token,
         httponly=True,
-        samesite="lax",
-        secure=settings.is_production,
+        samesite="none" if settings.is_production else "lax",
+        secure=True if settings.is_production else False,
         max_age=settings.SESSION_MAX_AGE_SECONDS,
         path="/"
     )

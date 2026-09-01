@@ -32,6 +32,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     } catch {
       // Clear client state even on error
     } finally {
+      if (typeof document !== 'undefined') {
+        document.cookie = 'zecure_admin_token=; path=/; max-age=0; SameSite=Lax; Secure';
+      }
       router.push('/dashboard/login');
     }
   };

@@ -31,6 +31,9 @@ export default function LoginPage() {
     try {
       const resp = await ZecureAPI.loginWithCredentials({ email, password });
       if (resp.status === 'authenticated') {
+        if (typeof document !== 'undefined') {
+          document.cookie = 'zecure_admin_token=true; path=/; max-age=604800; SameSite=Lax; Secure';
+        }
         router.push('/dashboard');
       } else if (resp.status === 'requires_verification') {
         setIsStepUp(true);
@@ -60,6 +63,9 @@ export default function LoginPage() {
         trust_device: trustDevice,
       });
       if (resp.status === 'authenticated') {
+        if (typeof document !== 'undefined') {
+          document.cookie = 'zecure_admin_token=true; path=/; max-age=604800; SameSite=Lax; Secure';
+        }
         router.push('/dashboard');
       } else {
         setError(resp.message || 'Verification failed');
