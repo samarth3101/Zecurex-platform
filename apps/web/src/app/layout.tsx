@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.scss';
 
@@ -8,12 +8,15 @@ const inter = Inter({
   display: 'swap',
 });
 
+export const viewport: Viewport = {
+  themeColor: '#000000',
+};
+
 export const metadata: Metadata = {
   title: 'Zecure ONE - AI-Powered Cybersecurity Platform',
   description: 'The AI Agent That Watches Over You. Advanced threat detection, real-time fraud prevention, and intelligent security monitoring.',
   keywords: 'AI security, cybersecurity, threat detection, fraud prevention, machine learning',
   authors: [{ name: 'Zecure ONE Team' }],
-  themeColor: '#000000',
 };
 
 export default function RootLayout({

@@ -1,5 +1,6 @@
 [build]
   base = "apps/web"
+  publish = ".next"
   command = "npm run build"
 
 [[plugins]]
