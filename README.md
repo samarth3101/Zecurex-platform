@@ -37,6 +37,8 @@ Zecure is an **AI-assisted payment fraud risk management platform** for online m
 
 ---
 
+## Directly dive to world of Zecure - https://zecureone.netlify.app/
+
 ## AI Risk Manager Alignment
 
 > **Track Goal**: *"Stop the merchant losing money to fraud, returns and chargebacks. Build a working detector, verifier or auto-responder for one class of loss, with measured precision and recall on a held-out test set. Strictly defense-only."*
