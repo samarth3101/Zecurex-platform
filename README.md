@@ -18,7 +18,7 @@
   <img src="https://img.shields.io/badge/Held--Out%20Test%20Set-15%2C000%20Txns-orange?style=flat-square" alt="Held-Out Test Set" />
   <img src="https://img.shields.io/badge/Behavioral%20Signals-46%20Features-purple?style=flat-square" alt="46 Features" />
   <img src="https://img.shields.io/badge/System-Strictly%20Defense--Only-green?style=flat-square" alt="Defense Only" />
-  <img src="https://img.shields.io/badge/Tests-35%20Passed%20(100%25)-brightgreen?style=flat-square" alt="Tests" />
+  <img src="https://img.shields.io/badge/Tests-39%20Passed%20(100%25)-brightgreen?style=flat-square" alt="Tests" />
 </p>
 
 ---
@@ -461,13 +461,13 @@ docker compose up --build
 
 The repository maintains an automated test suite verifying security guardrails, ML inference, and API contracts:
 
-### Run Backend Tests (35/35 Passed):
+### Run Backend Tests (39/39 Passed):
 ```bash
 cd apps/api
 .venv/bin/python -m pytest tests/ -v
 ```
 ```text
-======================= 35 passed, 420 warnings in 4.06s =======================
+======================= 39 passed, 420 warnings in 6.51s =======================
 ```
 
 ### Run Frontend Production Build:

@@ -3,6 +3,7 @@ from app.core.config import settings
 from app.services.email.provider import EmailProvider
 from app.services.email.dev_provider import DevelopmentEmailProvider
 from app.services.email.resend_provider import ResendEmailProvider
+from app.services.email.smtp_provider import SmtpEmailProvider
 
 class EmailService:
     """
@@ -20,6 +21,15 @@ class EmailService:
             elif provider_type == "resend":
                 self.provider = ResendEmailProvider(
                     api_key=settings.RESEND_API_KEY,
+                    default_from=settings.EMAIL_FROM
+                )
+            elif provider_type == "smtp":
+                self.provider = SmtpEmailProvider(
+                    host=settings.SMTP_HOST,
+                    port=settings.SMTP_PORT,
+                    user=settings.SMTP_USER,
+                    password=settings.SMTP_PASSWORD,
+                    use_tls=settings.SMTP_TLS,
                     default_from=settings.EMAIL_FROM
                 )
             else:
