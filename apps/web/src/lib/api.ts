@@ -227,6 +227,12 @@ export const ZecureAPI = {
       body: JSON.stringify(payload)
     }),
 
+  resendCode: (payload: { email: string; purpose?: string }): Promise<AuthStatusResponse> =>
+    fetchWithAuth<AuthStatusResponse>('/auth/resend-code', {
+      method: 'POST',
+      body: JSON.stringify({ email: payload.email, purpose: payload.purpose || 'REGISTRATION' })
+    }),
+
   loginWithCredentials: (payload: { email: string; password: string }): Promise<AuthStatusResponse> =>
     fetchWithAuth<AuthStatusResponse>('/auth/login', {
       method: 'POST',

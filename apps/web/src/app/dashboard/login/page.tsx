@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ShieldCheck, Lock, Mail, KeyRound, Loader2, Smartphone, ArrowLeft } from 'lucide-react';
+import { ShieldCheck, Lock, Mail, KeyRound, Loader2, Smartphone, ArrowLeft, Award } from 'lucide-react';
 import { ZecureAPI } from '@/lib/api';
 import styles from './login.module.scss';
 
@@ -22,6 +22,33 @@ export default function LoginPage() {
 
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  const handleJudgeAccess = async () => {
+    setError(null);
+    setLoading(true);
+    try {
+      const resp = await ZecureAPI.loginWithCredentials({
+        email: 'judge@razorpay.com',
+        password: 'Razorpay@2024',
+      });
+
+      if (resp.status === 'authenticated') {
+        if (typeof document !== 'undefined') {
+          document.cookie = 'zecure_admin_token=true; path=/; max-age=604800; SameSite=Lax; Secure';
+        }
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('zecure_judge_view', 'true');
+        }
+        router.push('/dashboard');
+      } else {
+        setError(resp.message || 'Evaluator authorization failed');
+      }
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Evaluator authorization failed');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleCredentialsSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -153,6 +180,20 @@ export default function LoginPage() {
               ) : (
                 <span>Sign In to Control Room</span>
               )}
+            </button>
+
+            <div className={styles.judgeDivider}>
+              <span>OR EVALUATOR QUICK ACCESS</span>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleJudgeAccess}
+              disabled={loading}
+              className={styles.judgeAccessBtn}
+            >
+              <Award size={15} />
+              <span>1-Click Evaluator Mode</span>
             </button>
           </form>
         ) : (

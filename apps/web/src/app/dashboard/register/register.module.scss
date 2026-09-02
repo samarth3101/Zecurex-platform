@@ -4,8 +4,8 @@
   justify-content: center;
   min-height: 100vh;
   width: 100vw;
-  background-color: #000000;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #03060a;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: #f1f5f9;
   padding: 20px;
 }
@@ -13,12 +13,13 @@
 .registerBox {
   width: 100%;
   max-width: 440px;
-  background: #080a0f;
-  border: 1px solid #182232;
-  border-radius: 8px;
-  padding: 32px 28px;
+  background: #0b0f17;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 34px 28px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
 }
 
 .header {
@@ -31,11 +32,11 @@
 }
 
 .brandIconWrap {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 8px;
-  background: rgba(0, 212, 255, 0.08);
-  border: 1px solid rgba(0, 212, 255, 0.2);
+  background: #111722;
+  border: 1px solid rgba(0, 212, 255, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,7 +44,7 @@
 }
 
 .shieldIcon {
-  color: #00d4ff;
+  color: #f8fafc;
 }
 
 .brandTitle {
@@ -58,7 +59,7 @@
   font-family: monospace;
   font-size: 0.68rem;
   font-weight: 600;
-  color: #00d4ff;
+  color: #94a3b8;
   letter-spacing: 0.08em;
 }
 
@@ -86,22 +87,22 @@
     gap: 6px;
     font-size: 0.75rem;
     font-weight: 600;
-    color: #94a3b8;
+    color: #cbd5e1;
   }
 }
 
 .input {
-  background: #0d111a;
-  border: 1px solid #1c2638;
+  background: #06090e;
+  border: 1px solid #1e293b;
   border-radius: 6px;
   padding: 10px 12px;
-  color: #f1f5f9;
+  color: #f8fafc;
   font-size: 0.82rem;
   font-family: inherit;
   transition: border-color 0.15s ease;
 
   &:focus {
-    border-color: #00d4ff;
+    border-color: rgba(0, 212, 255, 0.6);
     outline: none;
   }
 
@@ -119,25 +120,33 @@
 }
 
 .strengthBar {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 4px;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
 .strengthSegment {
   height: 3px;
-  flex: 1;
+  background: #1e293b;
   border-radius: 2px;
-  background: #1c2638;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease;
+}
 
-  &.activeWeak { background: #ef4444; }
-  &.activeMedium { background: #f59e0b; }
-  &.activeStrong { background: #10b981; }
+.activeWeak {
+  background: #f87171;
+}
+
+.activeMedium {
+  background: #fbbf24;
+}
+
+.activeStrong {
+  background: #34d399;
 }
 
 .strengthText {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   color: #64748b;
   margin-top: 2px;
 }
@@ -146,8 +155,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
-  background: #0d111a;
-  border: 1px solid #1c2638;
+  background: #06090e;
+  border: 1px solid #1e293b;
   border-radius: 6px;
   padding: 14px;
   margin: 6px 0 10px 0;
@@ -157,8 +166,9 @@
   font-family: monospace;
   font-size: 0.82rem;
   font-weight: 600;
-  color: #00d4ff;
-  background: #111622;
+  color: #f8fafc;
+  background: #111722;
+  border: 1px solid rgba(255, 255, 255, 0.06);
   padding: 6px 8px;
   border-radius: 4px;
   text-align: center;
@@ -186,22 +196,102 @@
   }
 }
 
-.devOtpBanner {
-  background: rgba(0, 212, 255, 0.06);
-  border: 1px solid rgba(0, 212, 255, 0.2);
+.evaluatorBanner {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(0, 212, 255, 0.35);
   border-radius: 6px;
-  padding: 8px 12px;
+  padding: 10px 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
   font-size: 0.75rem;
-  color: #94a3b8;
+  color: #cbd5e1;
 
   strong {
     font-family: monospace;
-    font-size: 0.88rem;
-    color: #00d4ff;
+    font-size: 0.95rem;
+    color: #f8fafc;
+    margin-left: 6px;
   }
+}
+
+.fillCodeBtn {
+  background: #111722;
+  border: 1px solid rgba(0, 212, 255, 0.4);
+  color: #e2e8f0;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: #1e293b;
+    border-color: rgba(0, 212, 255, 0.7);
+    color: #ffffff;
+  }
+}
+
+.resendRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.resendBtn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+  transition: color 0.15s ease;
+
+  &:hover:not(:disabled) {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+
+  &:disabled {
+    color: #475569;
+    cursor: not-allowed;
+  }
+}
+
+.backBtn {
+  background: transparent;
+  border: 1px solid #1e293b;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 4px;
+
+  &:hover {
+    color: #ffffff;
+    border-color: #334155;
+  }
+}
+
+.successMsg {
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  color: #4ade80;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 0.75rem;
 }
 
 .error {
@@ -218,23 +308,24 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 10px;
-  background: #00d4ff;
-  color: #000000;
+  padding: 11px;
+  background: #ffffff;
+  color: #090d16;
   border: none;
   border-radius: 6px;
   font-size: 0.82rem;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.15s ease;
+  transition: all 0.15s ease;
   margin-top: 4px;
 
   &:hover:not(:disabled) {
-    opacity: 0.9;
+    background: #e2e8f0;
+    transform: translateY(-1px);
   }
 
   &:disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
   }
 }
@@ -246,11 +337,14 @@
   color: #64748b;
 
   a {
-    color: #00d4ff;
+    color: #e2e8f0;
     font-weight: 600;
     text-decoration: none;
     margin-left: 4px;
-    &:hover { text-decoration: underline; }
+    &:hover { 
+      color: #ffffff;
+      text-decoration: underline; 
+    }
   }
 }
 

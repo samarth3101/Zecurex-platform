@@ -1,0 +1,201 @@
+.backdropOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modalCard {
+  width: 100%;
+  max-width: 480px;
+  background: #0b0f17;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.85);
+  overflow: hidden;
+  animation: scaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: #0f141f;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.headerTitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #f8fafc;
+  text-transform: uppercase;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+
+  &:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.modalBody {
+  padding: 22px 20px;
+}
+
+.trackTag {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #cbd5e1;
+  background: #151c28;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.introText {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: #cbd5e1;
+  margin-bottom: 14px;
+
+  strong {
+    color: #ffffff;
+  }
+}
+
+.authorPill {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #06090e;
+  border: 1px solid #1e293b;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 0.76rem;
+  color: #94a3b8;
+  margin-bottom: 16px;
+
+  .authorName {
+    color: #ffffff;
+    font-weight: 600;
+  }
+  .trackName {
+    color: #cbd5e1;
+    font-weight: 500;
+  }
+}
+
+.metricGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.metricBox {
+  background: #06090e;
+  border: 1px solid #1e293b;
+  border-radius: 6px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.metricLabel {
+  font-size: 0.65rem;
+  color: #64748b;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+}
+
+.metricVal {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.actionRow {
+  display: flex;
+  gap: 10px;
+}
+
+.simActionBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #ffffff;
+  color: #090d16;
+  border: none;
+  border-radius: 6px;
+  padding: 11px 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    background: #e2e8f0;
+    transform: translateY(-1px);
+  }
+}
+
+.dismissBtn {
+  background: #111722;
+  border: 1px solid #1e293b;
+  color: #cbd5e1;
+  border-radius: 6px;
+  padding: 11px 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+
+  &:hover {
+    color: #ffffff;
+    border-color: #334155;
+    background: #161e2e;
+  }
+}

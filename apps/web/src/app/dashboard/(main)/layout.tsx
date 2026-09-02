@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { ZecureAPI } from '@/lib/api';
 import SimulationModal from '../components/SimulationModal';
+import JudgeHudModal from '../components/JudgeHudModal';
 import styles from './layout.module.scss';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -200,6 +201,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           {children}
         </main>
       </div>
+
+      {/* Razorpay Buildathon Evaluator HUD */}
+      <JudgeHudModal onOpenSimulation={() => setIsSimModalOpen(true)} />
     </div>
   );
 }

@@ -111,6 +111,31 @@ async def verify_registration(
         recovery_codes=recovery_codes
     )
 
+@router.post("/resend-code", response_model=AuthStatusResponse)
+@router.post("/resend-otp", response_model=AuthStatusResponse)
+async def resend_code(
+    payload: ResendCodeRequest,
+    request: Request,
+    db: AsyncSession = Depends(get_db)
+):
+    ip = get_client_ip(request)
+    ua = get_user_agent(request)
+    success, message, dev_otp = await AuthService.resend_otp(
+        db=db,
+        email=payload.email,
+        purpose=payload.purpose,
+        ip_address=ip,
+        user_agent=ua
+    )
+    if not success:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=message)
+
+    return AuthStatusResponse(
+        status="otp_sent",
+        message=message,
+        dev_otp=dev_otp
+    )
+
 @router.post("/login", response_model=AuthStatusResponse)
 async def login_user(
     payload: LoginRequest,

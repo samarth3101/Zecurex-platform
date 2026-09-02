@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { ShieldCheck, Lock, Mail, KeyRound, Loader2, User, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Lock, Mail, KeyRound, Loader2, User, CheckCircle2, RefreshCw, ArrowLeft } from 'lucide-react';
 import { ZecureAPI } from '@/lib/api';
 import styles from './register.module.scss';
 
@@ -20,6 +20,19 @@ export default function RegisterPage() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [otpCode, setOtpCode] = useState('');
   const [devOtp, setDevOtp] = useState<string | null>(null);
+
+  // Resend State & Cooldown
+  const [resendCooldown, setResendCooldown] = useState(0);
+  const [resendLoading, setResendLoading] = useState(false);
+  const [resendMsg, setResendMsg] = useState<string | null>(null);
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (resendCooldown > 0) {
+      timer = setTimeout(() => setResendCooldown((c) => c - 1), 1000);
+    }
+    return () => clearTimeout(timer);
+  }, [resendCooldown]);
 
   // Security Setup / Recovery Codes
   const [recoveryCodes, setRecoveryCodes] = useState<string[]>([]);
@@ -43,6 +56,7 @@ export default function RegisterPage() {
   const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setResendMsg(null);
 
     if (password !== confirmPassword) {
       setError('Passwords do not match.');
@@ -63,6 +77,7 @@ export default function RegisterPage() {
 
       if (resp.status === 'registration_pending') {
         setStep(2);
+        setResendCooldown(30);
         if (resp.dev_otp) {
           setDevOtp(resp.dev_otp);
           setOtpCode(resp.dev_otp);
@@ -74,6 +89,30 @@ export default function RegisterPage() {
       setError(err instanceof Error ? err.message : 'Registration failed');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleResendOtp = async () => {
+    if (resendCooldown > 0 || resendLoading) return;
+    setResendLoading(true);
+    setResendMsg(null);
+    setError(null);
+
+    try {
+      const resp = await ZecureAPI.resendCode({
+        email: email.trim(),
+        purpose: 'REGISTRATION'
+      });
+      setResendCooldown(30);
+      setResendMsg(resp.message || 'Fresh verification code dispatched.');
+      if (resp.dev_otp) {
+        setDevOtp(resp.dev_otp);
+        setOtpCode(resp.dev_otp);
+      }
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Failed to resend code');
+    } finally {
+      setResendLoading(false);
     }
   };
 
@@ -242,9 +281,18 @@ export default function RegisterPage() {
         {step === 2 && (
           <form onSubmit={handleVerifyOtpSubmit} className={styles.form}>
             {devOtp && (
-              <div className={styles.devOtpBanner}>
-                <span>Dev Environment OTP:</span>
-                <strong>{devOtp}</strong>
+              <div className={styles.evaluatorBanner}>
+                <div>
+                  <span>Evaluation / Demo Code:</span>
+                  <strong>{devOtp}</strong>
+                </div>
+                <button
+                  type="button"
+                  className={styles.fillCodeBtn}
+                  onClick={() => setOtpCode(devOtp)}
+                >
+                  Auto-Fill
+                </button>
               </div>
             )}
 
@@ -265,6 +313,25 @@ export default function RegisterPage() {
               />
             </div>
 
+            <div className={styles.resendRow}>
+              <button
+                type="button"
+                onClick={handleResendOtp}
+                disabled={resendCooldown > 0 || resendLoading}
+                className={styles.resendBtn}
+              >
+                {resendLoading ? (
+                  <Loader2 size={12} className={styles.spin} />
+                ) : (
+                  <RefreshCw size={12} />
+                )}
+                <span>
+                  {resendCooldown > 0 ? `Resend Code in ${resendCooldown}s` : 'Resend Verification Code'}
+                </span>
+              </button>
+            </div>
+
+            {resendMsg && <div className={styles.successMsg}>{resendMsg}</div>}
             {error && <div className={styles.error}>{error}</div>}
 
             <button type="submit" disabled={loading || otpCode.length !== 6} className={styles.button}>
@@ -276,6 +343,18 @@ export default function RegisterPage() {
               ) : (
                 <span>Verify Email & Generate Keys</span>
               )}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                setStep(1);
+                setError(null);
+                setResendMsg(null);
+              }}
+              className={styles.backBtn}
+            >
+              <ArrowLeft size={13} /> Edit Email or Password
             </button>
           </form>
         )}

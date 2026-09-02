@@ -3,7 +3,7 @@ import logging
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 
 from app.services.email.provider import EmailProvider
 from app.core.config import settings
@@ -12,8 +12,8 @@ logger = logging.getLogger("zecure.email.smtp")
 
 class SmtpEmailProvider(EmailProvider):
     """
-    Production Email Provider using standard SMTP (e.g. Gmail App Password, AWS SES, SendGrid, Zoho).
-    Sends transaction alerts, OTPs, and password reset links to any recipient email address.
+    Production Email Provider using standard SMTP (Brevo, Gmail, AWS SES, SendGrid, Zoho).
+    Implements intelligent multi-port auto-failover (e.g. 2525, 465, 587) to bypass cloud host port blocks.
     """
 
     def __init__(
@@ -35,9 +35,23 @@ class SmtpEmailProvider(EmailProvider):
         if not self.host or not self.user or not self.password:
             raise ValueError("SMTP_HOST, SMTP_USER, and SMTP_PASSWORD are required for SmtpEmailProvider.")
 
+    def _get_candidate_ports(self) -> List[int]:
+        """
+        Builds a prioritized list of ports to try.
+        Port 2525 and 465 are prioritized when 587 might be blocked by cloud firewalls.
+        """
+        ordered = [self.port, 2525, 465, 587]
+        seen = set()
+        candidates = []
+        for p in ordered:
+            if p and p not in seen:
+                seen.add(p)
+                candidates.append(p)
+        return candidates
+
     def _send_sync(self, to_email: str, subject: str, body_text: str, body_html: Optional[str] = None) -> bool:
         """
-        Synchronous SMTP dispatcher executed inside asyncio.to_thread.
+        Synchronous SMTP dispatcher with intelligent multi-port failover executed inside asyncio.to_thread.
         """
         msg = MIMEMultipart("alternative")
         msg["Subject"] = subject
@@ -48,27 +62,34 @@ class SmtpEmailProvider(EmailProvider):
         if body_html:
             msg.attach(MIMEText(body_html, "html", "utf-8"))
 
-        try:
-            if self.port == 465:
-                # SSL connection
-                with smtplib.SMTP_SSL(self.host, self.port, timeout=10.0) as server:
-                    server.login(self.user, self.password)
-                    server.send_message(msg)
-            else:
-                # Standard SMTP with STARTTLS
-                with smtplib.SMTP(self.host, self.port, timeout=10.0) as server:
-                    server.ehlo()
-                    if self.use_tls:
-                        server.starttls()
-                        server.ehlo()
-                    server.login(self.user, self.password)
-                    server.send_message(msg)
+        ports_to_try = self._get_candidate_ports()
+        last_error: Optional[Exception] = None
 
-            logger.info("Email sent successfully via SMTP to %s (subject: %s)", to_email, subject)
-            return True
-        except Exception as exc:
-            logger.error("Failed to send email via SMTP to %s: %s", to_email, str(exc))
-            return False
+        for port in ports_to_try:
+            try:
+                if port == 465:
+                    # Direct SSL
+                    with smtplib.SMTP_SSL(self.host, port, timeout=4.0) as server:
+                        server.login(self.user, self.password)
+                        server.send_message(msg)
+                else:
+                    # STARTTLS (e.g. 2525, 587)
+                    with smtplib.SMTP(self.host, port, timeout=4.0) as server:
+                        server.ehlo()
+                        if self.use_tls:
+                            server.starttls()
+                            server.ehlo()
+                        server.login(self.user, self.password)
+                        server.send_message(msg)
+
+                logger.info("Email successfully sent via SMTP to %s on port %d (subject: %s)", to_email, port, subject)
+                return True
+            except Exception as exc:
+                last_error = exc
+                logger.warning("SMTP attempt failed on port %d for %s: %s. Trying next available port...", port, to_email, str(exc))
+
+        logger.error("All SMTP port attempts failed for %s. Final error: %s", to_email, str(last_error))
+        return False
 
     async def send_email(
         self,
@@ -79,7 +100,7 @@ class SmtpEmailProvider(EmailProvider):
         context: Optional[Dict[str, Any]] = None
     ) -> bool:
         """
-        Dispatches email asynchronously via worker thread.
+        Dispatches email asynchronously via worker thread with multi-port auto-retry.
         """
         return await asyncio.to_thread(
             self._send_sync,
