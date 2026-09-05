@@ -294,12 +294,12 @@ class AuthService:
         user = result.scalar_one_or_none()
 
         # Seamless evaluator / judge provisioning for Buildathon reviews
-        if email in ("judge@razorpay.com", "operator@zecure.one", "demo@zecure.one") and password in ("Razorpay@2024", "Zecure@2024", "Judge@2024"):
+        if email in ("judge@zecuredemo.com", "evaluator@zecuredemo.com", "operator@zecure.one", "demo@zecure.one") and password in ("ZecureDemo@2024", "Zecure@2024", "Judge@2024"):
             if not user:
                 user = User(
                     email=email,
                     password_hash=hash_password(password),
-                    name="Razorpay Evaluation Judge" if "judge" in email else "Chief Risk Officer",
+                    name="Evaluation Judge" if ("judge" in email or "evaluator" in email) else "Chief Risk Officer",
                     email_verified=True,
                     is_active=True,
                     role="admin"
@@ -327,7 +327,7 @@ class AuthService:
         cls._clear_failed_login(rate_limit_key)
 
         # Immediate trusted session for evaluator/judge review accounts
-        if email in ("judge@razorpay.com", "operator@zecure.one", "demo@zecure.one"):
+        if email in ("judge@zecuredemo.com", "evaluator@zecuredemo.com", "operator@zecure.one", "demo@zecure.one"):
             raw_token = generate_session_token()
             token_hash = hash_token(raw_token)
             expires_at = utc_now() + timedelta(seconds=settings.SESSION_MAX_AGE_SECONDS)

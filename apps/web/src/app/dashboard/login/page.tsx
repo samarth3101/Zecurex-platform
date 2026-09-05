@@ -28,8 +28,8 @@ export default function LoginPage() {
     setLoading(true);
     try {
       const resp = await ZecureAPI.loginWithCredentials({
-        email: 'judge@razorpay.com',
-        password: 'Razorpay@2024',
+        email: 'judge@zecuredemo.com',
+        password: 'ZecureDemo@2024',
       });
 
       if (resp.status === 'authenticated') {

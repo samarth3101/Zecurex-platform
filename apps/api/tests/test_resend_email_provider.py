@@ -118,3 +118,4 @@ def test_no_api_keys_in_frontend():
                     assert not resend_key_pattern.search(content), f"Possible Resend API key in {file_path}"
                     assert not gemini_key_pattern.search(content), f"Possible Gemini API key in {file_path}"
                     assert not razorpay_live_pattern.search(content), f"Possible Razorpay live secret in {file_path}"
+                    assert "@razorpay.com" not in content, f"Disallowed company domain email in {file_path}"
